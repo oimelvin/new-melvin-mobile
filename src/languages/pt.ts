@@ -1,0 +1,100 @@
+import { LanguageProps } from './languageProps'
+
+const pt: LanguageProps = {
+	common: {
+		language: 'Português',
+	},
+	home: {
+		trial: 'Teste 14 dias gratuitos',
+		signIn: 'Já tenho cadastro',
+		talkConsultant: 'Fale com um consultor',
+	},
+	signInUsernameOrEmail: {
+		typeUsernameOrEmail: 'Digite seu usuário ou e-mail.',
+		requiredUsernameOrEmail: 'O usuário ou o e-mail são obrigatórios.',
+		next: 'Prosseguir',
+	},
+	signInPassword: {
+		attention: 'Atenção',
+		typePassword: 'Digite sua senha.',
+		requiredPassword: 'A senha é obrigatória.',
+		signIn: 'Entrar',
+	},
+	equipment: {
+		manualSearch: 'Pesquisa Manual',
+		qrCodeSearch: 'Pesquisa QRCode',
+		searchThe: 'Pesquise o',
+		equipment: 'Ativo',
+		technicalData: 'Dados Técnicos',
+		searchSolicitation: 'Pesquisar SS',
+		openSolicitation: 'Abrir SS',
+		searchOS: 'Pesquisar OS',
+		openOS: 'Abrir OS',
+		equipmentPhoto: 'Foto do Equipamento',
+		mainInfo: 'Informações Principais',
+		tag: 'Tag',
+		name: 'Nome',
+		families: 'Famílias',
+		operatingData: 'Dados Operacionais',
+		noData: 'Sem dados',
+		startOperation: 'Início de operação',
+		uptime: 'Tempo operacional',
+		hoursADay: 'horas por dia',
+		daysAWeek: 'dias por semana',
+		criticality: 'Criticidade',
+		underWarrantyUntil: 'Em garantia até',
+		supplier: 'Fornecedor',
+		underContractUntil: 'Em contrato até',
+		maintenancePlan: 'Plano de Manutenção',
+		characteristics: {
+			title: 'Características',
+			noSetFound: 'Nenhum conjunto encontrado.',
+			noSubSetFound: 'Nenhum subconjunto encontrado.',
+		},
+		documents: 'Documentos',
+	},
+	searchEquipmentQRCode: {
+		requestingCameraPermission: 'Solicitando permissão para usar a câmera.',
+		permissionDenied:
+			'Sem acesso à câmera, por favor verifique as permissões.',
+		verifyPermission: 'Verificar permissões',
+		readEquipmentQrCode: 'Ler código QR do ativo',
+	},
+	schedule: {
+		schedule: 'Programação',
+		myOS: 'Minhas OS',
+		searchSolicitation: 'Pesquisar SS',
+		openSolicitation: 'Abrir SS',
+		searchOS: 'Pesquisar OS',
+		openOS: 'Abrir OS',
+	},
+	material: {
+		materials: 'Materiais',
+		generalData: 'Dados Gerais',
+		searchMaterial: 'Pesquisar Material',
+		singleReservation: 'Reserva Avulsa',
+		searchProvider: 'Pesquisar Fornecedor',
+		registerProvider: 'Cadastrar Fornecedor',
+	},
+	melvin: {
+		myShortcuts: 'Meus atalhos',
+	},
+	notifications: {
+		title: 'Notificações',
+		select: 'Selecionar',
+		cancel: 'Cancelar',
+		toYou: 'Para você',
+		myMessages: 'Minhas mensagens',
+		sent: 'Enviadas',
+	},
+	account: {
+		myData: 'Meus dados',
+		invite: 'Convidar',
+		portability: 'Portabilidade',
+		config: 'Configurações da conta',
+		signOut: 'Sair da conta',
+		attention: 'Atenção',
+	},
+}
+
+export default pt

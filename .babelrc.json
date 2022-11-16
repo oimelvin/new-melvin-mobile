@@ -1,0 +1,29 @@
+{
+  "presets": ["babel-preset-expo"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "cwd": "babelrc",
+        "root": ["./"],
+        "alias": {
+          "@assets": "./assets",
+          "@components": "./src/components",
+          "@contexts": "./src/contexts",
+          "@hooks": "./src/hooks",
+          "@languages": "./src/languages",
+          "@models": "./src/models",
+          "@pages": "./src/pages",
+          "@routes": "./src/routes",
+          "@services": "./src/services",
+          "@styles": "./src/styles"
+        }
+      }
+    ]
+  ],
+  "env": {
+    "production": {
+      "plugins": ["react-native-paper/babel"]
+    }
+  }
+}

@@ -1,0 +1,100 @@
+import { LanguageProps } from './languageProps'
+
+const es: LanguageProps = {
+	common: {
+		language: 'Español',
+	},
+	home: {
+		trial: '14 días de prueba gratuita',
+		signIn: 'Ya tengo un registro',
+		talkConsultant: 'Habla con un consultor',
+	},
+	signInUsernameOrEmail: {
+		typeUsernameOrEmail: 'Escribe su usuario o correo electrónico',
+		requiredUsernameOrEmail: 'Usuario o correo electrónico son requeridos.',
+		next: 'Siguiente',
+	},
+	signInPassword: {
+		attention: 'Atención',
+		typePassword: 'Escribe tu contraseña.',
+		requiredPassword: 'Contraseña es requerida.',
+		signIn: 'Iniciar sesión en',
+	},
+	equipment: {
+		manualSearch: 'Busqueda Manual',
+		qrCodeSearch: 'Busqueda QRCode',
+		searchThe: 'Buscar el',
+		equipment: 'Activo',
+		technicalData: 'Datos Técnicos',
+		searchSolicitation: 'Busqueda SS',
+		openSolicitation: 'Abrir SS',
+		searchOS: 'Busqueda OS',
+		openOS: 'Abrir OS',
+		equipmentPhoto: 'Foto del Equipo',
+		mainInfo: 'Información Fundamental',
+		tag: 'Tag',
+		name: 'Nombre',
+		families: 'Familias',
+		operatingData: 'Datos Operativos',
+		noData: 'Sin datos',
+		startOperation: 'Inicio de operación',
+		uptime: 'Tiempo de actividad',
+		hoursADay: 'horas al día',
+		daysAWeek: 'días a la semana',
+		criticality: 'Criticidad',
+		underWarrantyUntil: 'En garantía hasta',
+		supplier: 'Proveedor',
+		underContractUntil: 'En contrato hasta',
+		maintenancePlan: 'Plan de Mantenimiento',
+		characteristics: {
+			title: 'Características',
+			noSetFound: 'No se encontraron conjuntos.',
+			noSubSetFound: 'No se encontraron subconjuntos.',
+		},
+		documents: 'Documentos',
+	},
+	searchEquipmentQRCode: {
+		requestingCameraPermission: 'Solicitando permiso para usar la cámara.',
+		permissionDenied:
+			'Sin acceso a la cámara, por favor verifique las permisos.',
+		verifyPermission: 'Verificar permisos',
+		readEquipmentQrCode: 'Leer código QR del activo',
+	},
+	schedule: {
+		schedule: 'Calendario',
+		myOS: 'Mis OS',
+		searchSolicitation: 'Busqueda SS',
+		openSolicitation: 'Abrir SS',
+		searchOS: 'Busqueda OS',
+		openOS: 'Abrir OS',
+	},
+	material: {
+		materials: 'Materiales',
+		generalData: 'Datos Generales',
+		searchMaterial: 'Busqueda Material',
+		singleReservation: 'Reserva Individual',
+		searchProvider: 'Busqueda Proveedor',
+		registerProvider: 'Registrar Proveedor',
+	},
+	melvin: {
+		myShortcuts: 'Mis atajos',
+	},
+	notifications: {
+		title: 'Notificaciones',
+		select: 'Seleccione',
+		cancel: 'Cancelar',
+		toYou: 'Para ti',
+		myMessages: 'Mis mensajes',
+		sent: 'Enviadas',
+	},
+	account: {
+		myData: 'Mis datos',
+		invite: 'Invitar',
+		portability: 'Portabilidad',
+		config: 'Configuraciones de cuenta',
+		signOut: 'Cerrar sesión',
+		attention: 'Atención',
+	},
+}
+
+export default es

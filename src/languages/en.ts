@@ -3,6 +3,16 @@ import { LanguageProps } from './languageProps'
 const en: LanguageProps = {
 	common: {
 		language: 'English',
+		error: 'Error',
+		anErrorHasOccuredPleaseTryAgain:
+			'An error has occurred, please try again.',
+	},
+	components: {
+		select: {
+			typeForSearch: 'Type for search',
+			noItemsFound: 'No items found.',
+			clean: 'Clean',
+		},
 	},
 	home: {
 		trial: 'Free 14 day trial',
@@ -52,6 +62,21 @@ const en: LanguageProps = {
 			noSubSetFound: 'No subsets found.',
 		},
 		documents: 'Documents',
+	},
+	searchEquipmentManually: {
+		searchEquipment: 'Search equipment',
+		selectABranch: 'Select a branch:',
+		noBranchesFound: 'No branches found.',
+		selectASector: 'Select a sector:',
+		noSectorsFound: 'No sectors found.',
+		selectAFamily: 'Select a family:',
+		noFamiliesFound: 'No families found.',
+		selectAStatus: 'Select a status:',
+		noStatusFound: 'No status found.',
+		selectAnEquipment: 'Select an equipment:',
+		noEquipmentFound: 'No equipment found',
+		equipmentRequired: 'Equipment is required.',
+		seeEquipment: 'See Equipment',
 	},
 	searchEquipmentQRCode: {
 		requestingCameraPermission: 'Requesting camera permission',

@@ -19,6 +19,7 @@ import {
 	SelectItem,
 } from './styles'
 import Button from '@components/Button'
+import { i18n } from '@languages/index'
 
 export type SelectItemProps = {
 	value: string
@@ -29,6 +30,8 @@ type SelectProps = {
 	items: SelectItemProps[]
 	selectedValue: SelectItemProps | null
 	onSelect(item: SelectItemProps | null): void
+	onPress?(): void
+	onCloseSelect?(): void
 	label?: string
 	placeholder?: string
 	placeholderSearch?: string
@@ -43,6 +46,8 @@ const Select: React.FC<SelectProps> = ({
 	items,
 	selectedValue,
 	onSelect,
+	onPress,
+	onCloseSelect,
 	placeholder,
 	placeholderSearch,
 	emptyListText,
@@ -53,9 +58,20 @@ const Select: React.FC<SelectProps> = ({
 	const [opened, setOpened] = useState(false)
 	const [search, setSearch] = useState('')
 
+	const handlePress = () => {
+		onPress && onPress()
+		!disabled && setOpened(true)
+	}
+
 	const handleSelect = (item: SelectItemProps | null) => {
 		onSelect(item)
 		setOpened(false)
+		onCloseSelect && onCloseSelect()
+	}
+
+	const handleCloseSelect = () => {
+		setOpened(false)
+		onCloseSelect && onCloseSelect()
 	}
 
 	const renderItem = (item: SelectItemProps) => (
@@ -73,16 +89,14 @@ const Select: React.FC<SelectProps> = ({
 	const renderEmptyList = () => (
 		<SelectEmptyList>
 			<Text color={colors.gray100}>
-				{emptyListText || 'Nenhum item encontrado.'}
+				{emptyListText || i18n.t('components.select.noItemsFound')}
 			</Text>
 		</SelectEmptyList>
 	)
 
 	return (
 		<View>
-			<TouchableWithoutFeedback
-				onPress={() => !disabled && setOpened(true)}
-			>
+			<TouchableWithoutFeedback onPress={() => handlePress()}>
 				<View>
 					<Input
 						label={label}
@@ -115,16 +129,17 @@ const Select: React.FC<SelectProps> = ({
 			</TouchableWithoutFeedback>
 			<SelectModalContainer
 				visible={opened}
-				onRequestClose={() => setOpened(false)}
+				onRequestClose={() => handleCloseSelect()}
 			>
-				<TouchableWithoutFeedback onPress={() => setOpened(false)}>
+				<TouchableWithoutFeedback onPress={() => handleCloseSelect()}>
 					<SelectModalOverlay>
 						<SelectModal>
 							<Input
 								color={colors.white}
 								value={search}
 								placeholder={
-									placeholderSearch || 'Digite para buscar'
+									placeholderSearch ||
+									i18n.t('components.select.typeForSearch')
 								}
 								placeholderTextColor={colors.gray100}
 								onChangeText={text => setSearch(text)}
@@ -145,7 +160,7 @@ const Select: React.FC<SelectProps> = ({
 								variant="outline"
 								onPress={() => handleSelect(null)}
 							>
-								Limpar
+								{i18n.t('components.select.clean')}
 							</Button>
 						</SelectModal>
 					</SelectModalOverlay>

@@ -3,6 +3,15 @@ import { LanguageProps } from './languageProps'
 const pt: LanguageProps = {
 	common: {
 		language: 'Português',
+		error: 'Erro',
+		anErrorHasOccuredPleaseTryAgain: 'Ocorreu um erro, tente novamente.',
+	},
+	components: {
+		select: {
+			typeForSearch: 'Digite para buscar',
+			noItemsFound: 'Nenhum intem encontrado.',
+			clean: 'Limpar',
+		},
 	},
 	home: {
 		trial: 'Teste 14 dias gratuitos',
@@ -52,6 +61,21 @@ const pt: LanguageProps = {
 			noSubSetFound: 'Nenhum subconjunto encontrado.',
 		},
 		documents: 'Documentos',
+	},
+	searchEquipmentManually: {
+		searchEquipment: 'Pesquisar ativo',
+		selectABranch: 'Selecione uma filial:',
+		noBranchesFound: 'Nenhuma filial encontrada.',
+		selectASector: 'Selecione um setor:',
+		noSectorsFound: 'Nenhum setor encontrado.',
+		selectAFamily: 'Selecione uma família:',
+		noFamiliesFound: 'Nenhuma família encontrada.',
+		selectAStatus: 'Selecione um status:',
+		noStatusFound: 'Nenhum status encontrado.',
+		selectAnEquipment: 'Selecione um ativo:',
+		noEquipmentFound: 'Nenhum ativo encontrado.',
+		equipmentRequired: 'O ativo é obrigatório.',
+		seeEquipment: 'Visualizar Ativo',
 	},
 	searchEquipmentQRCode: {
 		requestingCameraPermission: 'Solicitando permissão para usar a câmera.',

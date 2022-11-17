@@ -1,6 +1,15 @@
 export type LanguageProps = {
 	common: {
 		language: string
+		error: string
+		anErrorHasOccuredPleaseTryAgain: string
+	}
+	components: {
+		select: {
+			typeForSearch: string
+			noItemsFound: string
+			clean: string
+		}
 	}
 	home: {
 		trial: string
@@ -50,6 +59,21 @@ export type LanguageProps = {
 			noSubSetFound: string
 		}
 		documents: string
+	}
+	searchEquipmentManually: {
+		searchEquipment: string
+		selectABranch: string
+		noBranchesFound: string
+		selectASector: string
+		noSectorsFound: string
+		selectAFamily: string
+		noFamiliesFound: string
+		selectAStatus: string
+		noStatusFound: string
+		selectAnEquipment: string
+		noEquipmentFound: string
+		equipmentRequired: string
+		seeEquipment: string
 	}
 	searchEquipmentQRCode: {
 		requestingCameraPermission: string

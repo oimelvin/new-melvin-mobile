@@ -4,26 +4,35 @@ import { Documento } from '@models/Documento'
 import api, { HttpResponse, Items } from '@services/api'
 
 interface AtivoServiceHookProps {
-  getAtivos(
-    idSetor: string | undefined,
-    idFamilia: string | undefined
-  ): Promise<Ativo[]>
-  getAtivoById(id: string): Promise<Ativo>
-  getDocumentosAtivoById(id: string): Promise<Documento[]>
-  getCaracteristicasAtivoById(id: string): Promise<Caracteristica[]>
+	getAtivos(
+		idFilial: string | undefined,
+		idSetor: string | undefined,
+		idFamilia: string | undefined,
+		status: string | undefined,
+		pesquisa: string | undefined
+	): Promise<Ativo[]>
+	getAtivoById(id: string): Promise<Ativo>
+	getDocumentosAtivoById(id: string): Promise<Documento[]>
+	getCaracteristicasAtivoById(id: string): Promise<Caracteristica[]>
 }
 
 const useAtivoService = (): AtivoServiceHookProps => {
 	const getAtivos = async (
+		idFilial: string | undefined,
 		idSetor: string | undefined,
-		idFamilia: string | undefined
+		idFamilia: string | undefined,
+		status: 'P' | 'F' | undefined,
+		pesquisa: string | undefined
 	): Promise<Ativo[]> => {
 		const { data } = await api.get<HttpResponse<Items<Ativo>>>(
 			'services/app/Equipamento/GetEquipamentosSelectList',
 			{
 				params: {
+					idFilial,
 					idSetor,
 					idFamilia,
+					status: status === 'F' || true,
+					keyWord: pesquisa,
 				},
 			}
 		)

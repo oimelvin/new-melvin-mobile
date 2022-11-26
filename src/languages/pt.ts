@@ -86,6 +86,8 @@ const pt: LanguageProps = {
 	},
 	schedule: {
 		schedule: 'Programação',
+		workOrders: 'Ordens de serviço',
+		solicitations: 'Solicitações',
 		myOS: 'Minhas OS',
 		searchSolicitation: 'Pesquisar SS',
 		openSolicitation: 'Abrir SS',

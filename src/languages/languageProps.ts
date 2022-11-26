@@ -83,6 +83,8 @@ export type LanguageProps = {
 	}
 	schedule: {
 		schedule: string
+		workOrders: string
+		solicitations: string
 		myOS: string
 		searchSolicitation: string
 		openSolicitation: string

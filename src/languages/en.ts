@@ -86,6 +86,8 @@ const en: LanguageProps = {
 	},
 	schedule: {
 		schedule: 'Programming',
+		workOrders: 'Work orders',
+		solicitations: 'Solicitations',
 		myOS: 'My OS',
 		searchSolicitation: 'Search SS',
 		openSolicitation: 'Open SS',

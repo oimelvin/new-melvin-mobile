@@ -1,12 +1,14 @@
+import { Platform } from 'react-native'
 import styled from 'styled-components/native'
 
 import { ButtonOpacity } from '@styles/global.style'
 
 export const TabBarContainer = styled.View`
 	background-color: ${({ theme }) => theme.colors.background};
-	height: 65px;
+	height: ${() => (Platform.OS === 'ios' ? 80 : 70)}px;
 	flex-direction: row;
 	align-items: center;
+	padding-bottom: ${() => (Platform.OS === 'ios' ? 15 : 0)}px;
 `
 
 export const TabSelected = styled.View`

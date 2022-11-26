@@ -39,6 +39,7 @@ type SelectProps = {
 	errorText?: string
 	color?: ColorValue
 	disabled?: boolean
+	translucentBackground?: boolean
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -54,6 +55,7 @@ const Select: React.FC<SelectProps> = ({
 	errorText,
 	color,
 	disabled,
+	translucentBackground,
 }: SelectProps) => {
 	const [opened, setOpened] = useState(false)
 	const [search, setSearch] = useState('')
@@ -123,6 +125,7 @@ const Select: React.FC<SelectProps> = ({
 						color={color || colors.gray100}
 						errorText={errorText}
 						disabled={disabled}
+						translucentBackground={translucentBackground}
 						readOnly
 					/>
 				</View>
@@ -143,6 +146,7 @@ const Select: React.FC<SelectProps> = ({
 								}
 								placeholderTextColor={colors.gray100}
 								onChangeText={text => setSearch(text)}
+								translucentBackground={translucentBackground}
 							/>
 							<FlatList
 								keyExtractor={({ value }) => value}

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Melvin",
-    "slug": "melvin",
+    "name": "Melvin Mobile",
+    "slug": "melvin-mobile",
     "owner": "oimelvin",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,10 +19,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "br.com.oimelvin.app.ios"
     },
     "android": {
-      "package": "com.oimelvin",
+      "package": "br.com.oimelvin.app.android",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -33,7 +34,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "d281fff6-8a33-4a77-a499-295d15fd8436"
+        "projectId": "6bb549ce-47f9-4f07-948e-5d34757ccd6d"
       }
     }
   }

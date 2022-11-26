@@ -1,18 +1,18 @@
 import axios from 'axios'
 
 export interface HttpError {
-  message: string
-  response: {
-    status: number
-  }
+	message: string
+	response: {
+		status: number
+	}
 }
 
 export interface HttpResponse<T> {
-  result: T
+	result: T
 }
 
 export interface Items<T> {
-  items: T[]
+	items: T[]
 }
 
 const api = axios.create({

@@ -4,12 +4,18 @@ import { Title } from '@styles/global.style'
 import colors from '@styles/colors.style'
 
 export const ScheduleContainer = styled.View`
-  flex: 1;
-  justify-content: flex-end;
-  padding: 16px;
+	flex: 1;
+	justify-content: flex-end;
+	padding: 16px;
 `
+
 export const ScheduleTitle = styled(Title)`
-  font-weight: normal;
-  color: ${colors.white};
-  text-transform: none;
+	font-weight: normal;
+	color: ${colors.white};
+	text-transform: none;
+`
+
+export const AcessoRapidoProgramacaoContainer = styled.View`
+	flex-direction: row;
+	justify-content: space-between;
 `

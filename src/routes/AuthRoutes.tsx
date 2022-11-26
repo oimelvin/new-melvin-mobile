@@ -8,36 +8,38 @@ import { BackgroundImage, WhiteLogoMelvin } from '@styles/global.style'
 import colors from '@styles/colors.style'
 
 export type AuthStackNavigatorParamList = {
-  HomePage: undefined
-  SignInUsernameOrEmailPage: undefined
-  SignInPasswordPage: { usernameOrEmail: string }
+	HomePage: undefined
+	SignInUsernameOrEmailPage: undefined
+	SignInPasswordPage: { usernameOrEmail: string }
 }
 
 const NativeStack = createNativeStackNavigator<AuthStackNavigatorParamList>()
 
 const AuthStackNavigator: React.FC = () => (
-	<BackgroundImage>
-		<NativeStack.Navigator
-			screenOptions={{
-				contentStyle: {
-					backgroundColor: 'transparent',
-				},
-				animation: 'slide_from_right',
-				headerTransparent: true,
-				headerTintColor: colors.white,
-				headerTitle: () => <WhiteLogoMelvin />,
-				headerTitleAlign: 'center',
-			}}
-			initialRouteName="HomePage"
-		>
-			<NativeStack.Screen name="HomePage" component={HomePage} />
-			<NativeStack.Screen name="SignInUsernameOrEmailPage" component={SignInUsernameOrEmailPage} />
-			<NativeStack.Screen
-				name="SignInPasswordPage"
-				component={SignInPasswordPage}
-			/>
-		</NativeStack.Navigator>
-	</BackgroundImage>
+	<NativeStack.Navigator
+		screenOptions={{
+			contentStyle: {
+				backgroundColor: colors.black,
+			},
+			animation: 'slide_from_right',
+			headerTransparent: true,
+			headerTintColor: colors.white,
+			headerTitle: () => <WhiteLogoMelvin />,
+			headerTitleAlign: 'center',
+			headerBackTitleVisible: false,
+		}}
+		initialRouteName="HomePage"
+	>
+		<NativeStack.Screen name="HomePage" component={HomePage} />
+		<NativeStack.Screen
+			name="SignInUsernameOrEmailPage"
+			component={SignInUsernameOrEmailPage}
+		/>
+		<NativeStack.Screen
+			name="SignInPasswordPage"
+			component={SignInPasswordPage}
+		/>
+	</NativeStack.Navigator>
 )
 
 export default AuthStackNavigator

@@ -13,17 +13,17 @@ import { ThemeContext } from '@contexts/theme.context'
 import { IconContainer } from './styles'
 
 export type IconProps = {
-  provider:
-    | 'feather'
-    | 'fontAwesome'
-    | 'fontAwesome5'
-    | 'fontisto'
-    | 'ionicons'
-    | 'materialCommunityIcons'
-    | 'materialIcons'
-  iconName: string
-  color?: ColorValue
-  size?: number
+	provider:
+		| 'feather'
+		| 'fontAwesome'
+		| 'fontAwesome5'
+		| 'fontisto'
+		| 'ionicons'
+		| 'materialCommunityIcons'
+		| 'materialIcons'
+	iconName: string
+	color?: ColorValue
+	size?: number
 }
 
 const Icon: React.FC<IconProps> = ({ provider, iconName, color, size }) => {
@@ -33,27 +33,27 @@ const Icon: React.FC<IconProps> = ({ provider, iconName, color, size }) => {
 		let Icon
 
 		switch (provider) {
-		case 'feather':
-			Icon = Feather
-			break
-		case 'fontAwesome':
-			Icon = FontAwesome
-			break
-		case 'fontAwesome5':
-			Icon = FontAwesome5
-			break
-		case 'fontisto':
-			Icon = Fontisto
-			break
-		case 'ionicons':
-			Icon = Ionicons
-			break
-		case 'materialCommunityIcons':
-			Icon = MaterialCommunityIcons
-			break
-		case 'materialIcons':
-			Icon = MaterialIcons
-			break
+			case 'feather':
+				Icon = Feather
+				break
+			case 'fontAwesome':
+				Icon = FontAwesome
+				break
+			case 'fontAwesome5':
+				Icon = FontAwesome5
+				break
+			case 'fontisto':
+				Icon = Fontisto
+				break
+			case 'ionicons':
+				Icon = Ionicons
+				break
+			case 'materialCommunityIcons':
+				Icon = MaterialCommunityIcons
+				break
+			case 'materialIcons':
+				Icon = MaterialIcons
+				break
 		}
 
 		return (

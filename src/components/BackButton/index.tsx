@@ -4,8 +4,8 @@ import { BackButtonContainer } from './styles'
 import IconButton from '../IconButton'
 
 type BackButtonProps = {
-  goBack(): void
-  canGoBack(): boolean
+	goBack(): void
+	canGoBack(): boolean
 }
 
 const BackButton: React.FC<BackButtonProps> = ({ canGoBack, goBack }) => {

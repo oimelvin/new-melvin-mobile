@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { BarCodeScanner, PermissionStatus } from 'expo-barcode-scanner'
 
-const useBarCodePermissions = () => {
+const useQRCodeEquipamentoHook = () => {
 	const [hasPermission, setHasPermission] = useState(
 		PermissionStatus.UNDETERMINED
 	)
@@ -19,4 +19,4 @@ const useBarCodePermissions = () => {
 	return { hasPermission, requestPermission }
 }
 
-export default useBarCodePermissions
+export default useQRCodeEquipamentoHook

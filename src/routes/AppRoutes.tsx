@@ -2,18 +2,21 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import BottomTabNavigator from './BottomTabNavigator'
-import SearchEquipmentManuallyPage from '@pages/App/SearchEquipmentManuallyPage'
-import SearchEquipmentQRCodePage from '@pages/App/SearchEquipmentQRCodePage'
+import FiltroEquipamentoPage from '@pages/App/FiltroEquipamentoPage'
+import QRCodeEquipamentoPage from '@pages/App/QRCodeEquipamentoPage'
+import FiltroOrdemServicoPage from '@pages/App/FiltroOrdemServicoPage'
 import NotificationTopTabNavigator from './NotificationTopTabNavigator'
 import AccountPage from '@pages/App/AccountPage'
 import colors from '@styles/colors.style'
 
 export type AppStackNavigatorParamList = {
-  BottomTabNavigator: undefined
-  SearchEquipmentManuallyPage: undefined
-  SearchEquipmentQRCodePage: undefined
-  NotificationTopTabNavigator: undefined
-  AccountPage: undefined
+	BottomTabNavigator: undefined
+	FiltroEquipamentoPage: undefined
+	QRCodeEquipamentoPage: undefined
+	FiltroOrdemServicoPage: undefined
+	FiltroSolicitacaoPage: undefined
+	NotificationTopTabNavigator: undefined
+	AccountPage: undefined
 }
 
 const NativeStack = createNativeStackNavigator<AppStackNavigatorParamList>()
@@ -31,6 +34,7 @@ const AppStackNavigator: React.FC = () => (
 			headerTransparent: true,
 			headerTintColor: colors.white,
 			headerTitle: '',
+			headerBackTitleVisible: false,
 		}}
 		initialRouteName="BottomTabNavigator"
 	>
@@ -42,15 +46,31 @@ const AppStackNavigator: React.FC = () => (
 			}}
 		/>
 		<NativeStack.Screen
-			name="SearchEquipmentQRCodePage"
-			component={SearchEquipmentQRCodePage}
+			name="QRCodeEquipamentoPage"
+			component={QRCodeEquipamentoPage}
 			options={{
 				animation: 'slide_from_right',
 			}}
 		/>
 		<NativeStack.Screen
-			name="SearchEquipmentManuallyPage"
-			component={SearchEquipmentManuallyPage}
+			name="FiltroEquipamentoPage"
+			component={FiltroEquipamentoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
+			name="FiltroOrdemServicoPage"
+			component={FiltroOrdemServicoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
+			name="FiltroSolicitacaoPage"
+			component={FiltroOrdemServicoPage}
 			options={{
 				headerTransparent: false,
 				animation: 'slide_from_right',

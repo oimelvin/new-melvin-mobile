@@ -61,8 +61,6 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 			await configTenant(usernameOrEmail)
 			await configSession(usernameOrEmail, password)
 			await clearTenant()
-		} catch (err) {
-			Alert.alert('Atenção', 'Credenciais incorretas')
 		} finally {
 			setLoading(false)
 		}

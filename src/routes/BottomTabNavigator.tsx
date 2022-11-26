@@ -15,11 +15,11 @@ import MelvinPage from '@pages/App/Tabs/MelvinPage'
 import MaterialPage from '@pages/App/Tabs/MaterialPage'
 
 export type BottomTabNavigatorParamList = {
-  EquipmentPage: { id: string } | undefined
-  SchedulePage: undefined
-  MelvinPage: undefined
-  MaterialPage: undefined
-  Page5: undefined
+	EquipmentPage: { id: string } | undefined
+	SchedulePage: undefined
+	MelvinPage: undefined
+	MaterialPage: undefined
+	Page5: undefined
 }
 
 const BottomTabBar = createBottomTabNavigator<BottomTabNavigatorParamList>()
@@ -72,7 +72,11 @@ const BottomTabNavigator: React.FC = () => {
 					component={MelvinPage}
 					options={{
 						tabBarIcon: () => (
-							<Logo width={30} height={30} fill={colors.secondary} />
+							<Logo
+								width={30}
+								height={30}
+								fill={colors.secondary}
+							/>
 						),
 						headerShown: false,
 					}}

@@ -17,17 +17,18 @@ import {
 import Icon from '../Icon'
 
 export type InputProps = Omit<
-  TextInputProps,
-  'editable' | 'passwordRules' | 'secureTextEntry'
+	TextInputProps,
+	'editable' | 'passwordRules' | 'secureTextEntry'
 > & {
-  label?: string
-  disabled?: boolean
-  readOnly?: boolean
-  isPassword?: boolean
-  infoText?: string
-  errorText?: string
-  rightComponent?: ReactElement
-  color?: ColorValue
+	label?: string
+	disabled?: boolean
+	readOnly?: boolean
+	isPassword?: boolean
+	infoText?: string
+	errorText?: string
+	rightComponent?: ReactElement
+	color?: ColorValue
+	translucentBackground?: boolean
 }
 
 const Input: React.FC<InputProps> = ({
@@ -42,6 +43,7 @@ const Input: React.FC<InputProps> = ({
 	color,
 	placeholderTextColor,
 	selectionColor,
+	translucentBackground,
 	...rest
 }) => {
 	const getColor = (): string => {
@@ -95,16 +97,23 @@ const Input: React.FC<InputProps> = ({
 	return (
 		<InputContainer>
 			{label && (
-				<InputLabel color={color || colors.white}>{renderLabel()}</InputLabel>
+				<InputLabel color={color || colors.white}>
+					{renderLabel()}
+				</InputLabel>
 			)}
 			<MarginTop value={5} />
-			<TextInputBorder borderColor={getColor()}>
+			<TextInputBorder
+				borderColor={getColor()}
+				translucentBackground={translucentBackground}
+			>
 				{readOnly ? (
 					<FixedText color={getColor()}>{value}</FixedText>
 				) : (
 					<TextInput
 						value={value}
-						placeholderTextColor={placeholderTextColor || colors.gray500}
+						placeholderTextColor={
+							placeholderTextColor || colors.gray500
+						}
 						selectionColor={selectionColor || colors.cyan}
 						color={getColor()}
 						secureTextEntry={isPassword}
@@ -112,7 +121,9 @@ const Input: React.FC<InputProps> = ({
 						{...rest}
 					/>
 				)}
-				<ButtonTextInputContainer>{rightComponent}</ButtonTextInputContainer>
+				<ButtonTextInputContainer>
+					{rightComponent}
+				</ButtonTextInputContainer>
 			</TextInputBorder>
 			<InfoContainer>{renderInfo()}</InfoContainer>
 		</InputContainer>

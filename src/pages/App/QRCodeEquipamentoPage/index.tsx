@@ -14,19 +14,19 @@ import colors from '@styles/colors.style'
 import Loading from '@components/Loading'
 import Button from '@components/Button'
 import StatusBar from '@components/StatusBar'
+import { Box, QRCodeEquipamentoPageContainer } from './styles'
+
 import { i18n } from '@languages/index'
+import useQRCodeEquipamentoHook from './hooks'
 
-import { Box, SearchEquipmentQRCodePageContainer } from './styles'
-import useBarCodePermissions from './hooks/useBarCodePermissions'
-
-type SearchEquipmentQRCodePageProp = BottomTabNavigationProp<
-  BottomTabNavigatorParamList,
-  'EquipmentPage'
+type QRCodeEquipamentoPageProp = BottomTabNavigationProp<
+	BottomTabNavigatorParamList,
+	'EquipmentPage'
 >
 
-const SearchEquipmentQRCodePage: React.FC = () => {
-	const { navigate } = useNavigation<SearchEquipmentQRCodePageProp>()
-	const { hasPermission, requestPermission } = useBarCodePermissions()
+const QRCodeEquipamentoPage: React.FC = () => {
+	const { navigate } = useNavigation<QRCodeEquipamentoPageProp>()
+	const { hasPermission, requestPermission } = useQRCodeEquipamentoHook()
 
 	const [scanned, setScanned] = useState(false)
 
@@ -49,7 +49,9 @@ const SearchEquipmentQRCodePage: React.FC = () => {
 					<Loading />
 					<MarginTop value={15} />
 					<Text color={colors.white}>
-						{i18n.t('searchEquipmentQRCode.requestingCameraPermission')}
+						{i18n.t(
+							'searchEquipmentQRCode.requestingCameraPermission'
+						)}
 					</Text>
 				</Center>
 			)
@@ -73,9 +75,15 @@ const SearchEquipmentQRCodePage: React.FC = () => {
 			<Center>
 				<StatusBar />
 				<BarCodeScanner
-					style={{ width: '100%', height: '100%', position: 'absolute' }}
+					style={{
+						width: '100%',
+						height: '100%',
+						position: 'absolute',
+					}}
 					barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-					onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+					onBarCodeScanned={
+						scanned ? undefined : handleBarCodeScanned
+					}
 				/>
 				<Title color={colors.white}>
 					{i18n.t('searchEquipmentQRCode.readEquipmentQrCode')}
@@ -87,10 +95,10 @@ const SearchEquipmentQRCodePage: React.FC = () => {
 	}
 
 	return (
-		<SearchEquipmentQRCodePageContainer>
+		<QRCodeEquipamentoPageContainer>
 			{renderScanner()}
-		</SearchEquipmentQRCodePageContainer>
+		</QRCodeEquipamentoPageContainer>
 	)
 }
 
-export default SearchEquipmentQRCodePage
+export default QRCodeEquipamentoPage

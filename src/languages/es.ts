@@ -87,6 +87,8 @@ const es: LanguageProps = {
 	},
 	schedule: {
 		schedule: 'Calendario',
+		workOrders: 'Ordenes de trabajo',
+		solicitations: 'Solicitaciones',
 		myOS: 'Mis OS',
 		searchSolicitation: 'Busqueda SS',
 		openSolicitation: 'Abrir SS',

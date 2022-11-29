@@ -30,6 +30,7 @@ const useAccessToken = (): AccessTokenHookProps => {
 
 	const setTokenAsyncStorage = async (value: string) => {
 		await AsyncStorage.setItem(ASToken, JSON.stringify(value))
+		configAuthorization(value)
 		setToken(value)
 	}
 

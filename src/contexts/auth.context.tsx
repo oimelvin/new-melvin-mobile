@@ -38,6 +38,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 				setLoading(true)
 
 				if (token && userId) {
+					setToken(token)
 					const user = await getUser()
 					setSessionUser(user)
 				}
@@ -57,10 +58,12 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 	): Promise<void> => {
 		try {
 			setLoading(true)
-
+			await clearTenant()
 			await configTenant(usernameOrEmail)
 			await configSession(usernameOrEmail, password)
-			await clearTenant()
+
+			
+			
 		} finally {
 			setLoading(false)
 		}

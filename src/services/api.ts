@@ -35,7 +35,6 @@ const api = axios.create({
 )*/
 
 export const configAuthorization = async (token: string): Promise<void> => {
-	console.log(token);
 	if (token) {
 		api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 	} else {

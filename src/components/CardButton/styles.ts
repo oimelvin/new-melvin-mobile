@@ -7,8 +7,7 @@ export const CardButtonContainer = styled(ButtonOpacity)`
 	flex: 1;
 	background-color: ${colors.gray900};
 	border-radius: 16px;
-	padding: 16px;
-	margin: 0 8px;
+	padding: 16px 8px;
 `
 
 export const CardButtonLabel = styled(Text)`

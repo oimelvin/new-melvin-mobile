@@ -21,7 +21,7 @@ import { i18n } from '@languages/index'
 
 type FiltroEquipamentoPageProp = BottomTabNavigationProp<
 	BottomTabNavigatorParamList,
-	'EquipmentPage'
+	'EquipamentoPage'
 >
 
 const FiltroEquipamentoPage: React.FC = () => {
@@ -29,17 +29,17 @@ const FiltroEquipamentoPage: React.FC = () => {
 
 	const { data, handles } = useFiltroEquipamentoPageHook()
 
-	const [dirtyAtivo, setDirtyAtivo] = useState(false)
+	const [dirtyEquipamento, setDirtyEquipamento] = useState(false)
 
-	const errorAtivo =
-		dirtyAtivo && !data.selectedAtivo
-			? i18n.t('FiltroEquipamentoPage.equipmentRequired')
+	const errorEquipamento =
+		dirtyEquipamento && !data.selectedEquipamento
+			? i18n.t('searchEquipmentManually.equipmentRequired')
 			: undefined
 
-	const handleVisualizarAtivo = () => {
-		if (data.selectedAtivo?.value) {
-			navigate('EquipmentPage', {
-				id: data.selectedAtivo.value,
+	const handleVisualizarEquipamento = () => {
+		if (data.selectedEquipamento?.value) {
+			navigate('EquipamentoPage', {
+				id: data.selectedEquipamento.value,
 			})
 		}
 	}
@@ -49,7 +49,7 @@ const FiltroEquipamentoPage: React.FC = () => {
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 				<FiltroEquipamentoPageContainer>
 					<Title color={colors.white}>
-						{i18n.t('FiltroEquipamentoPage.searchEquipment')}
+						{i18n.t('searchEquipmentManually.searchEquipment')}
 					</Title>
 					<MarginTop value={15} />
 					<Select
@@ -61,10 +61,10 @@ const FiltroEquipamentoPage: React.FC = () => {
 						onSelect={item => handles.setSelectedFilial(item)}
 						color={colors.white}
 						placeholder={i18n.t(
-							'FiltroEquipamentoPage.selectABranch'
+							'searchEquipmentManually.selectABranch'
 						)}
 						emptyListText={i18n.t(
-							'FiltroEquipamentoPage.noBranchesFound'
+							'searchEquipmentManually.noBranchesFound'
 						)}
 					/>
 					<MarginTop value={15} />
@@ -78,10 +78,10 @@ const FiltroEquipamentoPage: React.FC = () => {
 						disabled={!data.selectedFilial}
 						color={colors.white}
 						placeholder={i18n.t(
-							'FiltroEquipamentoPage.selectASector'
+							'searchEquipmentManually.selectASector'
 						)}
 						emptyListText={i18n.t(
-							'FiltroEquipamentoPage.noSectorsFound'
+							'searchEquipmentManually.noSectorsFound'
 						)}
 					/>
 					<MarginTop value={15} />
@@ -94,10 +94,10 @@ const FiltroEquipamentoPage: React.FC = () => {
 						onSelect={item => handles.setSelectedFamilia(item)}
 						color={colors.white}
 						placeholder={i18n.t(
-							'FiltroEquipamentoPage.selectAFamily'
+							'searchEquipmentManually.selectAFamily'
 						)}
 						emptyListText={i18n.t(
-							'FiltroEquipamentoPage.noFamiliesFound'
+							'searchEquipmentManually.noFamiliesFound'
 						)}
 					/>
 					<MarginTop value={15} />
@@ -110,10 +110,10 @@ const FiltroEquipamentoPage: React.FC = () => {
 						onSelect={item => handles.setSelectedStatus(item)}
 						color={colors.white}
 						placeholder={i18n.t(
-							'FiltroEquipamentoPage.selectAStatus'
+							'searchEquipmentManually.selectAStatus'
 						)}
 						emptyListText={i18n.t(
-							'FiltroEquipamentoPage.noStatusFound'
+							'searchEquipmentManually.noStatusFound'
 						)}
 					/>
 					<MarginTop value={15} />
@@ -122,7 +122,7 @@ const FiltroEquipamentoPage: React.FC = () => {
 						onChangeText={value => handles.setPesquisa(value)}
 						placeholderTextColor={colors.gray100}
 						placeholder={i18n.t(
-							'FiltroEquipamentoPage.searchEquipment'
+							'searchEquipmentManually.searchEquipment'
 						)}
 						selectionColor={colors.gray500}
 						color={colors.white}
@@ -130,30 +130,31 @@ const FiltroEquipamentoPage: React.FC = () => {
 					<Divider color={colors.gray900} />
 					<MarginTop value={15} />
 					<Select
-						items={data.ativos.map(({ id, descricao }) => ({
+						items={data.equipamentos.map(({ id, descricao }) => ({
 							value: id,
 							label: descricao,
 						}))}
-						selectedValue={data.selectedAtivo}
-						onSelect={item => handles.setSelectedAtivo(item)}
+						selectedValue={data.selectedEquipamento}
+						onSelect={item => handles.setSelectedEquipamento(item)}
 						color={colors.white}
 						placeholder={i18n.t(
-							'FiltroEquipamentoPage.selectAnEquipment'
+							'searchEquipmentManually.selectAnEquipment'
 						)}
 						emptyListText={i18n.t(
-							'FiltroEquipamentoPage.noEquipmentFound'
+							'searchEquipmentManually.noEquipmentFound'
 						)}
 						onCloseSelect={() =>
-							!data.selectedAtivo && setDirtyAtivo(true)
+							!data.selectedEquipamento &&
+							setDirtyEquipamento(true)
 						}
-						errorText={errorAtivo}
+						errorText={errorEquipamento}
 					/>
 					<MarginTop value={15} />
 					<Button
-						onPress={() => handleVisualizarAtivo()}
-						disabled={!data.selectedAtivo}
+						onPress={() => handleVisualizarEquipamento()}
+						disabled={!data.selectedEquipamento}
 					>
-						{i18n.t('FiltroEquipamentoPage.seeEquipment')}
+						{i18n.t('searchEquipmentManually.seeEquipment')}
 					</Button>
 					<MarginTop value={32} />
 				</FiltroEquipamentoPageContainer>

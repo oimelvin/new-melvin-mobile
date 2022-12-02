@@ -9,17 +9,18 @@ import TabBar from '@components/TabBar'
 
 import { BackgroundImage } from '../styles/global.style'
 import HeaderTabNavigation from '../components/HeaderTabNavigation'
-import EquipmentPage from '@pages/App/Tabs/EquipmentPage'
-import SchedulePage from '@pages/App/Tabs/SchedulePage'
+import EquipamentoPage from '@pages/App/Tabs/EquipamentoPage'
+import OrdemServicoPage from '@pages/App/Tabs/OrdemServicoPage'
 import MelvinPage from '@pages/App/Tabs/MelvinPage'
 import MaterialPage from '@pages/App/Tabs/MaterialPage'
+import DashboardPage from '@pages/App/Tabs/DashboardPage'
 
 export type BottomTabNavigatorParamList = {
-	EquipmentPage: { id: string } | undefined
-	SchedulePage: undefined
+	EquipamentoPage: { id: string } | undefined
+	OrdemServicoPage: undefined
 	MelvinPage: undefined
 	MaterialPage: undefined
-	Page5: undefined
+	DashboardPage: undefined
 }
 
 const BottomTabBar = createBottomTabNavigator<BottomTabNavigatorParamList>()
@@ -37,11 +38,11 @@ const BottomTabNavigator: React.FC = () => {
 				sceneContainerStyle={{
 					backgroundColor: 'transparent',
 				}}
-				initialRouteName="EquipmentPage"
+				initialRouteName="EquipamentoPage"
 			>
 				<BottomTabBar.Screen
-					name="EquipmentPage"
-					component={EquipmentPage}
+					name="EquipamentoPage"
+					component={EquipamentoPage}
 					options={{
 						tabBarIcon: ({ color, size }) => (
 							<Icon
@@ -54,8 +55,8 @@ const BottomTabNavigator: React.FC = () => {
 					}}
 				/>
 				<BottomTabBar.Screen
-					name="SchedulePage"
-					component={SchedulePage}
+					name="OrdemServicoPage"
+					component={OrdemServicoPage}
 					options={{
 						tabBarIcon: ({ color, size }) => (
 							<Icon
@@ -96,8 +97,8 @@ const BottomTabNavigator: React.FC = () => {
 					}}
 				/>
 				<BottomTabBar.Screen
-					name="Page5"
-					component={EquipmentPage}
+					name="DashboardPage"
+					component={DashboardPage}
 					options={{
 						tabBarIcon: ({ color, size }) => (
 							<Icon

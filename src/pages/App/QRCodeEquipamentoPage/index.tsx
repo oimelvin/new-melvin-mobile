@@ -21,7 +21,7 @@ import useQRCodeEquipamentoHook from './hooks'
 
 type QRCodeEquipamentoPageProp = BottomTabNavigationProp<
 	BottomTabNavigatorParamList,
-	'EquipmentPage'
+	'EquipamentoPage'
 >
 
 const QRCodeEquipamentoPage: React.FC = () => {
@@ -37,7 +37,7 @@ const QRCodeEquipamentoPage: React.FC = () => {
 
 		Vibration.vibrate(200)
 
-		navigate('EquipmentPage', {
+		navigate('EquipamentoPage', {
 			id: data,
 		})
 	}

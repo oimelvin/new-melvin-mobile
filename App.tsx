@@ -7,7 +7,7 @@ import Routes from './src/routes'
 import { ThemeProvider } from '@contexts/theme.context'
 import { AuthProvider } from '@contexts/auth.context'
 import { MessageProvider } from '@contexts/message.context'
-import { AtivoProvider } from '@pages/App/Tabs/EquipmentPage/ativo.context'
+import { EquipamentoProvider } from '@pages/App/Tabs/EquipamentoPage/equipamento.context'
 
 const App: React.FC = () => (
 	<ThemeProvider>
@@ -19,9 +19,9 @@ const App: React.FC = () => (
 		<MessageProvider>
 			<NavigationContainer>
 				<AuthProvider>
-					<AtivoProvider>
+					<EquipamentoProvider>
 						<Routes />
-					</AtivoProvider>
+					</EquipamentoProvider>
 				</AuthProvider>
 			</NavigationContainer>
 		</MessageProvider>

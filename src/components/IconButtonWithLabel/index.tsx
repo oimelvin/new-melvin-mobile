@@ -8,7 +8,7 @@ import {
 } from './styles'
 
 export type EquipmentIconButtonProps = {
-  label: string
+	label: string
 } & Omit<Omit<IconButtonProps, 'size'>, 'color'>
 
 const IconButtonWithLabel: React.FC<EquipmentIconButtonProps> = ({
@@ -16,12 +16,14 @@ const IconButtonWithLabel: React.FC<EquipmentIconButtonProps> = ({
 	iconName,
 	label,
 	onPress,
+	...props
 }) => (
 	<IconButtonContainer>
 		<StyledIconButton
 			provider={provider}
 			iconName={iconName}
 			onPress={onPress}
+			{...props}
 		/>
 		<IconButtonLabel>{label}</IconButtonLabel>
 	</IconButtonContainer>

@@ -51,7 +51,7 @@ export const ScrollView = styled.ScrollView.attrs({
 `
 
 export const Container = styled.View`
-	margin-bottom: 8px;
+	margin-bottom: 16px;
 	padding: 16px;
 	border: 1px solid ${({ theme }) => theme.colors.border};
 	border-radius: 16px;

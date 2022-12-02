@@ -33,10 +33,10 @@ export type LanguageProps = {
 		searchThe: string
 		equipment: string
 		technicalData: string
-		searchSolicitation: string
-		openSolicitation: string
-		searchOS: string
-		openOS: string
+		searchRequest: string
+		openRequest: string
+		searchWorkOrder: string
+		openWorkOrder: string
 		equipmentPhoto: string
 		mainInfo: string
 		tag: string
@@ -81,15 +81,11 @@ export type LanguageProps = {
 		verifyPermission: string
 		readEquipmentQrCode: string
 	}
-	schedule: {
-		schedule: string
+	workOrders: {
 		workOrders: string
-		solicitations: string
-		myOS: string
-		searchSolicitation: string
-		openSolicitation: string
-		searchOS: string
-		openOS: string
+		servicesPortfolio: string
+		schedule: string
+		serviceRequest: string
 	}
 	material: {
 		materials: string
@@ -98,6 +94,9 @@ export type LanguageProps = {
 		singleReservation: string
 		searchProvider: string
 		registerProvider: string
+	}
+	dashboard: {
+		dashboard: string
 	}
 	melvin: {
 		myShortcuts: string

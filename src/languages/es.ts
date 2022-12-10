@@ -45,7 +45,7 @@ const es: LanguageProps = {
 		tag: 'Tag',
 		name: 'Nombre',
 		families: 'Familias',
-		operatingData: 'Datos operequipamentos',
+		operatingData: 'Datos operativos',
 		noData: 'Sin datos',
 		startOperation: 'Inicio de operación',
 		uptime: 'Tiempo de actividad',
@@ -90,6 +90,7 @@ const es: LanguageProps = {
 		servicesPortfolio: 'Cartera de servicios',
 		schedule: 'Programación',
 		serviceRequest: 'Solicitud de servicio',
+		noWorkOrderFound: 'No se ha encontrado ninguna orden de trabajo.',
 	},
 	material: {
 		materials: 'Materiales',

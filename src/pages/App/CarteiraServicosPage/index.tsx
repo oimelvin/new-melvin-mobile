@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, FlatList, View } from 'react-native'
+import { Alert, FlatList, RefreshControl, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 
 import { AppStackNavigatorParamList } from '@routes/AppRoutes'
 
 import colors from '@styles/colors.style'
-import { MarginTop, ScrollView, Title } from '@styles/global.style'
+import { Text } from '@styles/global.style'
 import { i18n } from '@languages/index'
 import OrdemServicoComponent from './components/OrdemServicoComponent'
-import IconButton from '@components/IconButton'
 import useOrdemServicoService from '@services/useOrdemServicoService.hook'
 import { OrdemServico } from '@models/OrdemServico'
+import ListaOrdemServicoHeader from './components/ListaOrdemServicoHeader'
+import Loading from '@components/Loading'
 
 type CarteiraServicosPageProp = BottomTabNavigationProp<
 	AppStackNavigatorParamList,
@@ -22,51 +23,110 @@ const CarteiraServicosPage: React.FC = () => {
 	const { navigate } = useNavigation<CarteiraServicosPageProp>()
 
 	const { getOrdensServicos } = useOrdemServicoService()
+	const itensPorPagina = 10
 
-	const [ordensServicos, setOrdensServicos] = useState<OrdemServico[] | null>(
-		null
-	)
+	const [loading, setLoading] = useState(false)
+	const [refreshing, setRefreshing] = useState(false)
+	const [pagina, setPagina] = useState(0)
+	const [qtdPaginas, setQtdPaginas] = useState(1)
+	const [ordensServicos, setOrdensServicos] = useState<OrdemServico[]>([])
+
+	const carregarOrdensServicos = async () => {
+		try {
+			const { items, totalCount } = await getOrdensServicos(
+				pagina * itensPorPagina,
+				itensPorPagina
+			)
+
+			if (refreshing) {
+				setOrdensServicos(items)
+			} else {
+				setOrdensServicos([...ordensServicos, ...items])
+			}
+
+			setQtdPaginas(Math.ceil(totalCount / itensPorPagina))
+		} catch (error) {
+			Alert.alert(
+				i18n.t('common.error'),
+				i18n.t('common.anErrorHasOccuredPleaseTryAgain')
+			)
+		} finally {
+			setRefreshing(false)
+			setLoading(false)
+		}
+	}
 
 	useEffect(() => {
-		const carregarOrdensServicos = async () => {
-			const ordensServicosApi = await getOrdensServicos(1, 10)
-			setOrdensServicos(ordensServicosApi)
-		}
-
 		carregarOrdensServicos()
-	}, [])
+	}, [pagina])
 
-	return (
-		<View style={{ flex: 1, backgroundColor: colors.white }}>
-			<MarginTop value={16} />
+	const onRefreshOrdensServicos = async () => {
+		if (pagina !== 0) {
+			setRefreshing(true)
+			setQtdPaginas(0)
+			setPagina(0)
+		}
+	}
+
+	const onEndReachedOrdensServicos = async () => {
+		if (!loading && pagina <= qtdPaginas) {
+			setLoading(true)
+			setPagina(pagina + 1)
+		}
+	}
+
+	const emptyComponent = () =>
+		!loading ? (
 			<View
 				style={{
-					paddingHorizontal: 16,
-					flexDirection: 'row',
-					justifyContent: 'space-between',
+					flex: 1,
+					justifyContent: 'center',
 					alignItems: 'center',
 				}}
 			>
-				<Title>Carteira de serviços</Title>
-				<IconButton
-					provider="materialCommunityIcons"
-					iconName="filter"
-					onPress={() =>
-						Alert.alert(
-							'Filtrar carteira de serviços',
-							'Funcionalidade não implementada.'
-						)
-					}
-				/>
+				<Text align="center">
+					{i18n.t('workOrders.noWorkOrderFound')}
+				</Text>
 			</View>
-			<MarginTop value={16} />
+		) : null
+
+	const footerComponent = () =>
+		loading ? (
+			<View
+				style={{
+					flex: 1,
+					justifyContent: 'center',
+					alignItems: 'center',
+					marginBottom: 16,
+				}}
+			>
+				<Loading />
+			</View>
+		) : null
+
+	return (
+		<View style={{ flex: 1, backgroundColor: colors.white }}>
 			<FlatList<OrdemServico>
 				style={{ paddingHorizontal: 16 }}
 				data={ordensServicos}
 				keyExtractor={({ id }) => id}
+				overScrollMode="never"
+				ListHeaderComponent={() => <ListaOrdemServicoHeader />}
+				ListEmptyComponent={emptyComponent}
+				ListFooterComponent={footerComponent}
 				renderItem={({ item }) => (
 					<OrdemServicoComponent ordemServico={item} />
 				)}
+				refreshControl={
+					<RefreshControl
+						refreshing={refreshing}
+						onRefresh={onRefreshOrdensServicos}
+						tintColor={colors.cyan}
+						colors={[colors.cyan]}
+					/>
+				}
+				onEndReachedThreshold={0.1}
+				onEndReached={onEndReachedOrdensServicos}
 			/>
 		</View>
 	)

@@ -86,6 +86,7 @@ export type LanguageProps = {
 		servicesPortfolio: string
 		schedule: string
 		serviceRequest: string
+		noWorkOrderFound: string
 	}
 	material: {
 		materials: string

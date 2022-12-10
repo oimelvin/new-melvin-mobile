@@ -89,6 +89,7 @@ const en: LanguageProps = {
 		servicesPortfolio: 'Services portfolio',
 		schedule: 'Schedule',
 		serviceRequest: 'Service request',
+		noWorkOrderFound: 'No work order found.',
 	},
 	material: {
 		materials: 'Materials',

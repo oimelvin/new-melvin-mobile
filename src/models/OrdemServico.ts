@@ -43,5 +43,5 @@ export interface OrdemServico {
 	prioridade: Prioridade
 	oficina: Oficina
 	aprovador: User
-	ordemServicoEquipamento: OrdemServicoEquipamento
+	ordemEquipamentos: OrdemServicoEquipamento[]
 }

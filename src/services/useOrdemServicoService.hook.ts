@@ -16,7 +16,7 @@ interface OrdemServicoServiceHookProps {
 		pesquisa: string | undefined,
 		isActive: boolean | undefined,
 		osAbertas: boolean | undefined
-	): Promise<OrdemServico[]>
+	): Promise<Items<OrdemServico>>
 }
 
 const useOrdemServicoService = (): OrdemServicoServiceHookProps => {
@@ -34,7 +34,7 @@ const useOrdemServicoService = (): OrdemServicoServiceHookProps => {
 		pesquisa: string | undefined,
 		isActive: boolean | undefined,
 		osAbertas: boolean | undefined
-	): Promise<OrdemServico[]> => {
+	): Promise<Items<OrdemServico>> => {
 		const { data } = await api.get<HttpResponse<Items<OrdemServico>>>(
 			'services/app/OrdemServico/GetAll',
 			{
@@ -56,7 +56,7 @@ const useOrdemServicoService = (): OrdemServicoServiceHookProps => {
 			}
 		)
 
-		return data.result.items
+		return data.result
 	}
 
 	return {

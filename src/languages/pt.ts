@@ -89,6 +89,7 @@ const pt: LanguageProps = {
 		servicesPortfolio: 'Carteira de serviços',
 		schedule: 'Programação',
 		serviceRequest: 'Solicitação de serviço',
+		noWorkOrderFound: 'Nenhuma ordem de serviços encontrada.',
 	},
 	material: {
 		materials: 'Materiais',

@@ -13,6 +13,7 @@ export interface HttpResponse<T> {
 
 export interface Items<T> {
 	items: T[]
+	totalCount: number
 }
 
 const api = axios.create({

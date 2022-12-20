@@ -65,7 +65,7 @@ const OrdemServicoPage: React.FC = () => {
 						/>
 					}
 					label={i18n.t('workOrders.serviceRequest')}
-					onPress={() => navigate('QRCodeEquipamentoPage')}
+					onPress={() => navigate('SolicitacaoServicosPage')}
 				/>
 			</AcessoRapidoOrdemServicoContainer>
 		</OrdemServicoContainer>

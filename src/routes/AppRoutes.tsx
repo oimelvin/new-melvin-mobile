@@ -8,12 +8,14 @@ import CarteiraServicosPage from '@pages/App/CarteiraServicosPage'
 import NotificationTopTabNavigator from './NotificationTopTabNavigator'
 import AccountPage from '@pages/App/AccountPage'
 import colors from '@styles/colors.style'
+import SolicitacaoServicosPage from '@pages/App/SolicitacoesPage'
 
 export type AppStackNavigatorParamList = {
 	BottomTabNavigator: undefined
 	FiltroEquipamentoPage: undefined
 	QRCodeEquipamentoPage: undefined
 	CarteiraServicosPage: undefined
+	SolicitacaoServicosPage: undefined
 	NotificationTopTabNavigator: undefined
 	AccountPage: undefined
 }
@@ -78,6 +80,14 @@ const AppStackNavigator: React.FC = () => (
 			}}
 			name="NotificationTopTabNavigator"
 			component={NotificationTopTabNavigator}
+		/>
+		<NativeStack.Screen
+			name="SolicitacaoServicosPage"
+			component={SolicitacaoServicosPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
 		/>
 		<NativeStack.Screen name="AccountPage" component={AccountPage} />
 	</NativeStack.Navigator>

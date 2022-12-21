@@ -9,10 +9,10 @@ import colors from '@styles/colors.style'
 import { Text } from '@styles/global.style'
 import { i18n } from '@languages/index'
 import SolicitacaoServicoComponent from './components/SolicitacaoComponent'
-import useOrdemServicoService from '@services/useOrdemServicoService.hook'
-import { OrdemServico } from '@models/OrdemServico'
 import Loading from '@components/Loading'
 import ListaSolicitacaoServicoHeader from './components/ListaSolicitacaoServicoHeader'
+import { SolicitacaoServico } from '@models/SolicitacaoServico'
+import useSolicitacaoServicoService from '@services/useSolicitacaoServicoService.hook'
 
 type CarteiraServicosPageProp = BottomTabNavigationProp<
 	AppStackNavigatorParamList,
@@ -22,26 +22,26 @@ type CarteiraServicosPageProp = BottomTabNavigationProp<
 const SolicitacaoServicosPage: React.FC = () => {
 	const { navigate } = useNavigation<CarteiraServicosPageProp>()
 
-	const { getOrdensServicos } = useOrdemServicoService()
+	const { getSolicitacoes } = useSolicitacaoServicoService()
 	const itensPorPagina = 10
 
 	const [loading, setLoading] = useState(false)
 	const [refreshing, setRefreshing] = useState(false)
 	const [pagina, setPagina] = useState(0)
 	const [qtdPaginas, setQtdPaginas] = useState(1)
-	const [ordensServicos, setOrdensServicos] = useState<OrdemServico[]>([])
+	const [solicitacoesServicos, setSolicitacoesServicos] = useState<SolicitacaoServico[]>([])
 
-	const carregarOrdensServicos = async () => {
+	const carregarSolicitacoesServicos = async () => {
 		try {
-			const { items, totalCount } = await getOrdensServicos(
+			const { items, totalCount } = await getSolicitacoes(
 				pagina * itensPorPagina,
-				itensPorPagina
+				itensPorPagina, undefined, undefined, undefined
 			)
 
 			if (refreshing) {
-				setOrdensServicos(items)
+				setSolicitacoesServicos(items)
 			} else {
-				setOrdensServicos([...ordensServicos, ...items])
+				setSolicitacoesServicos([...solicitacoesServicos, ...items])
 			}
 
 			setQtdPaginas(Math.ceil(totalCount / itensPorPagina))
@@ -57,10 +57,10 @@ const SolicitacaoServicosPage: React.FC = () => {
 	}
 
 	useEffect(() => {
-		carregarOrdensServicos()
+		carregarSolicitacoesServicos()
 	}, [pagina])
 
-	const onRefreshOrdensServicos = async () => {
+	const onRefreshSolicitacoaoServicos = async () => {
 		if (pagina !== 0) {
 			setRefreshing(true)
 			setQtdPaginas(0)
@@ -106,21 +106,21 @@ const SolicitacaoServicosPage: React.FC = () => {
 
 	return (
 		<View style={{ flex: 1, backgroundColor: colors.white }}>
-			<FlatList<OrdemServico>
+			<FlatList<SolicitacaoServico>
 				style={{ paddingHorizontal: 16 }}
-				data={ordensServicos}
+				data={solicitacoesServicos}
 				keyExtractor={({ id }) => id}
 				overScrollMode="never"
 				ListHeaderComponent={() => <ListaSolicitacaoServicoHeader />}
 				ListEmptyComponent={emptyComponent}
 				ListFooterComponent={footerComponent}
 				renderItem={({ item }) => (
-					<SolicitacaoServicoComponent ordemServico={item} />
+					<SolicitacaoServicoComponent solicitacao={item} />
 				)}
 				refreshControl={
 					<RefreshControl
 						refreshing={refreshing}
-						onRefresh={onRefreshOrdensServicos}
+						onRefresh={onRefreshSolicitacoaoServicos}
 						tintColor={colors.cyan}
 						colors={[colors.cyan]}
 					/>

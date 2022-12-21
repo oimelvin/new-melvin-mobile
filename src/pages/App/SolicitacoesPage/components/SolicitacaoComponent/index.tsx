@@ -11,25 +11,55 @@ import {
 	MarginTop,
 	Text,
 } from '@styles/global.style'
-import { OrdemServico } from '@models/OrdemServico'
+import { SolicitacaoServico } from '@models/SolicitacaoServico'
 
 interface OrdemServicoProps {
-	ordemServico: OrdemServico
+	solicitacao: SolicitacaoServico
 }
 
 const SolicitacaoServicoComponent: React.FC<OrdemServicoProps> = ({
-	ordemServico: {
-		descricao,
-		codOrdem,
+	solicitacao: {
+		solicitacao,
+		codigo,
 		prioridade,
-		ordemEquipamentos,
+		equipamento,
 		status,
+		solicitante,
+		canal
 	},
 }) => {
-	const descricaoEquipamento =
-		ordemEquipamentos.length > 1
-			? 'Vários Equipamentos'
-			: `${ordemEquipamentos[0].equipamento.tag} - ${ordemEquipamentos[0].equipamento.descricao}`
+	const descricaoEquipamento = `${equipamento.tag} - ${equipamento.descricao}`;
+	const getCanalIcon = (canal: number) => {
+		switch (canal) {
+			case 1:
+				return 'phone';
+			case 2:
+				return 'email-outline';
+			case 3:
+				return 'file-upload';
+			case 4:
+				return 'account';
+			default:
+				return 'phone'
+		}
+	}
+
+	const getCor = (cor: any) => {
+		switch (cor) {
+		  case 1:
+			return colors.blue;
+		  case 2:
+			return colors.orange;
+		  case 3:
+			return colors.purple;
+		  case 4:
+			return colors.green;
+		  case 5:
+			return colors.red;
+		  default:
+			return colors.red;
+		}
+	}
 
 	return (
 		<ButtonOpacity
@@ -49,7 +79,7 @@ const SolicitacaoServicoComponent: React.FC<OrdemServicoProps> = ({
 					}}
 				>
 					<Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-						OS: {codOrdem}
+						SS: {codigo}
 					</Text>
 					<View
 						style={{
@@ -59,26 +89,26 @@ const SolicitacaoServicoComponent: React.FC<OrdemServicoProps> = ({
 						<Icon
 							provider="materialIcons"
 							iconName="warning"
-							color={colors.red}
+							color={getCor(prioridade.idCor)}
 							size={24}
 						/>
 						<MarginRight value={16} />
 						<Icon
 							provider="materialIcons"
-							iconName="calendar-today"
+							iconName={getCanalIcon(canal)}
 							size={24}
 						/>
 						<MarginRight value={16} />
 						<Avatar.Text
 							size={24}
-							label="C"
+							label={solicitante[0].toUpperCase()}
 							style={{ backgroundColor: colors.gray900 }}
 						/>
 					</View>
 				</View>
 				<MarginTop value={16} />
 				<View>
-					<Text style={{ fontWeight: 'bold' }}>{descricao}</Text>
+					<Text style={{ fontWeight: 'bold' }}>{solicitacao}</Text>
 				</View>
 				<MarginTop value={16} />
 				<View>

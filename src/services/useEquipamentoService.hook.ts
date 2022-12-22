@@ -11,6 +11,7 @@ interface EquipamentoServiceHookProps {
 		status: string | undefined,
 		pesquisa: string | undefined
 	): Promise<Equipamento[]>
+	getEquipamentosBySetor(idSetor: string): Promise<Equipamento[]>
 	getEquipamentoById(id: string): Promise<Equipamento>
 	getDocumentosEquipamentoById(id: string): Promise<Documento[]>
 	getCaracteristicasEquipamentoById(id: string): Promise<Caracteristica[]>
@@ -33,6 +34,21 @@ const useEquipamentoService = (): EquipamentoServiceHookProps => {
 					idFamilia,
 					status: status === 'F' || true,
 					keyWord: pesquisa,
+				},
+			}
+		)
+
+		return data.result.items
+	}
+
+	const getEquipamentosBySetor = async (
+		idSetor: string | undefined
+	): Promise<Equipamento[]> => {
+		const { data } = await api.get<HttpResponse<Items<Equipamento>>>(
+			'services/app/Equipamento/GetEquipamentos',
+			{
+				params: {
+					idSetor,
 				},
 			}
 		)
@@ -85,6 +101,7 @@ const useEquipamentoService = (): EquipamentoServiceHookProps => {
 
 	return {
 		getEquipamentos,
+		getEquipamentosBySetor,
 		getEquipamentoById,
 		getDocumentosEquipamentoById,
 		getCaracteristicasEquipamentoById,

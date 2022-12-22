@@ -1,5 +1,6 @@
 import { Oficina } from './Oficina'
 import { OrdemServicoEquipamento } from './OrdemServicoEquipamento'
+import { OrdemServicoStatus } from './OrdemServicoStatus'
 import { Prioridade } from './Prioridade'
 import { TipoManutencao } from './TipoManutencao'
 import { User } from './User'
@@ -30,7 +31,7 @@ export interface OrdemServico {
 	idOficina: string
 	idFmp: string
 	condicao: number
-	status: number
+	status: OrdemServicoStatus
 	indFavorita: true
 	indCancelada: true
 	idRota: string

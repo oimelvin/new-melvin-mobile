@@ -6,8 +6,13 @@ export type LanguageProps = {
 	}
 	components: {
 		select: {
+			select: string
 			typeForSearch: string
 			noItemsFound: string
+			clean: string
+		}
+		datePicker: {
+			select: string
 			clean: string
 		}
 	}
@@ -80,6 +85,47 @@ export type LanguageProps = {
 		permissionDenied: string
 		verifyPermission: string
 		readEquipmentQrCode: string
+	}
+	filterServicePortfolio: {
+		filterServicePortfolio: string
+		branch: string
+		selectABranch: string
+		noBranchesFound: string
+		sector: string
+		selectASector: string
+		noSectorsFound: string
+		equipment: string
+		selectAnEquipment: string
+		noEquipmentsFound: string
+		set: string
+		selectASet: string
+		noSetsFound: string
+		status: string
+		selectAStatus: string
+		noStatusFound: string
+		workshop: string
+		selectAWorkshop: string
+		noWorkshopsFound: string
+		maintenanceType: string
+		selectAMaintenanceType: string
+		noMaintenanceTypesFound: string
+		condition: string
+		selectACondition: string
+		priority: string
+		selectAPriority: string
+		noPrioritiesFound: string
+		executor: string
+		selectAnExecutor: string
+		noExecutorsFound: string
+		openingDate: string
+		selectAnOpeningDate: string
+		closingDate: string
+		selectAClosingDate: string
+		scheduleDate: string
+		selectAScheduleDate: string
+		search: string
+		searchWorkOrders: string
+		filterWorkOrders: string
 	}
 	workOrders: {
 		workOrders: string

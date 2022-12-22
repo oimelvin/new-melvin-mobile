@@ -57,6 +57,7 @@ const CarteiraServicosPage: React.FC = () => {
 	}
 
 	useEffect(() => {
+		setLoading(true)
 		carregarOrdensServicos()
 	}, [pagina])
 
@@ -111,7 +112,13 @@ const CarteiraServicosPage: React.FC = () => {
 				data={ordensServicos}
 				keyExtractor={({ id }) => id}
 				overScrollMode="never"
-				ListHeaderComponent={() => <ListaOrdemServicoHeader />}
+				ListHeaderComponent={() => (
+					<ListaOrdemServicoHeader
+						onFilterClick={() =>
+							navigate('FiltroCarteiraServicosPage')
+						}
+					/>
+				)}
 				ListEmptyComponent={emptyComponent}
 				ListFooterComponent={footerComponent}
 				renderItem={({ item }) => (

@@ -1,7 +1,10 @@
+import { PrioridadeCor } from './PrioridadeCor'
+import { PrioridadeIcone } from './PrioridadeIcone'
+
 export interface Prioridade {
 	id: string
 	descricao: string
-	idCor: string
-	idIcone: string
+	idCor: PrioridadeCor
+	idIcone: PrioridadeIcone
 	indDefault: boolean
 }

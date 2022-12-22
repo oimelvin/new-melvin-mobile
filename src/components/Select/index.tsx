@@ -108,7 +108,8 @@ const Select: React.FC<SelectProps> = ({
 										item =>
 											item.value === selectedValue.value
 								  )?.label
-								: placeholder || 'Selecione:'
+								: placeholder ||
+								  i18n.t('components.select.select')
 						}
 						rightComponent={
 							<Icon

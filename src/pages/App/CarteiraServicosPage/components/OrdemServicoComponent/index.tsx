@@ -26,10 +26,44 @@ const OrdemServicoComponent: React.FC<OrdemServicoProps> = ({
 		status,
 	},
 }) => {
-	const descricaoEquipamento =
+	const equipamentoDescricao =
 		ordemEquipamentos.length > 1
 			? 'Vários Equipamentos'
 			: `${ordemEquipamentos[0].equipamento.tag} - ${ordemEquipamentos[0].equipamento.descricao}`
+
+	const prioridadeCor = () => {
+		const cores = ['blue', 'orange', 'purple', 'green', 'red']
+
+		return cores[prioridade.idCor - 1]
+	}
+
+	const prioridadeIcone = () => {
+		const icones = [
+			'warning',
+			'info-circle',
+			'thumbs-up',
+			'thumbs-down',
+			'square',
+			'bolt',
+			'heart',
+		]
+
+		return icones[prioridade.idIcone - 1]
+	}
+
+	const statusIcone = () => {
+		const icones = [
+			'calendar-blank',
+			'calendar-check',
+			'calendar-refresh',
+			'calendar-text',
+			'play-circle-outline',
+			'folder',
+			'calendar-remove',
+		]
+
+		return icones[status - 1]
+	}
 
 	return (
 		<ButtonOpacity
@@ -57,15 +91,15 @@ const OrdemServicoComponent: React.FC<OrdemServicoProps> = ({
 						}}
 					>
 						<Icon
-							provider="materialIcons"
-							iconName="warning"
-							color={colors.red}
+							provider="fontAwesome"
+							iconName={prioridadeIcone()}
+							color={prioridadeCor()}
 							size={24}
 						/>
 						<MarginRight value={16} />
 						<Icon
-							provider="materialIcons"
-							iconName="calendar-today"
+							provider="materialCommunityIcons"
+							iconName={statusIcone()}
 							size={24}
 						/>
 						<MarginRight value={16} />
@@ -82,7 +116,7 @@ const OrdemServicoComponent: React.FC<OrdemServicoProps> = ({
 				</View>
 				<MarginTop value={16} />
 				<View>
-					<Text>{descricaoEquipamento}</Text>
+					<Text>{equipamentoDescricao}</Text>
 				</View>
 				<MarginTop value={16} />
 				<View>

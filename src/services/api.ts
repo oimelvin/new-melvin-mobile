@@ -17,7 +17,7 @@ export interface Items<T> {
 }
 
 const api = axios.create({
-	baseURL: 'http://melvinwebhost-380627449.us-east-1.elb.amazonaws.com/api/',
+	baseURL: 'https://api-novo.oimelvin.com.br/api/',
 })
 
 /*api.interceptors.response.use(

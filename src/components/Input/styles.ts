@@ -8,8 +8,7 @@ import colors from '@styles/colors.style'
 export const InputContainer = styled.View``
 
 export const InputLabel = styled(Text)`
-	font-weight: bold;
-	margin-left: 25px;
+	margin-left: 16px;
 `
 
 type TextInputBorderProps = ThemedStyledProps<

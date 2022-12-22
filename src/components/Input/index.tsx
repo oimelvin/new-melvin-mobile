@@ -91,7 +91,7 @@ const Input: React.FC<InputProps> = ({
 			)
 		}
 
-		return <Text />
+		return null
 	}
 
 	return (

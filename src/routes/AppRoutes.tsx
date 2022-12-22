@@ -5,10 +5,12 @@ import BottomTabNavigator from './BottomTabNavigator'
 import FiltroEquipamentoPage from '@pages/App/FiltroEquipamentoPage'
 import QRCodeEquipamentoPage from '@pages/App/QRCodeEquipamentoPage'
 import CarteiraServicosPage from '@pages/App/CarteiraServicosPage'
+import FiltroCarteiraServicosPage from '@pages/App/FiltroCarteiraServicosPage'
 import NotificationTopTabNavigator from './NotificationTopTabNavigator'
 import AccountPage from '@pages/App/AccountPage'
 import colors from '@styles/colors.style'
 import SolicitacaoServicosPage from '@pages/App/SolicitacoesPage'
+import { FiltrosCarteiraServicos } from '@models/FiltrosCarteiraServicos'
 
 export type AppStackNavigatorParamList = {
 	BottomTabNavigator: undefined
@@ -16,6 +18,7 @@ export type AppStackNavigatorParamList = {
 	QRCodeEquipamentoPage: undefined
 	CarteiraServicosPage: undefined
 	SolicitacaoServicosPage: undefined
+	FiltroCarteiraServicosPage: undefined
 	NotificationTopTabNavigator: undefined
 	AccountPage: undefined
 }
@@ -64,6 +67,14 @@ const AppStackNavigator: React.FC = () => (
 		<NativeStack.Screen
 			name="CarteiraServicosPage"
 			component={CarteiraServicosPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
+			name="FiltroCarteiraServicosPage"
+			component={FiltroCarteiraServicosPage}
 			options={{
 				headerTransparent: false,
 				animation: 'slide_from_right',

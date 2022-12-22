@@ -1,12 +1,16 @@
-import { Alert, View } from 'react-native'
+import { View } from 'react-native'
 
 import { MarginTop, Title } from '@styles/global.style'
 import IconButton from '@components/IconButton'
 import { i18n } from '@languages/index'
 
-interface ListaOrdemServicoHeaderProps {}
+interface ListaOrdemServicoHeaderProps {
+	onFilterClick(): void
+}
 
-const ListaOrdemServicoHeader: React.FC<ListaOrdemServicoHeaderProps> = () => (
+const ListaOrdemServicoHeader: React.FC<ListaOrdemServicoHeaderProps> = ({
+	onFilterClick,
+}) => (
 	<>
 		<MarginTop value={16} />
 		<View
@@ -20,12 +24,7 @@ const ListaOrdemServicoHeader: React.FC<ListaOrdemServicoHeaderProps> = () => (
 			<IconButton
 				provider="materialCommunityIcons"
 				iconName="filter"
-				onPress={() =>
-					Alert.alert(
-						'Filtrar carteira de serviços',
-						'Funcionalidade não implementada.'
-					)
-				}
+				onPress={onFilterClick}
 			/>
 		</View>
 		<MarginTop value={16} />

@@ -8,6 +8,7 @@ import { AppStackNavigatorParamList } from '@routes/AppRoutes'
 import colors from '@styles/colors.style'
 import { Text } from '@styles/global.style'
 import { i18n } from '@languages/index'
+import { FAB } from 'react-native-paper';
 import SolicitacaoServicoComponent from './components/SolicitacaoComponent'
 import Loading from '@components/Loading'
 import ListaSolicitacaoServicoHeader from './components/ListaSolicitacaoServicoHeader'
@@ -127,6 +128,14 @@ const SolicitacaoServicosPage: React.FC = () => {
 				}
 				onEndReachedThreshold={0.1}
 				onEndReached={onEndReachedOrdensServicos}
+			/>
+			<FAB
+				icon={{uri: 'https://cdn-icons-png.flaticon.com/512/32/32339.png'}}
+				style={{position: 'absolute',
+				margin: 16,
+				right: 0,
+				bottom: 0}}
+				onPress={() => console.log('Pressed')}
 			/>
 		</View>
 	)

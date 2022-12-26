@@ -1,8 +1,7 @@
 import { memo } from 'react'
 import { Alert, View } from 'react-native'
 import { Avatar, ProgressBar } from 'react-native-paper'
-import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 import Icon from '@components/Icon'
 import colors from '@styles/colors.style'
 import {
@@ -13,18 +12,12 @@ import {
 	Text,
 } from '@styles/global.style'
 import { SolicitacaoServico } from '@models/SolicitacaoServico'
-import { AppStackNavigatorParamList } from '@routes/AppRoutes'
 
 interface OrdemServicoProps {
 	solicitacao: SolicitacaoServico
 }
 
-type BottomTabNavigatorProp = NativeStackNavigationProp<
-	AppStackNavigatorParamList,
-	'BottomTabNavigator'
->
-
-const SolicitacaoServicoComponent: React.FC<OrdemServicoProps> = ({
+const SolicitacaoDetalheHeaderComponent: React.FC<OrdemServicoProps> = ({
 	solicitacao: {
 		solicitacao,
 		codigo,
@@ -32,11 +25,9 @@ const SolicitacaoServicoComponent: React.FC<OrdemServicoProps> = ({
 		equipamento,
 		status,
 		solicitante,
-		canal,
-		id
+		canal
 	},
 }) => {
-	const { navigate } = useNavigation<BottomTabNavigatorProp>()
 	const descricaoEquipamento = `${equipamento.tag} - ${equipamento.descricao}`;
 	const getCanalIcon = (canal: number) => {
 		switch (canal) {
@@ -72,9 +63,12 @@ const SolicitacaoServicoComponent: React.FC<OrdemServicoProps> = ({
 
 	return (
 		<ButtonOpacity
-		onPress={() => navigate('SolicitacaoDetalheComponent', {
-			id: id
-		})}
+			onPress={() =>
+				Alert.alert(
+					'Detalhes da ordem de serviço',
+					'Funcionalidade ainda não implementada.'
+				)
+			}
 		>
 			<Container>
 				<View
@@ -136,4 +130,4 @@ const SolicitacaoServicoComponent: React.FC<OrdemServicoProps> = ({
 	)
 }
 
-export default memo(SolicitacaoServicoComponent)
+export default memo(SolicitacaoDetalheHeaderComponent)

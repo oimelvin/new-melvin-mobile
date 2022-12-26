@@ -11,6 +11,7 @@ import AccountPage from '@pages/App/AccountPage'
 import colors from '@styles/colors.style'
 import SolicitacaoServicosPage from '@pages/App/SolicitacoesPage'
 import { FiltrosCarteiraServicos } from '@models/FiltrosCarteiraServicos'
+import SolicitacaoDetalheComponent from '@pages/App/SolicitacoesPage/components/SolicitacaoDetalheComponent'
 
 export type AppStackNavigatorParamList = {
 	BottomTabNavigator: undefined
@@ -95,6 +96,15 @@ const AppStackNavigator: React.FC = () => (
 		<NativeStack.Screen
 			name="SolicitacaoServicosPage"
 			component={SolicitacaoServicosPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+
+		<NativeStack.Screen
+			name="SolicitacaoDetalheComponent"
+			component={SolicitacaoDetalheComponent}
 			options={{
 				headerTransparent: false,
 				animation: 'slide_from_right',

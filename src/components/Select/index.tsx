@@ -9,16 +9,11 @@ import {
 
 import colors from '@styles/colors.style'
 import { Text } from '@styles/global.style'
+import Modal from '@components/Modal'
 import Icon from '@components/Icon'
 import Input from '@components/Input'
-import {
-	SelectModalContainer,
-	SelectModalOverlay,
-	SelectModal,
-	SelectEmptyList,
-	SelectItem,
-} from './styles'
 import Button from '@components/Button'
+import { SelectEmptyList, SelectItem } from './styles'
 import { i18n } from '@languages/index'
 
 export type SelectItemProps = {
@@ -80,10 +75,10 @@ const Select: React.FC<SelectProps> = ({
 		<TouchableHighlight
 			onPress={() => handleSelect(item)}
 			style={{ borderRadius: 16 }}
-			underlayColor={colors.gray500}
+			underlayColor={colors.gray100}
 		>
 			<SelectItem selected={item.value === selectedValue?.value}>
-				<Text color={colors.white}>{item.label}</Text>
+				<Text>{item.label}</Text>
 			</SelectItem>
 		</TouchableHighlight>
 	)
@@ -131,46 +126,30 @@ const Select: React.FC<SelectProps> = ({
 					/>
 				</View>
 			</TouchableWithoutFeedback>
-			<SelectModalContainer
-				visible={opened}
-				onRequestClose={() => handleCloseSelect()}
-			>
-				<TouchableWithoutFeedback onPress={() => handleCloseSelect()}>
-					<SelectModalOverlay>
-						<SelectModal>
-							<Input
-								color={colors.white}
-								value={search}
-								placeholder={
-									placeholderSearch ||
-									i18n.t('components.select.typeForSearch')
-								}
-								placeholderTextColor={colors.gray100}
-								onChangeText={text => setSearch(text)}
-								translucentBackground={translucentBackground}
-							/>
-							<FlatList
-								keyExtractor={({ value }) => value}
-								data={items?.filter(item =>
-									item.label
-										?.toUpperCase()
-										.includes(search.toUpperCase())
-								)}
-								renderItem={({ item }) => renderItem(item)}
-								ListEmptyComponent={renderEmptyList}
-								showsVerticalScrollIndicator={false}
-								overScrollMode="never"
-							/>
-							<Button
-								variant="outline"
-								onPress={() => handleSelect(null)}
-							>
-								{i18n.t('components.select.clean')}
-							</Button>
-						</SelectModal>
-					</SelectModalOverlay>
-				</TouchableWithoutFeedback>
-			</SelectModalContainer>
+			<Modal opened={opened} onClose={() => handleCloseSelect()} padding>
+				<Input
+					value={search}
+					placeholder={
+						placeholderSearch ||
+						i18n.t('components.select.typeForSearch')
+					}
+					onChangeText={text => setSearch(text)}
+					translucentBackground={translucentBackground}
+				/>
+				<FlatList
+					keyExtractor={({ value }) => value}
+					data={items?.filter(item =>
+						item.label?.toUpperCase().includes(search.toUpperCase())
+					)}
+					renderItem={({ item }) => renderItem(item)}
+					ListEmptyComponent={renderEmptyList}
+					showsVerticalScrollIndicator={false}
+					overScrollMode="never"
+				/>
+				<Button variant="outline" onPress={() => handleSelect(null)}>
+					{i18n.t('components.select.clean')}
+				</Button>
+			</Modal>
 		</View>
 	)
 }

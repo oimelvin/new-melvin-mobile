@@ -4,8 +4,8 @@ import { MarginLeft } from '@styles/global.style'
 import { FieldContainer, Label, Li, Ul, Value } from './styles'
 
 type FieldProps = {
-  label: string
-  value: string | string[]
+	label: string
+	value: string | string[]
 }
 
 const Field: React.FC<FieldProps> = ({ label, value }) => {

@@ -2,11 +2,7 @@ import styled from 'styled-components/native'
 
 import colors from '@styles/colors.style'
 
-export const FiltroEquipamentoPageContainer = styled.ScrollView.attrs({
-	overScrollMode: 'never',
-})`
+export const CarteiraServicosPageContainer = styled.View`
 	flex: 1;
-	padding: 16px;
-	padding-top: 0;
-	background-color: ${colors.black};
+	background-color: ${colors.white};
 `

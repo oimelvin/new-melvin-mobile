@@ -12,7 +12,7 @@ import Input from '@components/Input'
 import DatePicker from '@components/DatePicker'
 
 import { i18n } from '@languages/index'
-import useFiltroCarteiraServicosHook from './hooks'
+import useFiltroCarteiraServicosHook from './hooks/useFiltroCarteiraServicos.hook'
 import { AppStackNavigatorParamList } from '@routes/AppRoutes'
 
 type FiltroCarteiraServicosPageProp = BottomTabNavigationProp<

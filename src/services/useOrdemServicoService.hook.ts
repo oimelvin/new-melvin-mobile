@@ -5,35 +5,36 @@ interface OrdemServicoServiceHookProps {
 	getOrdensServicos(
 		skipCount: number,
 		maxResultCount: number,
-		idsEquipamento: string[] | undefined,
-		idsOficina: string[] | undefined,
-		idsTipoManutencao: string[] | undefined,
-		idsFamilia: string[] | undefined,
-		idsExecutantes: string[] | undefined,
-		status: string | undefined,
-		condicao: string | undefined,
-		statusTempo: string | undefined,
-		pesquisa: string | undefined,
-		isActive: boolean | undefined,
-		osAbertas: boolean | undefined
+		idsEquipamento?: string[],
+		idsOficina?: string[],
+		idsTipoManutencao?: string[],
+		idsFamilia?: string[],
+		idsExecutantes?: string[],
+		status?: string,
+		condicao?: string,
+		statusTempo?: string,
+		pesquisa?: string,
+		isActive?: boolean,
+		osAbertas?: boolean
 	): Promise<Items<OrdemServico>>
+	getOrdemServico(id: string): Promise<OrdemServico>
 }
 
 const useOrdemServicoService = (): OrdemServicoServiceHookProps => {
 	const getOrdensServicos = async (
 		skipCount: number,
 		maxResultCount: number,
-		idsEquipamento: string[] | undefined,
-		idsOficina: string[] | undefined,
-		idsTipoManutencao: string[] | undefined,
-		idsFamilia: string[] | undefined,
-		idsExecutantes: string[] | undefined,
-		status: string | undefined,
-		condicao: string | undefined,
-		statusTempo: string | undefined,
-		pesquisa: string | undefined,
-		isActive: boolean | undefined,
-		osAbertas: boolean | undefined
+		idsEquipamento?: string[],
+		idsOficina?: string[],
+		idsTipoManutencao?: string[],
+		idsFamilia?: string[],
+		idsExecutantes?: string[],
+		status?: string,
+		condicao?: string,
+		statusTempo?: string,
+		pesquisa?: string,
+		isActive?: boolean,
+		osAbertas?: boolean
 	): Promise<Items<OrdemServico>> => {
 		const { data } = await api.get<HttpResponse<Items<OrdemServico>>>(
 			'services/app/OrdemServico/GetAll',
@@ -59,8 +60,22 @@ const useOrdemServicoService = (): OrdemServicoServiceHookProps => {
 		return data.result
 	}
 
+	const getOrdemServico = async (id: string): Promise<OrdemServico> => {
+		const { data } = await api.get<HttpResponse<OrdemServico>>(
+			'services/app/OrdemServico/Get',
+			{
+				params: {
+					id,
+				},
+			}
+		)
+
+		return data.result
+	}
+
 	return {
 		getOrdensServicos,
+		getOrdemServico,
 	}
 }
 

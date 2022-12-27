@@ -1,83 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { Alert, FlatList, RefreshControl, View } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
-
-import { AppStackNavigatorParamList } from '@routes/AppRoutes'
+import React from 'react'
+import { FlatList, RefreshControl, View } from 'react-native'
 
 import colors from '@styles/colors.style'
 import { Text } from '@styles/global.style'
-import { i18n } from '@languages/index'
-import OrdemServicoComponent from './components/OrdemServicoComponent'
-import useOrdemServicoService from '@services/useOrdemServicoService.hook'
-import { OrdemServico } from '@models/OrdemServico'
-import ListaOrdemServicoHeader from './components/ListaOrdemServicoHeader'
+import { CarteiraServicosPageContainer } from './styles'
 import Loading from '@components/Loading'
+import OrdemServicoComponent from './components/OrdemServicoComponent'
+import ListaOrdemServicoHeader from './components/ListaOrdemServicoHeader'
 
-type CarteiraServicosPageProp = BottomTabNavigationProp<
-	AppStackNavigatorParamList,
-	'CarteiraServicosPage'
->
+import { OrdemServico } from '@models/OrdemServico'
+
+import { i18n } from '@languages/index'
+import useCarteiraServicosHook from './hooks/useCarteiraServicos.hook'
 
 const CarteiraServicosPage: React.FC = () => {
-	const { navigate } = useNavigation<CarteiraServicosPageProp>()
-
-	const { getOrdensServicos } = useOrdemServicoService()
-	const itensPorPagina = 10
-
-	const [loading, setLoading] = useState(false)
-	const [refreshing, setRefreshing] = useState(false)
-	const [pagina, setPagina] = useState(0)
-	const [qtdPaginas, setQtdPaginas] = useState(1)
-	const [ordensServicos, setOrdensServicos] = useState<OrdemServico[]>([])
-
-	const carregarOrdensServicos = async () => {
-		try {
-			const { items, totalCount } = await getOrdensServicos(
-				pagina * itensPorPagina,
-				itensPorPagina
-			)
-
-			if (refreshing) {
-				setOrdensServicos(items)
-			} else {
-				setOrdensServicos([...ordensServicos, ...items])
-			}
-
-			setQtdPaginas(Math.ceil(totalCount / itensPorPagina))
-		} catch (error) {
-			Alert.alert(
-				i18n.t('common.error'),
-				i18n.t('common.anErrorHasOccuredPleaseTryAgain')
-			)
-		} finally {
-			setRefreshing(false)
-			setLoading(false)
-		}
-	}
-
-	useEffect(() => {
-		setLoading(true)
-		carregarOrdensServicos()
-	}, [pagina])
-
-	const onRefreshOrdensServicos = async () => {
-		if (pagina !== 0) {
-			setRefreshing(true)
-			setQtdPaginas(0)
-			setPagina(0)
-		}
-	}
-
-	const onEndReachedOrdensServicos = async () => {
-		if (!loading && pagina <= qtdPaginas) {
-			setLoading(true)
-			setPagina(pagina + 1)
-		}
-	}
+	const { data, handles } = useCarteiraServicosHook()
 
 	const emptyComponent = () =>
-		!loading ? (
+		!data.loading ? (
 			<View
 				style={{
 					flex: 1,
@@ -92,7 +32,7 @@ const CarteiraServicosPage: React.FC = () => {
 		) : null
 
 	const footerComponent = () =>
-		loading ? (
+		data.loading ? (
 			<View
 				style={{
 					flex: 1,
@@ -106,36 +46,37 @@ const CarteiraServicosPage: React.FC = () => {
 		) : null
 
 	return (
-		<View style={{ flex: 1, backgroundColor: colors.white }}>
+		<CarteiraServicosPageContainer>
 			<FlatList<OrdemServico>
 				style={{ paddingHorizontal: 16 }}
-				data={ordensServicos}
+				data={data.ordensServicos}
 				keyExtractor={({ id }) => id}
 				overScrollMode="never"
 				ListHeaderComponent={() => (
 					<ListaOrdemServicoHeader
-						onFilterClick={() =>
-							navigate('FiltroCarteiraServicosPage')
-						}
+						onFilterClick={handles.onPressFilter}
 					/>
 				)}
 				ListEmptyComponent={emptyComponent}
 				ListFooterComponent={footerComponent}
 				renderItem={({ item }) => (
-					<OrdemServicoComponent ordemServico={item} />
+					<OrdemServicoComponent
+						ordemServico={item}
+						onPressOrdemServico={handles.onPressOrdemServico}
+					/>
 				)}
 				refreshControl={
 					<RefreshControl
-						refreshing={refreshing}
-						onRefresh={onRefreshOrdensServicos}
+						refreshing={data.refreshing}
+						onRefresh={handles.onRefreshOrdensServicos}
 						tintColor={colors.cyan}
 						colors={[colors.cyan]}
 					/>
 				}
 				onEndReachedThreshold={0.1}
-				onEndReached={onEndReachedOrdensServicos}
+				onEndReached={handles.onEndReachedOrdensServicos}
 			/>
-		</View>
+		</CarteiraServicosPageContainer>
 	)
 }
 

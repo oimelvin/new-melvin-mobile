@@ -3,6 +3,7 @@ export type LanguageProps = {
 		language: string
 		error: string
 		anErrorHasOccuredPleaseTryAgain: string
+		noData: string
 	}
 	components: {
 		select: {
@@ -48,7 +49,6 @@ export type LanguageProps = {
 		name: string
 		families: string
 		operatingData: string
-		noData: string
 		startOperation: string
 		uptime: string
 		hoursADay: string
@@ -133,6 +133,34 @@ export type LanguageProps = {
 		schedule: string
 		serviceRequest: string
 		noWorkOrderFound: string
+	}
+	workOrderDetails: {
+		openingDate: string
+		startExecutionDate: string
+		endExecutionDate: string
+		requestDate: string
+		issueDate: string
+		startScheduleDate: string
+		endScheduleDate: string
+		closingDate: string
+		cancellationDate: string
+		approvalDate: string
+		explanation: string
+		guidance: string
+		man: string
+		hour: string
+		manHour: string
+		notes: string
+		cost: string
+		situation: string
+		condition: string
+		status: string
+		statusTime: string
+		history: string
+		maintenanceType: string
+		priority: string
+		workshop: string
+		approver: string
 	}
 	material: {
 		materials: string

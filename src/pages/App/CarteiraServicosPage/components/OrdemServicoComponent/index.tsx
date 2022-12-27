@@ -15,16 +15,19 @@ import { OrdemServico } from '@models/OrdemServico'
 
 interface OrdemServicoProps {
 	ordemServico: OrdemServico
+	onPressOrdemServico(id: string): void
 }
 
 const OrdemServicoComponent: React.FC<OrdemServicoProps> = ({
 	ordemServico: {
+		id,
 		descricao,
 		codOrdem,
 		prioridade,
 		ordemEquipamentos,
 		status,
 	},
+	onPressOrdemServico,
 }) => {
 	const equipamentoDescricao =
 		ordemEquipamentos.length > 1
@@ -66,14 +69,7 @@ const OrdemServicoComponent: React.FC<OrdemServicoProps> = ({
 	}
 
 	return (
-		<ButtonOpacity
-			onPress={() =>
-				Alert.alert(
-					'Detalhes da ordem de serviço',
-					'Funcionalidade ainda não implementada.'
-				)
-			}
-		>
+		<ButtonOpacity onPress={() => onPressOrdemServico(id)}>
 			<Container>
 				<View
 					style={{
@@ -83,7 +79,7 @@ const OrdemServicoComponent: React.FC<OrdemServicoProps> = ({
 					}}
 				>
 					<Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-						OS: {codOrdem}
+						#{codOrdem}
 					</Text>
 					<View
 						style={{

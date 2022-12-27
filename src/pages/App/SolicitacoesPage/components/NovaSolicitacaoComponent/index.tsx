@@ -15,12 +15,13 @@ import { SolicitacaoServico } from '@models/SolicitacaoServico'
 import useSolicitacaoServicoService from '@services/useSolicitacaoServicoService.hook'
 import { i18n } from '@languages/index'
 import SolicitacaoDetalheHeaderComponent from '../SolicitacaoDetalheHeaderComponent'
+import Input from '@components/Input'
 
 interface OrdemServicoProps {
 	solicitacao: SolicitacaoServico
 }
 
-const SolicitacaoDetalheComponent: React.FC = (
+const NovaSolicitacaoComponent: React.FC = (
 	{ route, navigation }
 ) => {
 	const { id } = route.params;
@@ -59,59 +60,64 @@ const SolicitacaoDetalheComponent: React.FC = (
 			paddingLeft: 42,
 			paddingRight: 42
 		}}>
-			<SolicitacaoDetalheHeaderComponent></SolicitacaoDetalheHeaderComponent>
-			<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						alignItems: 'center',
-						marginTop: 16,
-					}}>
-				<View>
-					<Text>Nº SS</Text>
-					<Text>{solicitacoesServicos?.codigo}</Text>
-				</View>
-				<View>
-					<Text>Data</Text>
-					<Text>18/01/2022</Text>
-				</View>
-				<View>
-					<Text>Canal</Text>
-					<Text>3219</Text>
-				</View>
-			</View>
-			<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						alignItems: 'center',
-						marginTop: 20,
-					}}>
-				<View>
-					<Text>Solicitante</Text>
-					<Text>{solicitacoesServicos?.solicitante}</Text>
-				</View>
-				<View>
-					<Text>Status</Text>
-					<Text>{solicitacoesServicos?.statusTexto}</Text>
-				</View>
-				<View>
-					<Text>Prioridade</Text>
-					<Text>3219</Text>
-				</View>
-			</View>
-			<View style={{
-						marginTop: 20,
-					}}>
-				<Text>Ativo</Text>
-				<Text>O.S. Criada</Text>
-			</View>
-			<View style={{
-						marginTop: 20,
-					}}>
-				<Text>Solicitação</Text>
-				<Text>O.S. Criada</Text>
-			</View>
+			<Input
+				placeholderTextColor={colors.gray100}
+				placeholder={i18n.t(
+					'searchEquipmentManually.searchEquipment'
+				)}
+				selectionColor={colors.gray500}
+				color={colors.white}
+			/>
+			<Input
+				placeholderTextColor={colors.gray100}
+				placeholder={i18n.t(
+					'searchEquipmentManually.searchEquipment'
+				)}
+				selectionColor={colors.gray500}
+				color={colors.white}
+			/>
+			<Input
+				placeholderTextColor={colors.gray100}
+				placeholder={i18n.t(
+					'searchEquipmentManually.searchEquipment'
+				)}
+				selectionColor={colors.gray500}
+				color={colors.white}
+			/>
+			<Input
+				placeholderTextColor={colors.gray100}
+				placeholder={i18n.t(
+					'searchEquipmentManually.searchEquipment'
+				)}
+				selectionColor={colors.gray500}
+				color={colors.white}
+			/>
+			<Input
+				placeholderTextColor={colors.gray100}
+				placeholder={i18n.t(
+					'searchEquipmentManually.searchEquipment'
+				)}
+				selectionColor={colors.gray500}
+				color={colors.white}
+			/>
+			<Input
+				placeholderTextColor={colors.gray100}
+				placeholder={i18n.t(
+					'searchEquipmentManually.searchEquipment'
+				)}
+				selectionColor={colors.gray500}
+				color={colors.white}
+			/>
+			<Input
+				placeholderTextColor={colors.gray100}
+				placeholder={i18n.t(
+					'searchEquipmentManually.searchEquipment'
+				)}
+				selectionColor={colors.gray500}
+				color={colors.white}
+			/>
 		</View>
 	)
 }
 
-export default memo(SolicitacaoDetalheComponent)
+export default memo(NovaSolicitacaoComponent)

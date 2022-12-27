@@ -76,6 +76,10 @@ const SolicitacaoServicosPage: React.FC = () => {
 		}
 	}
 
+	const irNovaSolicitacao = () => {
+		navigate('NovaSolicitacaoComponent')
+	}
+
 	const emptyComponent = () =>
 		!loading ? (
 			<View
@@ -104,6 +108,7 @@ const SolicitacaoServicosPage: React.FC = () => {
 				<Loading />
 			</View>
 		) : null
+
 
 	return (
 		<View style={{ flex: 1, backgroundColor: colors.white }}>
@@ -135,7 +140,7 @@ const SolicitacaoServicosPage: React.FC = () => {
 				margin: 16,
 				right: 0,
 				bottom: 0}}
-				onPress={() => console.log('Pressed')}
+				onPress={() => irNovaSolicitacao()}
 			/>
 		</View>
 	)

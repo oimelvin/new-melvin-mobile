@@ -16,6 +16,8 @@ import useSolicitacaoServicoService from '@services/useSolicitacaoServicoService
 import { i18n } from '@languages/index'
 import SolicitacaoDetalheHeaderComponent from '../SolicitacaoDetalheHeaderComponent'
 import Input from '@components/Input'
+import SolicitacaoAcoesComponent from '../SolicitacaoAcoesComponent'
+import Select from '@components/Select'
 
 interface OrdemServicoProps {
 	solicitacao: SolicitacaoServico
@@ -24,7 +26,6 @@ interface OrdemServicoProps {
 const NovaSolicitacaoComponent: React.FC = (
 	{ route, navigation }
 ) => {
-	const { id } = route.params;
 	const { getSolicitacao } = useSolicitacaoServicoService()
 	const itensPorPagina = 10
 
@@ -34,9 +35,12 @@ const NovaSolicitacaoComponent: React.FC = (
 
 	const carregarSolicitacoesServicos = async () => {
 		try {
-			const solicitacao = await getSolicitacao(id)
-			console.log(solicitacao)
-			setSolicitacoesServicos(solicitacao)
+			if(route.params?.id){
+				const solicitacao = await getSolicitacao(route.params?.id)
+				console.log(solicitacao)
+				setSolicitacoesServicos(solicitacao)
+			}
+			
 			
 		} catch (error) {
 			Alert.alert(
@@ -60,53 +64,91 @@ const NovaSolicitacaoComponent: React.FC = (
 			paddingLeft: 42,
 			paddingRight: 42
 		}}>
+			<SolicitacaoAcoesComponent></SolicitacaoAcoesComponent>
 			<Input
 				placeholderTextColor={colors.gray100}
-				placeholder={i18n.t(
-					'searchEquipmentManually.searchEquipment'
-				)}
+				placeholder='Solicitante'
 				selectionColor={colors.gray500}
 				color={colors.white}
 			/>
-			<Input
-				placeholderTextColor={colors.gray100}
+			<Select
+				label={i18n.t('filterServicePortfolio.executor')}
+				items={data.executantes.map(({ id, nome }) => ({
+					value: id,
+					label: nome,
+				}))}
+				selectedValue={data.filtros.selectedExecutante}
+				onSelect={item => handles.setSelectedExecutante(item)}
+				color={colors.black}
 				placeholder={i18n.t(
-					'searchEquipmentManually.searchEquipment'
+					'filterServicePortfolio.selectAnExecutor'
 				)}
-				selectionColor={colors.gray500}
-				color={colors.white}
+				emptyListText={i18n.t(
+					'filterServicePortfolio.noExecutorsFound'
+				)}
+				translucentBackground
 			/>
-			<Input
-				placeholderTextColor={colors.gray100}
+			<Select
+				label={i18n.t('filterServicePortfolio.executor')}
+				items={data.executantes.map(({ id, nome }) => ({
+					value: id,
+					label: nome,
+				}))}
+				selectedValue={data.filtros.selectedExecutante}
+				onSelect={item => handles.setSelectedExecutante(item)}
+				color={colors.black}
 				placeholder={i18n.t(
-					'searchEquipmentManually.searchEquipment'
+					'filterServicePortfolio.selectAnExecutor'
 				)}
-				selectionColor={colors.gray500}
-				color={colors.white}
+				emptyListText={i18n.t(
+					'filterServicePortfolio.noExecutorsFound'
+				)}
+				translucentBackground
 			/>
-			<Input
-				placeholderTextColor={colors.gray100}
+			<Select
+				label={i18n.t('filterServicePortfolio.executor')}
+				items={data.executantes.map(({ id, nome }) => ({
+					value: id,
+					label: nome,
+				}))}
+				selectedValue={data.filtros.selectedExecutante}
+				onSelect={item => handles.setSelectedExecutante(item)}
+				color={colors.black}
 				placeholder={i18n.t(
-					'searchEquipmentManually.searchEquipment'
+					'filterServicePortfolio.selectAnExecutor'
 				)}
-				selectionColor={colors.gray500}
-				color={colors.white}
+				emptyListText={i18n.t(
+					'filterServicePortfolio.noExecutorsFound'
+				)}
+				translucentBackground
 			/>
-			<Input
-				placeholderTextColor={colors.gray100}
+			<Select
+				label={i18n.t('filterServicePortfolio.executor')}
+				items={data.executantes.map(({ id, nome }) => ({
+					value: id,
+					label: nome,
+				}))}
+				selectedValue={data.filtros.selectedExecutante}
+				onSelect={item => handles.setSelectedExecutante(item)}
+				color={colors.black}
 				placeholder={i18n.t(
-					'searchEquipmentManually.searchEquipment'
+					'filterServicePortfolio.selectAnExecutor'
 				)}
-				selectionColor={colors.gray500}
-				color={colors.white}
+				emptyListText={i18n.t(
+					'filterServicePortfolio.noExecutorsFound'
+				)}
+				translucentBackground
 			/>
-			<Input
-				placeholderTextColor={colors.gray100}
+			<Select
+				label={i18n.t('filterServicePortfolio.executor')}
+				color={colors.black}
 				placeholder={i18n.t(
-					'searchEquipmentManually.searchEquipment'
+					'filterServicePortfolio.selectAnExecutor'
 				)}
-				selectionColor={colors.gray500}
-				color={colors.white}
+				emptyListText={i18n.t(
+					'filterServicePortfolio.noExecutorsFound'
+				)}
+				translucentBackground
 			/>
 			<Input
 				placeholderTextColor={colors.gray100}

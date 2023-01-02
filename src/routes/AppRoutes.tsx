@@ -9,8 +9,10 @@ import AccountPage from '@pages/App/AccountPage'
 import colors from '@styles/colors.style'
 import SolicitacaoServicosPage from '@pages/App/SolicitacoesPage'
 import CarteiraServicosPage from '@pages/App/CarteiraServicosPage'
+import AdicionarOrdemServicoPage from '@pages/App/AdicionarOrdemServicoPage'
 import DetalhesOrdemServicoPage from '@pages/App/DetalhesOrdemServicoPage'
 import FiltroCarteiraServicosPage from '@pages/App/FiltroCarteiraServicosPage'
+import ProgramacaoPage from '@pages/App/ProgramacaoPage'
 
 export type AppStackNavigatorParamList = {
 	BottomTabNavigator: undefined
@@ -20,7 +22,11 @@ export type AppStackNavigatorParamList = {
 	DetalhesOrdemServicoPage: {
 		id: string
 	}
+	AdicionarOrdemServicoPage: {
+		id?: string
+	}
 	FiltroCarteiraServicosPage: undefined
+	ProgramacaoPage: undefined
 	SolicitacaoServicosPage: undefined
 	NotificationTopTabNavigator: undefined
 	AccountPage: undefined
@@ -84,8 +90,24 @@ const AppStackNavigator: React.FC = () => (
 			}}
 		/>
 		<NativeStack.Screen
+			name="AdicionarOrdemServicoPage"
+			component={AdicionarOrdemServicoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
 			name="FiltroCarteiraServicosPage"
 			component={FiltroCarteiraServicosPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
+			name="ProgramacaoPage"
+			component={ProgramacaoPage}
 			options={{
 				headerTransparent: false,
 				animation: 'slide_from_right',

@@ -1,4 +1,6 @@
 import React from 'react'
+import { View } from 'react-native'
+import { ProgressBar } from 'react-native-paper'
 
 import { DetalhesOrdemServicoPageContainer } from './styles'
 import useDetalhesOrdemServicoHook from './hooks/useDetalhesOrdemServico.hook'
@@ -23,12 +25,21 @@ const DetalhesOrdemServicoPage: React.FC = () => {
 		handles,
 	} = useDetalhesOrdemServicoHook()
 
+	const statusOrdemServico = ordemServico?.status || 0
+
 	const convertDate = (date: Date | undefined) => {
 		if (!date) {
 			return i18n.t('common.noData')
 		}
 
 		return moment(date).format('L')
+	}
+
+	const calcularHomemHora = () => {
+		const homem = ordemServico?.homem || 0
+		const hora = ordemServico?.hora || 0
+
+		return homem * hora
 	}
 
 	if (loading) {
@@ -39,13 +50,6 @@ const DetalhesOrdemServicoPage: React.FC = () => {
 		)
 	}
 
-	const calcularHomemHora = () => {
-		const homem = ordemServico?.homem || 0
-		const hora = ordemServico?.hora || 0
-
-		return homem * hora
-	}
-
 	return (
 		<DetalhesOrdemServicoPageContainer>
 			<PageContainer>
@@ -53,6 +57,17 @@ const DetalhesOrdemServicoPage: React.FC = () => {
 					<Title>#{ordemServico?.codOrdem}</Title>
 					<MarginTop value={16} />
 					<SubTitle>{ordemServico?.descricao}</SubTitle>
+					<MarginTop value={16} />
+					<View>
+						<ProgressBar
+							progress={statusOrdemServico / 7}
+							color={colors.green}
+							style={{
+								backgroundColor: colors.gray100,
+								borderRadius: 16,
+							}}
+						/>
+					</View>
 					<MarginTop value={16} />
 					<Field
 						label={i18n.t('workOrderDetails.openingDate')}

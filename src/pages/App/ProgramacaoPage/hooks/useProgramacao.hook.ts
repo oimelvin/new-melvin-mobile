@@ -9,33 +9,32 @@ import useOrdemServicoService from '@services/useOrdemServicoService.hook'
 import { i18n } from '@languages/index'
 import { AppStackNavigatorParamList } from '@routes/AppRoutes'
 
-interface CarteiraServicosHookDataProps {
+interface ProgramacaoHookDataProps {
 	loading: boolean
 	refreshing: boolean
 	ordensServicos: OrdemServico[]
 }
 
-interface CarteiraServicosHandlesProps {
+interface ProgramacaoHandlesProps {
 	onCarregarOrdensServicos(): void
 	onRefreshOrdensServicos(): void
 	onEndReachedOrdensServicos(): void
 	onPressFilter(): void
 	onPressOrdemServico(id: string): void
-	onPressAdicionarOrdemServico(): void
 }
 
-export interface CarteiraServicosHookProps {
-	data: CarteiraServicosHookDataProps
-	handles: CarteiraServicosHandlesProps
+export interface ProgramacaoHookProps {
+	data: ProgramacaoHookDataProps
+	handles: ProgramacaoHandlesProps
 }
 
-type CarteiraServicosPageProp = BottomTabNavigationProp<
+type ProgramacaoPageProp = BottomTabNavigationProp<
 	AppStackNavigatorParamList,
-	'CarteiraServicosPage'
+	'ProgramacaoPage'
 >
 
-const useCarteiraServicosHook = (): CarteiraServicosHookProps => {
-	const { navigate } = useNavigation<CarteiraServicosPageProp>()
+const useProgramacaoHook = (): ProgramacaoHookProps => {
+	const { navigate } = useNavigation<ProgramacaoPageProp>()
 
 	const itensPorPagina = 10
 
@@ -102,10 +101,6 @@ const useCarteiraServicosHook = (): CarteiraServicosHookProps => {
 		})
 	}
 
-	const onPressAdicionarOrdemServico = async () => {
-		navigate('AdicionarOrdemServicoPage', {})
-	}
-
 	return {
 		data: {
 			loading,
@@ -118,9 +113,8 @@ const useCarteiraServicosHook = (): CarteiraServicosHookProps => {
 			onEndReachedOrdensServicos,
 			onPressFilter,
 			onPressOrdemServico,
-			onPressAdicionarOrdemServico,
 		},
 	}
 }
 
-export default useCarteiraServicosHook
+export default useProgramacaoHook

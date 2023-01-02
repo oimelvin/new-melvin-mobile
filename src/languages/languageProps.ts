@@ -134,6 +134,40 @@ export type LanguageProps = {
 		serviceRequest: string
 		noWorkOrderFound: string
 	}
+	addWorkOrder: {
+		addWorkOrder: string
+		description: string
+		informADescription: string
+		maintenanceType: string
+		selectAMaintenanceType: string
+		noMaintenanceTypesFound: string
+		priority: string
+		selectAPriority: string
+		noPrioritiesFound: string
+		workshop: string
+		selectAWorkshop: string
+		noWorkshopsFound: string
+		condition: string
+		selectACondition: string
+		peopleNumber: string
+		informAPeopleNumber: string
+		executionTime: string
+		informAnExecutionTime: string
+		manHour: string
+		branch: string
+		selectABranch: string
+		noBranchesFound: string
+		sector: string
+		selectASector: string
+		noSectorsFound: string
+		equipment: string
+		selectAnEquipment: string
+		noEquipmentsFound: string
+		set: string
+		selectASet: string
+		noSetsFound: string
+		add: string
+	}
 	workOrderDetails: {
 		openingDate: string
 		startExecutionDate: string
@@ -161,6 +195,10 @@ export type LanguageProps = {
 		priority: string
 		workshop: string
 		approver: string
+	}
+	schedule: {
+		schedule: string
+		noWorkOrderFound: string
 	}
 	material: {
 		materials: string

@@ -2,7 +2,7 @@ import React from 'react'
 import { FlatList, RefreshControl, View } from 'react-native'
 
 import colors from '@styles/colors.style'
-import { Text } from '@styles/global.style'
+import { PageContainer, Text } from '@styles/global.style'
 import { CarteiraServicosPageContainer } from './styles'
 import Loading from '@components/Loading'
 import OrdemServicoComponent from './components/OrdemServicoComponent'
@@ -12,6 +12,7 @@ import { OrdemServico } from '@models/OrdemServico'
 
 import { i18n } from '@languages/index'
 import useCarteiraServicosHook from './hooks/useCarteiraServicos.hook'
+import FAB from '@components/FAB'
 
 const CarteiraServicosPage: React.FC = () => {
 	const { data, handles } = useCarteiraServicosHook()
@@ -47,35 +48,42 @@ const CarteiraServicosPage: React.FC = () => {
 
 	return (
 		<CarteiraServicosPageContainer>
-			<FlatList<OrdemServico>
-				style={{ paddingHorizontal: 16 }}
-				data={data.ordensServicos}
-				keyExtractor={({ id }) => id}
-				overScrollMode="never"
-				ListHeaderComponent={() => (
-					<ListaOrdemServicoHeader
-						onFilterClick={handles.onPressFilter}
-					/>
-				)}
-				ListEmptyComponent={emptyComponent}
-				ListFooterComponent={footerComponent}
-				renderItem={({ item }) => (
-					<OrdemServicoComponent
-						ordemServico={item}
-						onPressOrdemServico={handles.onPressOrdemServico}
-					/>
-				)}
-				refreshControl={
-					<RefreshControl
-						refreshing={data.refreshing}
-						onRefresh={handles.onRefreshOrdensServicos}
-						tintColor={colors.cyan}
-						colors={[colors.cyan]}
-					/>
-				}
-				onEndReachedThreshold={0.1}
-				onEndReached={handles.onEndReachedOrdensServicos}
-			/>
+			<PageContainer>
+				<FlatList<OrdemServico>
+					style={{ paddingHorizontal: 16 }}
+					data={data.ordensServicos}
+					keyExtractor={({ id }) => id}
+					overScrollMode="never"
+					ListHeaderComponent={() => (
+						<ListaOrdemServicoHeader
+							onFilterClick={handles.onPressFilter}
+						/>
+					)}
+					ListEmptyComponent={emptyComponent}
+					ListFooterComponent={footerComponent}
+					renderItem={({ item }) => (
+						<OrdemServicoComponent
+							ordemServico={item}
+							onPressOrdemServico={handles.onPressOrdemServico}
+						/>
+					)}
+					refreshControl={
+						<RefreshControl
+							refreshing={data.refreshing}
+							onRefresh={handles.onRefreshOrdensServicos}
+							tintColor={colors.cyan}
+							colors={[colors.cyan]}
+						/>
+					}
+					onEndReachedThreshold={0.1}
+					onEndReached={handles.onEndReachedOrdensServicos}
+				/>
+				<FAB
+					provider="materialIcons"
+					iconName="add"
+					onPress={handles.onPressAdicionarOrdemServico}
+				/>
+			</PageContainer>
 		</CarteiraServicosPageContainer>
 	)
 }

@@ -1,13 +1,22 @@
-import { Alert, View, Text } from 'react-native'
+import { Alert, View, Text, TouchableOpacity } from 'react-native'
 
 import { MarginTop, Title } from '@styles/global.style'
 import IconButton from '@components/IconButton'
 import { i18n } from '@languages/index'
 import ListaSolicitacaoServicoHeader from '../ListaSolicitacaoServicoHeader'
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
+import { AppStackNavigatorParamList } from '@routes/AppRoutes'
+import { useNavigation } from '@react-navigation/native'
 
 interface SolicitacaoAcoesComponent {}
+type SolicitacaoAcoesPageProp = BottomTabNavigationProp<
+	AppStackNavigatorParamList,
+	'CarteiraServicosPage'
+>
 
-const SolicitacaoAcoesComponent: React.FC = () => (
+const SolicitacaoAcoesComponent: React.FC = () => {
+	const { navigate } = useNavigation<SolicitacaoAcoesPageProp>()
+	return(
 	<>
 		<View style={{
 						flexDirection: 'row',
@@ -15,45 +24,51 @@ const SolicitacaoAcoesComponent: React.FC = () => (
 						alignItems: 'center',
 						marginTop: 16,
 					}}>
-			<View>
-				<IconButton
+			<TouchableOpacity onPress={() => navigate('CarteiraServicosPage')}>
+				<IconButton style={{backgroundColor: '#E0E0E0', height: 50, width: 50, borderRadius: 25}}
 					provider="materialIcons"
-					iconName="attach-file"
+					iconName="today"
+					onPress={() => navigate('CarteiraServicosPage')}
 				/>
-				<Text>Minhas OS</Text>
-			</View>
+				<Text style={{textAlign: 'center'}}>{`Minhas\n OS`}</Text>
+			</TouchableOpacity>
+			<TouchableOpacity onPress={() => navigate('SolicitacaoServicosPage')}>
+				<IconButton style={{backgroundColor: '#E0E0E0', height: 50, width: 50, borderRadius: 25}}
+					provider="materialIcons"
+					iconName="menu"
+					onPress={() => navigate('SolicitacaoServicosPage')}
+				/>
+				<Text style={{textAlign: 'center'}}>{`Pesquisar\n SS`}</Text>
+			</TouchableOpacity>
+			<TouchableOpacity onPress={() => navigate('NovaSolicitacaoComponent')}>
+				<IconButton style={{backgroundColor: '#E0E0E0', height: 50, width: 50, borderRadius: 25}}
+					provider="feather"
+					iconName="file-plus"
+					onPress={() => navigate('NovaSolicitacaoComponent')}
+				/>
+				<Text style={{textAlign: 'center'}}>{`Abrir\n SS`}</Text>
+			</TouchableOpacity>
+			<TouchableOpacity onPress={() => navigate('CarteiraServicosPage')}>
+				<IconButton style={{backgroundColor: '#E0E0E0', height: 50, width: 50, borderRadius: 25}}
+					provider="feather"
+					iconName="search"
+					onPress={() => navigate('CarteiraServicosPage')}
+				/>
+				<Text style={{textAlign: 'center'}}>{`Pesquisar\n OS`}</Text>
+			</TouchableOpacity>
 			<View>
-				<IconButton
-					provider="ionicons"
-					iconName="chevron-back"
+				<IconButton style={{backgroundColor: '#E0E0E0', height: 50, width: 50, borderRadius: 25}}
+					provider="feather"
+					iconName="folder-plus"
 				/>
-				<Text>Pesquisar SS</Text>
-			</View>
-			<View>
-				<IconButton
-					provider="ionicons"
-					iconName="chevron-back"
-				/>
-				<Text>Abrir SS</Text>
-			</View>
-			<View>
-				<IconButton
-					provider="ionicons"
-					iconName="chevron-back"
-				/>
-				<Text>Pesquisar OS</Text>
-			</View>
-			<View>
-				<IconButton
-					provider="ionicons"
-					iconName="chevron-back"
-				/>
-				<Text>Abrir OS</Text>
+				<Text style={{textAlign: 'center'}}>{`Abrir\n OS`}</Text>
 			</View>
 			
 		</View>
 		<MarginTop value={16} />
 	</>
-)
+	)
+
+}
 
 export default SolicitacaoAcoesComponent

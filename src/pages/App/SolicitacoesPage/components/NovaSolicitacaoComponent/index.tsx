@@ -17,7 +17,9 @@ import { i18n } from '@languages/index'
 import SolicitacaoDetalheHeaderComponent from '../SolicitacaoDetalheHeaderComponent'
 import Input from '@components/Input'
 import SolicitacaoAcoesComponent from '../SolicitacaoAcoesComponent'
-import Select from '@components/Select'
+import Select, { SelectItemProps } from '@components/Select'
+import useFiltroSolicitacaoServicosHook from './hooks'
+import { CreateSolicitacaoServicoDto } from '@models/CreateSolicitacaoServico'
 
 interface OrdemServicoProps {
 	solicitacao: SolicitacaoServico
@@ -28,10 +30,17 @@ const NovaSolicitacaoComponent: React.FC = (
 ) => {
 	const { getSolicitacao } = useSolicitacaoServicoService()
 	const itensPorPagina = 10
-
+	const { data, handles } = useFiltroSolicitacaoServicosHook();
 	const [loading, setLoading] = useState(false)
 	const [refreshing, setRefreshing] = useState(false)
 	const [solicitacoesServicos, setSolicitacoesServicos] = useState<SolicitacaoServico>()
+	const [createSolicitacaoDto, setcreateSolicitacaoDto] = useState<CreateSolicitacaoServicoDto>()
+	const canais = [
+		{ id: 1, nome: 'Telefone' },
+		{ id: 2, nome: 'Email' },
+		{ id: 3, nome: 'Sistema' },
+		{ id: 4, nome: 'Pessoalmente' },
+	]
 
 	const carregarSolicitacoesServicos = async () => {
 		try {
@@ -66,40 +75,22 @@ const NovaSolicitacaoComponent: React.FC = (
 		}}>
 			<SolicitacaoAcoesComponent></SolicitacaoAcoesComponent>
 			<Input
-				placeholderTextColor={colors.gray100}
 				placeholder='Solicitante'
-				selectionColor={colors.gray500}
-				color={colors.white}
+				translucentBackground	
+				color={colors.black}
+				value={createSolicitacaoDto?.solicitante}
+				onChangeText={value => handles.setPesquisa(value)}
 			/>
 			<Select
 				label={i18n.t('filterServicePortfolio.executor')}
-				items={data.executantes.map(({ id, nome }) => ({
-					value: id,
+				items={canais.map(({ id, nome }) => ({
+					value: id.toString(),
 					label: nome,
 				}))}
 				selectedValue={data.filtros.selectedExecutante}
 				onSelect={item => handles.setSelectedExecutante(item)}
 				color={colors.black}
-				placeholder={i18n.t(
-					'filterServicePortfolio.selectAnExecutor'
-				)}
-				emptyListText={i18n.t(
-					'filterServicePortfolio.noExecutorsFound'
-				)}
-				translucentBackground
-			/>
-			<Select
-				label={i18n.t('filterServicePortfolio.executor')}
-				items={data.executantes.map(({ id, nome }) => ({
-					value: id,
-					label: nome,
-				}))}
-				selectedValue={data.filtros.selectedExecutante}
-				onSelect={item => handles.setSelectedExecutante(item)}
-				color={colors.black}
-				placeholder={i18n.t(
-					'filterServicePortfolio.selectAnExecutor'
-				)}
+				placeholder='Canal'
 				emptyListText={i18n.t(
 					'filterServicePortfolio.noExecutorsFound'
 				)}
@@ -114,9 +105,7 @@ const NovaSolicitacaoComponent: React.FC = (
 				selectedValue={data.filtros.selectedExecutante}
 				onSelect={item => handles.setSelectedExecutante(item)}
 				color={colors.black}
-				placeholder={i18n.t(
-					'filterServicePortfolio.selectAnExecutor'
-				)}
+				placeholder='Filial'
 				emptyListText={i18n.t(
 					'filterServicePortfolio.noExecutorsFound'
 				)}
@@ -131,9 +120,22 @@ const NovaSolicitacaoComponent: React.FC = (
 				selectedValue={data.filtros.selectedExecutante}
 				onSelect={item => handles.setSelectedExecutante(item)}
 				color={colors.black}
-				placeholder={i18n.t(
-					'filterServicePortfolio.selectAnExecutor'
+				placeholder='Setor'
+				emptyListText={i18n.t(
+					'filterServicePortfolio.noExecutorsFound'
 				)}
+				translucentBackground
+			/>
+			<Select
+				label={i18n.t('filterServicePortfolio.executor')}
+				items={data.executantes.map(({ id, nome }) => ({
+					value: id,
+					label: nome,
+				}))}
+				selectedValue={data.filtros.selectedExecutante}
+				onSelect={item => handles.setSelectedExecutante(item)}
+				color={colors.black}
+				placeholder='Ativo'
 				emptyListText={i18n.t(
 					'filterServicePortfolio.noExecutorsFound'
 				)}
@@ -142,21 +144,19 @@ const NovaSolicitacaoComponent: React.FC = (
 			<Select
 				label={i18n.t('filterServicePortfolio.executor')}
 				color={colors.black}
-				placeholder={i18n.t(
-					'filterServicePortfolio.selectAnExecutor'
-				)}
+				placeholder='Prioridade'
 				emptyListText={i18n.t(
 					'filterServicePortfolio.noExecutorsFound'
 				)}
-				translucentBackground
-			/>
+				translucentBackground items={[]} selectedValue={null} onSelect={function (item: SelectItemProps | null): void {
+					throw new Error('Function not implemented.')
+				} }			/>
 			<Input
-				placeholderTextColor={colors.gray100}
-				placeholder={i18n.t(
-					'searchEquipmentManually.searchEquipment'
-				)}
-				selectionColor={colors.gray500}
-				color={colors.white}
+				placeholder='Solicitação'
+				translucentBackground	
+				color={colors.black}
+				multiline={true}
+				numberOfLines={4}
 			/>
 		</View>
 	)

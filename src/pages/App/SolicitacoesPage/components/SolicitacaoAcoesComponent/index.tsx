@@ -11,7 +11,7 @@ const SolicitacaoAcoesComponent: React.FC = () => (
 	<>
 		<View style={{
 						flexDirection: 'row',
-						justifyContent: 'space-between',
+						justifyContent: 'space-around',
 						alignItems: 'center',
 						marginTop: 16,
 					}}>

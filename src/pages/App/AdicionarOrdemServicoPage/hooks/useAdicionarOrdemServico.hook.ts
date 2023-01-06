@@ -1,4 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Alert } from 'react-native'
+import { RouteProp, useRoute } from '@react-navigation/native'
 
 import { SelectItemProps } from '@components/Select'
 
@@ -18,6 +20,9 @@ import useConjuntoEquipamentoService from '@services/useConjuntoEquipamentoServi
 import useOficinaService from '@services/useOficinaService.hook'
 import useTipoManutencaoService from '@services/useTipoManutencaoService.hook'
 import usePrioridadeService from '@services/usePrioridadeService.hook'
+import useOrdemServicoService from '@services/useOrdemServicoService.hook'
+
+import { AppStackNavigatorParamList } from '@routes/AppRoutes'
 
 interface AdicionarOrdemServico {
 	descricao: string
@@ -25,9 +30,9 @@ interface AdicionarOrdemServico {
 	selectedPrioridade: SelectItemProps | null
 	selectedOficina: SelectItemProps | null
 	selectedCondicao: SelectItemProps | null
-	numeroPessoas: number
-	tempoExecucao: number
-	homemHora: number
+	numeroPessoas: string
+	tempoExecucao: string
+	homemHora: string
 	selectedFilial: SelectItemProps | null
 	selectedSetor: SelectItemProps | null
 	selectedEquipamento: SelectItemProps | null
@@ -52,25 +57,47 @@ interface AdicionarOrdemServicoHandlesProps {
 	setSelectedPrioridade: Dispatch<SetStateAction<SelectItemProps | null>>
 	setSelectedOficina: Dispatch<SetStateAction<SelectItemProps | null>>
 	setSelectedCondicao: Dispatch<SetStateAction<SelectItemProps | null>>
-	setNumeroPessoas: Dispatch<SetStateAction<number>>
-	setTempoExecucao: Dispatch<SetStateAction<number>>
-	setHomemHora: Dispatch<SetStateAction<number>>
+	setNumeroPessoas: Dispatch<SetStateAction<string>>
+	setTempoExecucao: Dispatch<SetStateAction<string>>
+	setHomemHora: Dispatch<SetStateAction<string>>
 	setSelectedFilial: Dispatch<SetStateAction<SelectItemProps | null>>
 	setSelectedSetor: Dispatch<SetStateAction<SelectItemProps | null>>
 	setSelectedEquipamento: Dispatch<SetStateAction<SelectItemProps | null>>
 	setSelectedConjunto: Dispatch<SetStateAction<SelectItemProps | null>>
+	addOrdemServico: () => Promise<void>
 }
 
 export interface AdicionarOrdemServicoHookProps {
+	loading: boolean
+	edicao: boolean
 	data: AdicionarOrdemServicoHookDataProps
 	handles: AdicionarOrdemServicoHandlesProps
 }
 
+type AdicionarOrdemServicoRouteProp = RouteProp<
+	AppStackNavigatorParamList,
+	'AdicionarOrdemServicoPage'
+>
+
 const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
+	const { params } = useRoute<AdicionarOrdemServicoRouteProp>()
+
+	const [loading, setLoading] = useState(false)
+	const [edicao, setEdicao] = useState(false)
+
 	const [tiposManutencao, setTiposManutencao] = useState<TipoManutencao[]>([])
 	const [prioridades, setPrioridades] = useState<Prioridade[]>([])
 	const [oficinas, setOficinas] = useState<Oficina[]>([])
-	const [condicoes, setCondicoes] = useState<Condicao[]>([])
+	const [condicoes] = useState<Condicao[]>([
+		{
+			id: '0',
+			descricao: 'Parado',
+		},
+		{
+			id: '1',
+			descricao: 'Funcionando',
+		},
+	])
 	const [filiais, setFiliais] = useState<Filial[]>([])
 	const [setores, setSetores] = useState<Setor[]>([])
 	const [equipamentos, setEquipamentos] = useState<Equipamento[]>([])
@@ -85,9 +112,9 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 		useState<SelectItemProps | null>(null)
 	const [selectedCondicao, setSelectedCondicao] =
 		useState<SelectItemProps | null>(null)
-	const [numeroPessoas, setNumeroPessoas] = useState(0)
-	const [tempoExecucao, setTempoExecucao] = useState(0)
-	const [homemHora, setHomemHora] = useState(0)
+	const [numeroPessoas, setNumeroPessoas] = useState('0')
+	const [tempoExecucao, setTempoExecucao] = useState('0')
+	const [homemHora, setHomemHora] = useState('0')
 	const [selectedFilial, setSelectedFilial] =
 		useState<SelectItemProps | null>(null)
 	const [selectedSetor, setSelectedSetor] = useState<SelectItemProps | null>(
@@ -105,45 +132,17 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 	const { getSetores } = useSetorService()
 	const { getEquipamentosBySetor } = useEquipamentoService()
 	const { getConjuntosEquipamentoById } = useConjuntoEquipamentoService()
+	const { getOrdemServico, postOrdemServico } = useOrdemServicoService()
 
 	useEffect(() => {
-		const loadSelectTipoManutencao = async () => {
-			setSelectedTipoManutencao(null)
-
+		const loadSelects = async () => {
 			setTiposManutencao(await getTiposManutencao(false))
-		}
-
-		loadSelectTipoManutencao()
-	}, [])
-
-	useEffect(() => {
-		const loadSelectPrioridade = async () => {
-			setSelectedPrioridade(null)
-
 			setPrioridades(await getPrioridades())
-		}
-
-		loadSelectPrioridade()
-	}, [])
-
-	useEffect(() => {
-		const loadSelectOficina = async () => {
-			setSelectedOficina(null)
-
 			setOficinas(await getOficinas())
-		}
-
-		loadSelectOficina()
-	}, [])
-
-	useEffect(() => {
-		const loadSelectFilial = async () => {
-			setSelectedFilial(null)
-
 			setFiliais(await getFiliais())
 		}
 
-		loadSelectFilial()
+		loadSelects()
 	}, [])
 
 	useEffect(() => {
@@ -187,10 +186,74 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 	}, [selectedEquipamento])
 
 	useEffect(() => {
-		setHomemHora(numeroPessoas * tempoExecucao)
+		const homemHora = Number(numeroPessoas) * Number(tempoExecucao)
+		setHomemHora(homemHora.toFixed(2))
 	}, [numeroPessoas, tempoExecucao])
 
+	useEffect(() => {
+		const carregarEdicao = async () => {
+			if (params.id) {
+				setEdicao(true)
+
+				const ordemServico = await getOrdemServico(params.id)
+
+				setDescricao(ordemServico.descricao)
+				setSelectedTipoManutencao({
+					label: ordemServico.tipoManutencao.descricao,
+					value: ordemServico.tipoManutencao.id,
+				})
+				setSelectedPrioridade({
+					label: ordemServico.prioridade.descricao,
+					value: ordemServico.prioridade.id,
+				})
+				setSelectedOficina({
+					label: ordemServico.oficina.descricao,
+					value: ordemServico.oficina.id,
+				})
+				setSelectedCondicao({
+					label: '',
+					value: ordemServico.condicao,
+				})
+				setNumeroPessoas(ordemServico.homem.toFixed())
+				setTempoExecucao(ordemServico.hora.toFixed(2))
+				setHomemHora(
+					(ordemServico.homem * ordemServico.hora).toFixed(2)
+				)
+			}
+		}
+
+		carregarEdicao()
+	}, [])
+
+	const addOrdemServico = async () => {
+		try {
+			setLoading(true)
+
+			await postOrdemServico({
+				descricao,
+				idTipoManutencao: selectedTipoManutencao?.value,
+				idPrioridade: selectedPrioridade?.value,
+				idOficina: selectedOficina?.value,
+				condicao: selectedCondicao?.value,
+				idSolicitacao: null,
+				homem: Number(numeroPessoas),
+				hora: Number(tempoExecucao),
+				ordemEquipamento: {
+					idFilial: selectedFilial!.value,
+					idSetor: selectedSetor!.value,
+					idEquipamento: selectedEquipamento!.value,
+				},
+			})
+		} catch (err) {
+			Alert.alert('Erro', 'Erro ao criar ordem de serviço.')
+		} finally {
+			setLoading(false)
+		}
+	}
+
 	return {
+		loading,
+		edicao,
 		data: {
 			tiposManutencao,
 			prioridades,
@@ -228,6 +291,7 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 			setSelectedSetor,
 			setSelectedEquipamento,
 			setSelectedConjunto,
+			addOrdemServico,
 		},
 	}
 }

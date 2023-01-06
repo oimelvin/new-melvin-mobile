@@ -10,7 +10,7 @@ interface OrdemServicoServiceHookProps {
 		idsTipoManutencao?: string[],
 		idsFamilia?: string[],
 		idsExecutantes?: string[],
-		status?: string,
+		status?: string[],
 		condicao?: string,
 		statusTempo?: string,
 		pesquisa?: string,
@@ -18,6 +18,7 @@ interface OrdemServicoServiceHookProps {
 		osAbertas?: boolean
 	): Promise<Items<OrdemServico>>
 	getOrdemServico(id: string): Promise<OrdemServico>
+	postOrdemServico(ordemServico: Partial<OrdemServico>): Promise<void>
 }
 
 const useOrdemServicoService = (): OrdemServicoServiceHookProps => {
@@ -29,31 +30,29 @@ const useOrdemServicoService = (): OrdemServicoServiceHookProps => {
 		idsTipoManutencao?: string[],
 		idsFamilia?: string[],
 		idsExecutantes?: string[],
-		status?: string,
+		status?: string[],
 		condicao?: string,
 		statusTempo?: string,
 		pesquisa?: string,
 		isActive?: boolean,
 		osAbertas?: boolean
 	): Promise<Items<OrdemServico>> => {
-		const { data } = await api.get<HttpResponse<Items<OrdemServico>>>(
-			'services/app/OrdemServico/GetAll',
+		const { data } = await api.post<HttpResponse<Items<OrdemServico>>>(
+			'services/app/OrdemServico/GetCarteiraServico',
 			{
-				params: {
-					idsEquipamento,
-					idsOficina,
-					idsTipoManutencao,
-					idsFamilia,
-					idsExecutantes,
-					status,
-					condicao,
-					statusTempo,
-					keyword: pesquisa,
-					isActive,
-					osAbertas,
-					skipCount,
-					maxResultCount,
-				},
+				idsEquipamento,
+				idsOficina,
+				idsTipoManutencao,
+				idsFamilia,
+				idsExecutantes,
+				status,
+				condicao,
+				statusTempo,
+				keyword: pesquisa,
+				isActive,
+				osAbertas,
+				skipCount,
+				maxResultCount,
 			}
 		)
 
@@ -73,9 +72,19 @@ const useOrdemServicoService = (): OrdemServicoServiceHookProps => {
 		return data.result
 	}
 
+	const postOrdemServico = async (
+		ordemServico: Partial<OrdemServico>
+	): Promise<void> => {
+		await api.post<OrdemServico>(
+			'services/app/OrdemServico/Create',
+			ordemServico
+		)
+	}
+
 	return {
 		getOrdensServicos,
 		getOrdemServico,
+		postOrdemServico,
 	}
 }
 

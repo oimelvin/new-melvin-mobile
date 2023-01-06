@@ -88,18 +88,6 @@ export type LanguageProps = {
 	}
 	filterServicePortfolio: {
 		filterServicePortfolio: string
-		branch: string
-		selectABranch: string
-		noBranchesFound: string
-		sector: string
-		selectASector: string
-		noSectorsFound: string
-		equipment: string
-		selectAnEquipment: string
-		noEquipmentsFound: string
-		set: string
-		selectASet: string
-		noSetsFound: string
 		status: string
 		selectAStatus: string
 		noStatusFound: string
@@ -136,6 +124,7 @@ export type LanguageProps = {
 	}
 	addWorkOrder: {
 		addWorkOrder: string
+		editWorkOrder: string
 		description: string
 		informADescription: string
 		maintenanceType: string

@@ -22,9 +22,7 @@ type AdicionarOrdemServicosPageProp = BottomTabNavigationProp<
 const AdicionarOrdemServicoPage: React.FC = () => {
 	const { goBack } = useNavigation<AdicionarOrdemServicosPageProp>()
 
-	const { data, handles } = useAdicionarOrdemServicosHook()
-
-	const handleSalverOrdemServico = () => {}
+	const { loading, edicao, data, handles } = useAdicionarOrdemServicosHook()
 
 	return (
 		<KeyboardAvoidingView>
@@ -32,7 +30,9 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 				<AdicionarOrdemServicosPageContainer>
 					<MarginTop value={15} />
 					<Title color={colors.black}>
-						{i18n.t('addWorkOrder.addWorkOrder')}
+						{edicao
+							? i18n.t('addWorkOrder.editWorkOrder')
+							: i18n.t('addWorkOrder.addWorkOrder')}
 					</Title>
 					<MarginTop value={15} />
 					<Input
@@ -123,10 +123,8 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 					<MarginTop value={15} />
 					<Input
 						label={i18n.t('addWorkOrder.peopleNumber')}
-						value={data.valores.numeroPessoas.toFixed(0)}
-						onChangeText={value =>
-							handles.setNumeroPessoas(Number(value))
-						}
+						value={data.valores.numeroPessoas}
+						onChangeText={value => handles.setNumeroPessoas(value)}
 						placeholder={i18n.t('addWorkOrder.informAPeopleNumber')}
 						color={colors.black}
 						keyboardType="numeric"
@@ -135,10 +133,8 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 					<MarginTop value={15} />
 					<Input
 						label={i18n.t('addWorkOrder.executionTime')}
-						value={data.valores.tempoExecucao.toFixed(1)}
-						onChangeText={value =>
-							handles.setTempoExecucao(Number(value))
-						}
+						value={data.valores.tempoExecucao}
+						onChangeText={value => handles.setTempoExecucao(value)}
 						placeholder={i18n.t(
 							'addWorkOrder.informAnExecutionTime'
 						)}
@@ -149,7 +145,7 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 					<MarginTop value={15} />
 					<Input
 						label={i18n.t('addWorkOrder.manHour')}
-						value={data.valores.homemHora.toFixed(1)}
+						value={data.valores.homemHora}
 						color={colors.black}
 						keyboardType="numeric"
 						translucentBackground
@@ -215,7 +211,10 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 						translucentBackground
 					/>
 					<MarginTop value={15} />
-					<Button onPress={() => handleSalverOrdemServico()}>
+					<Button
+						onPress={handles.addOrdemServico}
+						disabled={loading}
+					>
 						{i18n.t('addWorkOrder.add')}
 					</Button>
 					<MarginTop value={32} />

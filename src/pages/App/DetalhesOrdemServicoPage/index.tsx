@@ -168,7 +168,7 @@ const DetalhesOrdemServicoPage: React.FC = () => {
 					<Field
 						label={i18n.t('workOrderDetails.condition')}
 						value={
-							ordemServico?.condicao == 1
+							ordemServico?.condicao == '1'
 								? 'Parado'
 								: 'Funcionando' || i18n.t('common.noData')
 						}
@@ -246,7 +246,7 @@ const DetalhesOrdemServicoPage: React.FC = () => {
 				<FAB
 					provider="materialIcons"
 					iconName="edit"
-					onPress={() => console.log('Editar OS')}
+					onPress={handles.onEditOrdemServico}
 				/>
 			</PageContainer>
 		</DetalhesOrdemServicoPageContainer>

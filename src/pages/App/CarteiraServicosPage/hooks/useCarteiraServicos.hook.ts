@@ -8,6 +8,7 @@ import useOrdemServicoService from '@services/useOrdemServicoService.hook'
 
 import { i18n } from '@languages/index'
 import { AppStackNavigatorParamList } from '@routes/AppRoutes'
+import useEquipamentoService from '@services/useEquipamentoService.hook'
 
 interface CarteiraServicosHookDataProps {
 	loading: boolean
@@ -45,6 +46,7 @@ const useCarteiraServicosHook = (): CarteiraServicosHookProps => {
 	const [qtdPaginas, setQtdPaginas] = useState(1)
 	const [ordensServicos, setOrdensServicos] = useState<OrdemServico[]>([])
 
+	const { getEquipamentos } = useEquipamentoService()
 	const { getOrdensServicos } = useOrdemServicoService()
 
 	useEffect(() => {
@@ -54,9 +56,12 @@ const useCarteiraServicosHook = (): CarteiraServicosHookProps => {
 
 	const onCarregarOrdensServicos = async () => {
 		try {
+			const equipamentos = await getEquipamentos()
+
 			const { items, totalCount } = await getOrdensServicos(
 				pagina * itensPorPagina,
-				itensPorPagina
+				itensPorPagina,
+				equipamentos.map(equipamento => equipamento.id)
 			)
 
 			if (refreshing) {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Alert } from 'react-native'
-import { RouteProp, useRoute } from '@react-navigation/native'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { OrdemServico } from '@models/OrdemServico'
 import useOrdemServicoService from '@services/useOrdemServicoService.hook'
@@ -13,12 +14,19 @@ interface DetalhesOrdemServicoHookDataProps {
 	ordemServico: OrdemServico | null
 }
 
-interface DetalhesOrdemServicoHandlesProps {}
+interface DetalhesOrdemServicoHandlesProps {
+	onEditOrdemServico: () => void
+}
 
 export interface DetalhesOrdemServicoHookProps {
 	data: DetalhesOrdemServicoHookDataProps
 	handles: DetalhesOrdemServicoHandlesProps
 }
+
+type EquipamentoNavigatorProp = NativeStackNavigationProp<
+	AppStackNavigatorParamList,
+	'DetalhesOrdemServicoPage'
+>
 
 type EquipmentRouteProp = RouteProp<
 	AppStackNavigatorParamList,
@@ -26,6 +34,7 @@ type EquipmentRouteProp = RouteProp<
 >
 
 const useDetalhesOrdemServicoHook = (): DetalhesOrdemServicoHookProps => {
+	const { navigate } = useNavigation<EquipamentoNavigatorProp>()
 	const { params } = useRoute<EquipmentRouteProp>()
 
 	const [loading, setLoading] = useState(false)
@@ -53,12 +62,20 @@ const useDetalhesOrdemServicoHook = (): DetalhesOrdemServicoHookProps => {
 		}
 	}
 
+	const onEditOrdemServico = () => {
+		navigate('AdicionarOrdemServicoPage', {
+			id: ordemServico?.id,
+		})
+	}
+
 	return {
 		data: {
 			loading,
 			ordemServico,
 		},
-		handles: {},
+		handles: {
+			onEditOrdemServico,
+		},
 	}
 }
 

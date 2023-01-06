@@ -5,11 +5,11 @@ import api, { HttpResponse, Items } from '@services/api'
 
 interface EquipamentoServiceHookProps {
 	getEquipamentos(
-		idFilial: string | undefined,
-		idSetor: string | undefined,
-		idFamilia: string | undefined,
-		status: string | undefined,
-		pesquisa: string | undefined
+		idFilial?: string,
+		idSetor?: string,
+		idFamilia?: string,
+		status?: string,
+		pesquisa?: string
 	): Promise<Equipamento[]>
 	getEquipamentosBySetor(idSetor: string): Promise<Equipamento[]>
 	getEquipamentoById(id: string): Promise<Equipamento>
@@ -19,11 +19,11 @@ interface EquipamentoServiceHookProps {
 
 const useEquipamentoService = (): EquipamentoServiceHookProps => {
 	const getEquipamentos = async (
-		idFilial: string | undefined,
-		idSetor: string | undefined,
-		idFamilia: string | undefined,
-		status: 'P' | 'F' | undefined,
-		pesquisa: string | undefined
+		idFilial?: string,
+		idSetor?: string,
+		idFamilia?: string,
+		status?: 'P' | 'F',
+		pesquisa?: string
 	): Promise<Equipamento[]> => {
 		const { data } = await api.get<HttpResponse<Items<Equipamento>>>(
 			'services/app/Equipamento/GetEquipamentosSelectList',

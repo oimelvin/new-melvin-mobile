@@ -2,10 +2,6 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 import { SelectItemProps } from '@components/Select'
 
-import { Filial } from '@models/Filial'
-import { Setor } from '@models/Setor'
-import { Equipamento } from '@models/Equipamento'
-import { ConjuntoEquipamento } from '@models/ConjuntoEquipamento'
 import { Status } from '@models/Status'
 import { Oficina } from '@models/Oficina'
 import { TipoManutencao } from '@models/TipoManutencao'
@@ -13,10 +9,6 @@ import { Condicao } from '@models/Condicao'
 import { Prioridade } from '@models/Prioridade'
 import { Executante } from '@models/Executante'
 
-import useFilialService from '@services/useFilialService.hook'
-import useSetorService from '@services/useSetorService.hook'
-import useEquipamentoService from '@services/useEquipamentoService.hook'
-import useConjuntoEquipamentoService from '@services/useConjuntoEquipamentoService.hook'
 import useOficinaService from '@services/useOficinaService.hook'
 import useTipoManutencaoService from '@services/useTipoManutencaoService.hook'
 import usePrioridadeService from '@services/usePrioridadeService.hook'
@@ -24,10 +16,6 @@ import useExecutanteService from '@services/useExecutanteService.hook'
 import { FiltrosCarteiraServicos } from '@models/FiltrosCarteiraServicos'
 
 interface FiltroCarteiraServicosHookDataProps {
-	filiais: Filial[]
-	setores: Setor[]
-	equipamentos: Equipamento[]
-	conjuntos: ConjuntoEquipamento[]
 	status: Status[]
 	oficinas: Oficina[]
 	tiposManutencao: TipoManutencao[]
@@ -38,10 +26,6 @@ interface FiltroCarteiraServicosHookDataProps {
 }
 
 interface FiltroCarteiraServicosHandlesProps {
-	setSelectedFilial: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedSetor: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedEquipamento: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedConjunto: Dispatch<SetStateAction<SelectItemProps | null>>
 	setSelectedStatus: Dispatch<SetStateAction<SelectItemProps | null>>
 	setSelectedOficina: Dispatch<SetStateAction<SelectItemProps | null>>
 	setSelectedTipoManutencao: Dispatch<SetStateAction<SelectItemProps | null>>
@@ -52,7 +36,6 @@ interface FiltroCarteiraServicosHandlesProps {
 	setSelectedDataEncerramento: Dispatch<SetStateAction<Date | null>>
 	setSelectedDataProgramada: Dispatch<SetStateAction<Date | null>>
 	setPesquisa: Dispatch<SetStateAction<string>>
-	setFiltros(filtros: FiltrosCarteiraServicos): void
 }
 
 export interface FiltroCarteiraServicosHookProps {
@@ -61,10 +44,6 @@ export interface FiltroCarteiraServicosHookProps {
 }
 
 const useFiltroCarteiraServicosHook = (): FiltroCarteiraServicosHookProps => {
-	const [filiais, setFiliais] = useState<Filial[]>([])
-	const [setores, setSetores] = useState<Setor[]>([])
-	const [equipamentos, setEquipamentos] = useState<Equipamento[]>([])
-	const [conjuntos, setConjuntos] = useState<ConjuntoEquipamento[]>([])
 	const [status, setStatus] = useState<Status[]>([])
 	const [oficinas, setOficinas] = useState<Oficina[]>([])
 	const [tiposManutencao, setTiposManutencao] = useState<TipoManutencao[]>([])
@@ -72,15 +51,6 @@ const useFiltroCarteiraServicosHook = (): FiltroCarteiraServicosHookProps => {
 	const [prioridades, setPrioridades] = useState<Prioridade[]>([])
 	const [executantes, setExecutantes] = useState<Executante[]>([])
 
-	const [selectedFilial, setSelectedFilial] =
-		useState<SelectItemProps | null>(null)
-	const [selectedSetor, setSelectedSetor] = useState<SelectItemProps | null>(
-		null
-	)
-	const [selectedEquipamento, setSelectedEquipamento] =
-		useState<SelectItemProps | null>(null)
-	const [selectedConjunto, setSelectedConjunto] =
-		useState<SelectItemProps | null>(null)
 	const [selectedStatus, setSelectedStatus] =
 		useState<SelectItemProps | null>(null)
 	const [selectedOficina, setSelectedOficina] =
@@ -101,64 +71,10 @@ const useFiltroCarteiraServicosHook = (): FiltroCarteiraServicosHookProps => {
 		useState<Date | null>(null)
 	const [pesquisa, setPesquisa] = useState('')
 
-	const { getFiliais } = useFilialService()
-	const { getSetores } = useSetorService()
-	const { getEquipamentosBySetor } = useEquipamentoService()
-	const { getConjuntosEquipamentoById } = useConjuntoEquipamentoService()
 	const { getOficinas } = useOficinaService()
 	const { getTiposManutencao } = useTipoManutencaoService()
 	const { getPrioridades } = usePrioridadeService()
 	const { getExecutantes } = useExecutanteService()
-
-	useEffect(() => {
-		const loadSelectFilial = async () => {
-			setSelectedFilial(null)
-
-			setFiliais(await getFiliais())
-		}
-
-		loadSelectFilial()
-	}, [])
-
-	useEffect(() => {
-		const loadSelectSetor = async () => {
-			setSelectedSetor(null)
-
-			if (selectedFilial) {
-				setSetores(await getSetores(selectedFilial.value))
-			}
-		}
-
-		loadSelectSetor()
-	}, [selectedFilial])
-
-	useEffect(() => {
-		const loadSelectEquipamento = async () => {
-			setSelectedEquipamento(null)
-
-			if (selectedSetor) {
-				setEquipamentos(
-					await getEquipamentosBySetor(selectedSetor.value)
-				)
-			}
-		}
-
-		loadSelectEquipamento()
-	}, [selectedSetor])
-
-	useEffect(() => {
-		const loadSelectConjunto = async () => {
-			setSelectedConjunto(null)
-
-			if (selectedEquipamento) {
-				setConjuntos(
-					await getConjuntosEquipamentoById(selectedEquipamento.value)
-				)
-			}
-		}
-
-		loadSelectConjunto()
-	}, [selectedEquipamento])
 
 	useEffect(() => {
 		const loadSelectOficina = async () => {
@@ -200,44 +116,8 @@ const useFiltroCarteiraServicosHook = (): FiltroCarteiraServicosHookProps => {
 		loadSelectExecutantes()
 	}, [])
 
-	const setFiltros = ({
-		selectedFilial,
-		selectedSetor,
-		selectedEquipamento,
-		selectedConjunto,
-		selectedStatus,
-		selectedOficina,
-		selectedTipoManutencao,
-		selectedCondicao,
-		selectedPrioridade,
-		selectedExecutante,
-		selectedDataAbertura,
-		selectedDataEncerramento,
-		selectedDataProgramada,
-		pesquisa,
-	}: FiltrosCarteiraServicos) => {
-		setSelectedFilial(selectedFilial)
-		setSelectedSetor(selectedSetor)
-		setSelectedEquipamento(selectedEquipamento)
-		setSelectedConjunto(selectedConjunto)
-		setSelectedStatus(selectedStatus)
-		setSelectedOficina(selectedOficina)
-		setSelectedTipoManutencao(selectedTipoManutencao)
-		setSelectedCondicao(selectedCondicao)
-		setSelectedPrioridade(selectedPrioridade)
-		setSelectedExecutante(selectedExecutante)
-		setSelectedDataAbertura(selectedDataAbertura)
-		setSelectedDataEncerramento(selectedDataEncerramento)
-		setSelectedDataProgramada(selectedDataProgramada)
-		setPesquisa(pesquisa)
-	}
-
 	return {
 		data: {
-			filiais,
-			setores,
-			equipamentos,
-			conjuntos,
 			status,
 			oficinas,
 			tiposManutencao,
@@ -245,10 +125,6 @@ const useFiltroCarteiraServicosHook = (): FiltroCarteiraServicosHookProps => {
 			prioridades,
 			executantes,
 			filtros: {
-				selectedFilial,
-				selectedSetor,
-				selectedEquipamento,
-				selectedConjunto,
 				selectedStatus,
 				selectedOficina,
 				selectedTipoManutencao,
@@ -262,10 +138,6 @@ const useFiltroCarteiraServicosHook = (): FiltroCarteiraServicosHookProps => {
 			},
 		},
 		handles: {
-			setSelectedFilial,
-			setSelectedSetor,
-			setSelectedEquipamento,
-			setSelectedConjunto,
 			setSelectedStatus,
 			setSelectedOficina,
 			setSelectedTipoManutencao,
@@ -276,7 +148,6 @@ const useFiltroCarteiraServicosHook = (): FiltroCarteiraServicosHookProps => {
 			setSelectedDataEncerramento,
 			setSelectedDataProgramada,
 			setPesquisa,
-			setFiltros,
 		},
 	}
 }

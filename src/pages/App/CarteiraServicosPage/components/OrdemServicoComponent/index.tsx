@@ -19,20 +19,11 @@ interface OrdemServicoProps {
 }
 
 const OrdemServicoComponent: React.FC<OrdemServicoProps> = ({
-	ordemServico: {
-		id,
-		descricao,
-		codOrdem,
-		prioridade,
-		ordemEquipamentos,
-		status,
-	},
+	ordemServico: { id, descricao, codOrdem, prioridade, equipamentos, status },
 	onPressOrdemServico,
 }) => {
 	const equipamentoDescricao =
-		ordemEquipamentos.length > 1
-			? 'Vários Equipamentos'
-			: `${ordemEquipamentos[0].equipamento.tag} - ${ordemEquipamentos[0].equipamento.descricao}`
+		equipamentos.length > 1 ? 'Vários Equipamentos' : equipamentos[0]
 
 	const prioridadeCor = () => {
 		const cores = ['blue', 'orange', 'purple', 'green', 'red']

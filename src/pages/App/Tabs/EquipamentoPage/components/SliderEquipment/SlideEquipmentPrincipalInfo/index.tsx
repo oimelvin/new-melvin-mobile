@@ -27,7 +27,7 @@ const SlideEquipmentPrincipalInfo: React.FC = () => {
 						? equipamento!.familias.map(
 								familia => familia.descricao
 						  )
-						: i18n.t('equipment.noData')
+						: i18n.t('common.noData')
 				}
 			/>
 		</ScrollView>

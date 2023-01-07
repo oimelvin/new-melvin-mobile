@@ -3,6 +3,7 @@ export type LanguageProps = {
 		language: string
 		error: string
 		anErrorHasOccuredPleaseTryAgain: string
+		noData: string
 	}
 	components: {
 		select: {
@@ -48,7 +49,6 @@ export type LanguageProps = {
 		name: string
 		families: string
 		operatingData: string
-		noData: string
 		startOperation: string
 		uptime: string
 		hoursADay: string
@@ -88,18 +88,6 @@ export type LanguageProps = {
 	}
 	filterServicePortfolio: {
 		filterServicePortfolio: string
-		branch: string
-		selectABranch: string
-		noBranchesFound: string
-		sector: string
-		selectASector: string
-		noSectorsFound: string
-		equipment: string
-		selectAnEquipment: string
-		noEquipmentsFound: string
-		set: string
-		selectASet: string
-		noSetsFound: string
 		status: string
 		selectAStatus: string
 		noStatusFound: string
@@ -132,6 +120,74 @@ export type LanguageProps = {
 		servicesPortfolio: string
 		schedule: string
 		serviceRequest: string
+		noWorkOrderFound: string
+	}
+	addWorkOrder: {
+		addWorkOrder: string
+		editWorkOrder: string
+		description: string
+		informADescription: string
+		maintenanceType: string
+		selectAMaintenanceType: string
+		noMaintenanceTypesFound: string
+		priority: string
+		selectAPriority: string
+		noPrioritiesFound: string
+		workshop: string
+		selectAWorkshop: string
+		noWorkshopsFound: string
+		condition: string
+		selectACondition: string
+		peopleNumber: string
+		informAPeopleNumber: string
+		executionTime: string
+		informAnExecutionTime: string
+		manHour: string
+		branch: string
+		selectABranch: string
+		noBranchesFound: string
+		sector: string
+		selectASector: string
+		noSectorsFound: string
+		equipment: string
+		selectAnEquipment: string
+		noEquipmentsFound: string
+		set: string
+		selectASet: string
+		noSetsFound: string
+		add: string
+		edit: string
+	}
+	workOrderDetails: {
+		openingDate: string
+		startExecutionDate: string
+		endExecutionDate: string
+		requestDate: string
+		issueDate: string
+		startScheduleDate: string
+		endScheduleDate: string
+		closingDate: string
+		cancellationDate: string
+		approvalDate: string
+		explanation: string
+		guidance: string
+		man: string
+		hour: string
+		manHour: string
+		notes: string
+		cost: string
+		situation: string
+		condition: string
+		status: string
+		statusTime: string
+		history: string
+		maintenanceType: string
+		priority: string
+		workshop: string
+		approver: string
+	}
+	schedule: {
+		schedule: string
 		noWorkOrderFound: string
 	}
 	material: {

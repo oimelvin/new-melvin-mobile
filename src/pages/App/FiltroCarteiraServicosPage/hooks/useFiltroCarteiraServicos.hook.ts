@@ -26,15 +26,15 @@ interface FiltroCarteiraServicosHookDataProps {
 }
 
 interface FiltroCarteiraServicosHandlesProps {
-	setSelectedStatus: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedOficina: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedTipoManutencao: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedCondicao: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedPrioridade: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedExecutante: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedDataAbertura: Dispatch<SetStateAction<Date | null>>
-	setSelectedDataEncerramento: Dispatch<SetStateAction<Date | null>>
-	setSelectedDataProgramada: Dispatch<SetStateAction<Date | null>>
+	setSelectedStatus: Dispatch<SetStateAction<string | undefined>>
+	setSelectedOficina: Dispatch<SetStateAction<string | undefined>>
+	setSelectedTipoManutencao: Dispatch<SetStateAction<string | undefined>>
+	setSelectedCondicao: Dispatch<SetStateAction<string | undefined>>
+	setSelectedPrioridade: Dispatch<SetStateAction<string | undefined>>
+	setSelectedExecutante: Dispatch<SetStateAction<string | undefined>>
+	setSelectedDataAbertura: Dispatch<SetStateAction<Date | undefined>>
+	setSelectedDataEncerramento: Dispatch<SetStateAction<Date | undefined>>
+	setSelectedDataProgramada: Dispatch<SetStateAction<Date | undefined>>
 	setPesquisa: Dispatch<SetStateAction<string>>
 }
 
@@ -47,28 +47,46 @@ const useFiltroCarteiraServicosHook = (): FiltroCarteiraServicosHookProps => {
 	const [status, setStatus] = useState<Status[]>([])
 	const [oficinas, setOficinas] = useState<Oficina[]>([])
 	const [tiposManutencao, setTiposManutencao] = useState<TipoManutencao[]>([])
-	const [condicoes, setCondicoes] = useState<Condicao[]>([])
+	const [condicoes] = useState<Condicao[]>([
+		{
+			id: '0',
+			descricao: 'Parado',
+		},
+		{
+			id: '1',
+			descricao: 'Funcionando',
+		},
+	])
 	const [prioridades, setPrioridades] = useState<Prioridade[]>([])
 	const [executantes, setExecutantes] = useState<Executante[]>([])
 
-	const [selectedStatus, setSelectedStatus] =
-		useState<SelectItemProps | null>(null)
-	const [selectedOficina, setSelectedOficina] =
-		useState<SelectItemProps | null>(null)
-	const [selectedTipoManutencao, setSelectedTipoManutencao] =
-		useState<SelectItemProps | null>(null)
-	const [selectedCondicao, setSelectedCondicao] =
-		useState<SelectItemProps | null>(null)
-	const [selectedPrioridade, setSelectedPrioridade] =
-		useState<SelectItemProps | null>(null)
-	const [selectedExecutante, setSelectedExecutante] =
-		useState<SelectItemProps | null>(null)
-	const [selectedDataAbertura, setSelectedDataAbertura] =
-		useState<Date | null>(null)
-	const [selectedDataEncerramento, setSelectedDataEncerramento] =
-		useState<Date | null>(null)
-	const [selectedDataProgramada, setSelectedDataProgramada] =
-		useState<Date | null>(null)
+	const [selectedStatus, setSelectedStatus] = useState<string | undefined>(
+		undefined
+	)
+	const [selectedOficina, setSelectedOficina] = useState<string | undefined>(
+		undefined
+	)
+	const [selectedTipoManutencao, setSelectedTipoManutencao] = useState<
+		string | undefined
+	>(undefined)
+	const [selectedCondicao, setSelectedCondicao] = useState<
+		string | undefined
+	>(undefined)
+	const [selectedPrioridade, setSelectedPrioridade] = useState<
+		string | undefined
+	>(undefined)
+	const [selectedExecutante, setSelectedExecutante] = useState<
+		string | undefined
+	>(undefined)
+	const [selectedDataAbertura, setSelectedDataAbertura] = useState<
+		Date | undefined
+	>(undefined)
+	const [selectedDataEncerramento, setSelectedDataEncerramento] = useState<
+		Date | undefined
+	>(undefined)
+	const [selectedDataProgramada, setSelectedDataProgramada] = useState<
+		Date | undefined
+	>(undefined)
 	const [pesquisa, setPesquisa] = useState('')
 
 	const { getOficinas } = useOficinaService()
@@ -78,7 +96,7 @@ const useFiltroCarteiraServicosHook = (): FiltroCarteiraServicosHookProps => {
 
 	useEffect(() => {
 		const loadSelectOficina = async () => {
-			setSelectedOficina(null)
+			setSelectedOficina(undefined)
 
 			setOficinas(await getOficinas())
 		}
@@ -88,7 +106,7 @@ const useFiltroCarteiraServicosHook = (): FiltroCarteiraServicosHookProps => {
 
 	useEffect(() => {
 		const loadSelectTipoManutencao = async () => {
-			setSelectedTipoManutencao(null)
+			setSelectedTipoManutencao(undefined)
 
 			setTiposManutencao(await getTiposManutencao(false))
 		}
@@ -98,7 +116,7 @@ const useFiltroCarteiraServicosHook = (): FiltroCarteiraServicosHookProps => {
 
 	useEffect(() => {
 		const loadSelectPrioridade = async () => {
-			setSelectedPrioridade(null)
+			setSelectedPrioridade(undefined)
 
 			setPrioridades(await getPrioridades())
 		}
@@ -108,7 +126,7 @@ const useFiltroCarteiraServicosHook = (): FiltroCarteiraServicosHookProps => {
 
 	useEffect(() => {
 		const loadSelectExecutantes = async () => {
-			setSelectedExecutante(null)
+			setSelectedExecutante(undefined)
 
 			setExecutantes(await getExecutantes())
 		}

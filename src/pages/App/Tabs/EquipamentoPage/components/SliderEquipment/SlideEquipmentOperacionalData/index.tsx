@@ -14,7 +14,7 @@ const SlideEquipmentOperacionalData: React.FC = () => {
 
 	const convertDate = (date: Date | undefined) => {
 		if (!date) {
-			return i18n.t('equipment.noData')
+			return i18n.t('common.noData')
 		}
 
 		return moment(date).format('L')
@@ -55,7 +55,7 @@ const SlideEquipmentOperacionalData: React.FC = () => {
 						label={i18n.t('equipment.criticality')}
 						value={
 							equipamento!.criticidadeTotalTexto ||
-							i18n.t('equipment.noData')
+							i18n.t('common.noData')
 						}
 					/>
 				</View>
@@ -69,7 +69,7 @@ const SlideEquipmentOperacionalData: React.FC = () => {
 						label={i18n.t('equipment.supplier')}
 						value={
 							equipamento!.garantia?.fornecedor?.nome ||
-							i18n.t('equipment.noData')
+							i18n.t('common.noData')
 						}
 					/>
 					<MarginTop value={16} />
@@ -84,7 +84,7 @@ const SlideEquipmentOperacionalData: React.FC = () => {
 						label={i18n.t('equipment.supplier')}
 						value={
 							equipamento!.contrato?.fornecedor?.nome ||
-							i18n.t('equipment.noData')
+							i18n.t('common.noData')
 						}
 					/>
 				</View>

@@ -17,23 +17,17 @@ export interface Items<T> {
 }
 
 const api = axios.create({
-	baseURL: 'https://api-novo.oimelvin.com.br/api/',
+	baseURL: 'http://melvinwebhost-380627449.us-east-1.elb.amazonaws.com/api/',
 })
 
-/*api.interceptors.response.use(
-  response => response,
-  (error: HttpError) => {
-    if (error.response) {
-      addError({
-        message: error.message,
-        type: 'error',
-      })
-      console.error(`${error.response.status} - ${error.message}`)
-    }
+api.interceptors.response.use(
+	response => response,
+	(error: HttpError) => {
+		console.log(error.response)
 
-    return false
-  }
-)*/
+		return false
+	}
+)
 
 export const configAuthorization = async (token: string): Promise<void> => {
 	if (token) {

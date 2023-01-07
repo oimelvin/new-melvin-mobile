@@ -52,7 +52,7 @@ const OrdemServicoPage: React.FC = () => {
 						/>
 					}
 					label={i18n.t('workOrders.schedule')}
-					onPress={() => navigate('QRCodeEquipamentoPage')}
+					onPress={() => navigate('ProgramacaoPage')}
 				/>
 				<MarginLeft value={16} />
 				<CardButton

@@ -2,8 +2,6 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Alert } from 'react-native'
 import { RouteProp, useRoute } from '@react-navigation/native'
 
-import { SelectItemProps } from '@components/Select'
-
 import { Filial } from '@models/Filial'
 import { Setor } from '@models/Setor'
 import { Equipamento } from '@models/Equipamento'
@@ -26,17 +24,17 @@ import { AppStackNavigatorParamList } from '@routes/AppRoutes'
 
 interface AdicionarOrdemServico {
 	descricao: string
-	selectedTipoManutencao: string | undefined
-	selectedPrioridade: string | undefined
-	selectedOficina: string | undefined
-	selectedCondicao: string | undefined
+	selectedTipoManutencao?: string
+	selectedPrioridade?: string
+	selectedOficina?: string
+	selectedCondicao?: string
 	numeroPessoas: string
 	tempoExecucao: string
 	homemHora: string
-	selectedFilial: string | undefined
-	selectedSetor: string | undefined
-	selectedEquipamento: string | undefined
-	selectedConjunto: string | undefined
+	selectedFilial?: string
+	selectedSetor?: string
+	selectedEquipamento?: string
+	selectedConjunto?: string
 }
 
 interface AdicionarOrdemServicoHookDataProps {

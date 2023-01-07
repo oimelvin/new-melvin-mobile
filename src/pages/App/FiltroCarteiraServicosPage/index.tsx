@@ -12,7 +12,7 @@ import Input from '@components/Input'
 import DatePicker from '@components/DatePicker'
 
 import { i18n } from '@languages/index'
-import useFiltroCarteiraServicosHook from './hooks'
+import useFiltroCarteiraServicosHook from './hooks/useFiltroCarteiraServicos.hook'
 import { AppStackNavigatorParamList } from '@routes/AppRoutes'
 
 type FiltroCarteiraServicosPageProp = BottomTabNavigationProp<
@@ -26,7 +26,6 @@ const FiltroCarteiraServicosPage: React.FC = () => {
 	const { data, handles } = useFiltroCarteiraServicosHook()
 
 	const handleFiltrarCarteiraServicos = () => {
-		// set filtros no redux
 		goBack()
 	}
 
@@ -40,81 +39,6 @@ const FiltroCarteiraServicosPage: React.FC = () => {
 							'filterServicePortfolio.filterServicePortfolio'
 						)}
 					</Title>
-					<MarginTop value={15} />
-					<Select
-						label={i18n.t('filterServicePortfolio.branch')}
-						items={data.filiais.map(({ id, descricao }) => ({
-							value: id,
-							label: descricao,
-						}))}
-						selectedValue={data.filtros.selectedFilial}
-						onSelect={item => handles.setSelectedFilial(item)}
-						color={colors.black}
-						placeholder={i18n.t(
-							'filterServicePortfolio.selectABranch'
-						)}
-						emptyListText={i18n.t(
-							'filterServicePortfolio.noBranchesFound'
-						)}
-						translucentBackground
-					/>
-					<MarginTop value={15} />
-					<Select
-						label={i18n.t('filterServicePortfolio.sector')}
-						items={data.setores.map(({ id, descricao }) => ({
-							value: id,
-							label: descricao,
-						}))}
-						selectedValue={data.filtros.selectedSetor}
-						onSelect={item => handles.setSelectedSetor(item)}
-						disabled={!data.filtros.selectedFilial}
-						color={colors.black}
-						placeholder={i18n.t(
-							'filterServicePortfolio.selectASector'
-						)}
-						emptyListText={i18n.t(
-							'filterServicePortfolio.noSectorsFound'
-						)}
-						translucentBackground
-					/>
-					<MarginTop value={15} />
-					<Select
-						label={i18n.t('filterServicePortfolio.equipment')}
-						items={data.equipamentos.map(({ id, descricao }) => ({
-							value: id,
-							label: descricao,
-						}))}
-						selectedValue={data.filtros.selectedEquipamento}
-						onSelect={item => handles.setSelectedEquipamento(item)}
-						disabled={!data.filtros.selectedSetor}
-						color={colors.black}
-						placeholder={i18n.t(
-							'filterServicePortfolio.selectAnEquipment'
-						)}
-						emptyListText={i18n.t(
-							'filterServicePortfolio.noEquipmentsFound'
-						)}
-						translucentBackground
-					/>
-					<MarginTop value={15} />
-					<Select
-						label={i18n.t('filterServicePortfolio.set')}
-						items={data.conjuntos.map(({ id, descricao }) => ({
-							value: id,
-							label: descricao,
-						}))}
-						selectedValue={data.filtros.selectedConjunto}
-						onSelect={item => handles.setSelectedConjunto(item)}
-						disabled={!data.filtros.selectedEquipamento}
-						color={colors.black}
-						placeholder={i18n.t(
-							'filterServicePortfolio.selectASet'
-						)}
-						emptyListText={i18n.t(
-							'filterServicePortfolio.noSetsFound'
-						)}
-						translucentBackground
-					/>
 					<MarginTop value={15} />
 					<Select
 						label={i18n.t('filterServicePortfolio.status')}

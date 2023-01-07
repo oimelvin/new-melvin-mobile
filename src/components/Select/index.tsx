@@ -23,8 +23,8 @@ export type SelectItemProps = {
 
 type SelectProps = {
 	items: SelectItemProps[]
-	selectedValue: string | undefined
-	onSelect(item: string | undefined): void
+	selectedValue?: string
+	onSelect(item?: string): void
 	onPress?(): void
 	onCloseSelect?(): void
 	label?: string

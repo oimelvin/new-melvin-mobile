@@ -13,17 +13,21 @@ import SolicitacaoServicosPage from '@pages/App/SolicitacoesPage'
 import { FiltrosCarteiraServicos } from '@models/FiltrosCarteiraServicos'
 import SolicitacaoDetalheComponent from '@pages/App/SolicitacoesPage/components/SolicitacaoDetalheComponent'
 import NovaSolicitacaoComponent from '@pages/App/SolicitacoesPage/components/NovaSolicitacaoComponent'
+import AdicionarOrdemServicoPage from '@pages/App/AdicionarOrdemServicoPage'
 
 export type AppStackNavigatorParamList = {
 	BottomTabNavigator: undefined
 	FiltroEquipamentoPage: undefined
 	QRCodeEquipamentoPage: undefined
 	CarteiraServicosPage: undefined
+	AdicionarOrdemServicoPage: {
+		id?: string
+	}
 	SolicitacaoServicosPage: undefined
 	FiltroCarteiraServicosPage: undefined
 	NotificationTopTabNavigator: undefined
-	AccountPage: undefined,
-	SolicitacaoDetalheComponent: undefined,
+	AccountPage: undefined
+	SolicitacaoDetalheComponent: undefined
 	NovaSolicitacaoComponent: undefined
 }
 
@@ -77,6 +81,14 @@ const AppStackNavigator: React.FC = () => (
 			}}
 		/>
 		<NativeStack.Screen
+			name="AdicionarOrdemServicoPage"
+			component={AdicionarOrdemServicoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
 			name="FiltroCarteiraServicosPage"
 			component={FiltroCarteiraServicosPage}
 			options={{
@@ -121,7 +133,6 @@ const AppStackNavigator: React.FC = () => (
 				animation: 'slide_from_right',
 			}}
 		/>
-
 
 		<NativeStack.Screen name="AccountPage" component={AccountPage} />
 	</NativeStack.Navigator>

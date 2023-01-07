@@ -23,8 +23,8 @@ export type SelectItemProps = {
 
 type SelectProps = {
 	items: SelectItemProps[]
-	selectedValue: SelectItemProps | null
-	onSelect(item: SelectItemProps | null): void
+	selectedValue: string | undefined
+	onSelect(item: string | undefined): void
 	onPress?(): void
 	onCloseSelect?(): void
 	label?: string
@@ -60,7 +60,7 @@ const Select: React.FC<SelectProps> = ({
 		!disabled && setOpened(true)
 	}
 
-	const handleSelect = (item: SelectItemProps | null) => {
+	const handleSelect = (item: string | undefined) => {
 		onSelect(item)
 		setOpened(false)
 		onCloseSelect && onCloseSelect()
@@ -73,11 +73,11 @@ const Select: React.FC<SelectProps> = ({
 
 	const renderItem = (item: SelectItemProps) => (
 		<TouchableHighlight
-			onPress={() => handleSelect(item)}
+			onPress={() => handleSelect(item.value)}
 			style={{ borderRadius: 16 }}
 			underlayColor={colors.gray100}
 		>
-			<SelectItem selected={item.value === selectedValue?.value}>
+			<SelectItem selected={item.value === selectedValue}>
 				<Text>{item.label}</Text>
 			</SelectItem>
 		</TouchableHighlight>
@@ -100,8 +100,7 @@ const Select: React.FC<SelectProps> = ({
 						value={
 							selectedValue
 								? items.find(
-										item =>
-											item.value === selectedValue.value
+										item => item.value === selectedValue
 								  )?.label
 								: placeholder ||
 								  i18n.t('components.select.select')
@@ -146,7 +145,10 @@ const Select: React.FC<SelectProps> = ({
 					showsVerticalScrollIndicator={false}
 					overScrollMode="never"
 				/>
-				<Button variant="outline" onPress={() => handleSelect(null)}>
+				<Button
+					variant="outline"
+					onPress={() => handleSelect(undefined)}
+				>
 					{i18n.t('components.select.clean')}
 				</Button>
 			</Modal>

@@ -26,17 +26,17 @@ import { AppStackNavigatorParamList } from '@routes/AppRoutes'
 
 interface AdicionarOrdemServico {
 	descricao: string
-	selectedTipoManutencao: SelectItemProps | null
-	selectedPrioridade: SelectItemProps | null
-	selectedOficina: SelectItemProps | null
-	selectedCondicao: SelectItemProps | null
+	selectedTipoManutencao: string | undefined
+	selectedPrioridade: string | undefined
+	selectedOficina: string | undefined
+	selectedCondicao: string | undefined
 	numeroPessoas: string
 	tempoExecucao: string
 	homemHora: string
-	selectedFilial: SelectItemProps | null
-	selectedSetor: SelectItemProps | null
-	selectedEquipamento: SelectItemProps | null
-	selectedConjunto: SelectItemProps | null
+	selectedFilial: string | undefined
+	selectedSetor: string | undefined
+	selectedEquipamento: string | undefined
+	selectedConjunto: string | undefined
 }
 
 interface AdicionarOrdemServicoHookDataProps {
@@ -53,17 +53,17 @@ interface AdicionarOrdemServicoHookDataProps {
 
 interface AdicionarOrdemServicoHandlesProps {
 	setDescricao: Dispatch<SetStateAction<string>>
-	setSelectedTipoManutencao: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedPrioridade: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedOficina: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedCondicao: Dispatch<SetStateAction<SelectItemProps | null>>
+	setSelectedTipoManutencao: Dispatch<SetStateAction<string | undefined>>
+	setSelectedPrioridade: Dispatch<SetStateAction<string | undefined>>
+	setSelectedOficina: Dispatch<SetStateAction<string | undefined>>
+	setSelectedCondicao: Dispatch<SetStateAction<string | undefined>>
 	setNumeroPessoas: Dispatch<SetStateAction<string>>
 	setTempoExecucao: Dispatch<SetStateAction<string>>
 	setHomemHora: Dispatch<SetStateAction<string>>
-	setSelectedFilial: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedSetor: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedEquipamento: Dispatch<SetStateAction<SelectItemProps | null>>
-	setSelectedConjunto: Dispatch<SetStateAction<SelectItemProps | null>>
+	setSelectedFilial: Dispatch<SetStateAction<string | undefined>>
+	setSelectedSetor: Dispatch<SetStateAction<string | undefined>>
+	setSelectedEquipamento: Dispatch<SetStateAction<string | undefined>>
+	setSelectedConjunto: Dispatch<SetStateAction<string | undefined>>
 	addOrdemServico: () => Promise<void>
 }
 
@@ -104,26 +104,33 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 	const [conjuntos, setConjuntos] = useState<ConjuntoEquipamento[]>([])
 
 	const [descricao, setDescricao] = useState('')
-	const [selectedTipoManutencao, setSelectedTipoManutencao] =
-		useState<SelectItemProps | null>(null)
-	const [selectedPrioridade, setSelectedPrioridade] =
-		useState<SelectItemProps | null>(null)
-	const [selectedOficina, setSelectedOficina] =
-		useState<SelectItemProps | null>(null)
-	const [selectedCondicao, setSelectedCondicao] =
-		useState<SelectItemProps | null>(null)
+	const [selectedTipoManutencao, setSelectedTipoManutencao] = useState<
+		string | undefined
+	>(undefined)
+	const [selectedPrioridade, setSelectedPrioridade] = useState<
+		string | undefined
+	>(undefined)
+	const [selectedOficina, setSelectedOficina] = useState<string | undefined>(
+		undefined
+	)
+	const [selectedCondicao, setSelectedCondicao] = useState<
+		string | undefined
+	>(undefined)
 	const [numeroPessoas, setNumeroPessoas] = useState('0')
 	const [tempoExecucao, setTempoExecucao] = useState('0')
 	const [homemHora, setHomemHora] = useState('0')
-	const [selectedFilial, setSelectedFilial] =
-		useState<SelectItemProps | null>(null)
-	const [selectedSetor, setSelectedSetor] = useState<SelectItemProps | null>(
-		null
+	const [selectedFilial, setSelectedFilial] = useState<string | undefined>(
+		undefined
 	)
-	const [selectedEquipamento, setSelectedEquipamento] =
-		useState<SelectItemProps | null>(null)
-	const [selectedConjunto, setSelectedConjunto] =
-		useState<SelectItemProps | null>(null)
+	const [selectedSetor, setSelectedSetor] = useState<string | undefined>(
+		undefined
+	)
+	const [selectedEquipamento, setSelectedEquipamento] = useState<
+		string | undefined
+	>(undefined)
+	const [selectedConjunto, setSelectedConjunto] = useState<
+		string | undefined
+	>(undefined)
 
 	const { getTiposManutencao } = useTipoManutencaoService()
 	const { getPrioridades } = usePrioridadeService()
@@ -147,10 +154,10 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 
 	useEffect(() => {
 		const loadSelectSetor = async () => {
-			setSelectedSetor(null)
+			setSelectedSetor(undefined)
 
 			if (selectedFilial) {
-				setSetores(await getSetores(selectedFilial.value))
+				setSetores(await getSetores(selectedFilial))
 			}
 		}
 
@@ -159,12 +166,10 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 
 	useEffect(() => {
 		const loadSelectEquipamento = async () => {
-			setSelectedEquipamento(null)
+			setSelectedEquipamento(undefined)
 
 			if (selectedSetor) {
-				setEquipamentos(
-					await getEquipamentosBySetor(selectedSetor.value)
-				)
+				setEquipamentos(await getEquipamentosBySetor(selectedSetor))
 			}
 		}
 
@@ -173,11 +178,11 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 
 	useEffect(() => {
 		const loadSelectConjunto = async () => {
-			setSelectedConjunto(null)
+			setSelectedConjunto(undefined)
 
 			if (selectedEquipamento) {
 				setConjuntos(
-					await getConjuntosEquipamentoById(selectedEquipamento.value)
+					await getConjuntosEquipamentoById(selectedEquipamento)
 				)
 			}
 		}
@@ -197,27 +202,25 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 
 				const ordemServico = await getOrdemServico(params.id)
 
+				console.log(ordemServico)
+
 				setDescricao(ordemServico.descricao)
-				setSelectedTipoManutencao({
-					label: ordemServico.tipoManutencao.descricao,
-					value: ordemServico.tipoManutencao.id,
-				})
-				setSelectedPrioridade({
-					label: ordemServico.prioridade.descricao,
-					value: ordemServico.prioridade.id,
-				})
-				setSelectedOficina({
-					label: ordemServico.oficina.descricao,
-					value: ordemServico.oficina.id,
-				})
-				setSelectedCondicao({
-					label: '',
-					value: ordemServico.condicao,
-				})
+				setSelectedTipoManutencao(ordemServico.idTipoManutencao)
+				setSelectedPrioridade(ordemServico.idPrioridade)
+				setSelectedOficina(ordemServico.idOficina)
+				setSelectedCondicao(ordemServico.condicao)
 				setNumeroPessoas(ordemServico.homem.toFixed())
 				setTempoExecucao(ordemServico.hora.toFixed(2))
 				setHomemHora(
 					(ordemServico.homem * ordemServico.hora).toFixed(2)
+				)
+				setSelectedFilial(ordemServico.ordemEquipamentos[0].idFilial)
+				setSelectedSetor(ordemServico.ordemEquipamentos[0].idSetor)
+				setSelectedEquipamento(
+					ordemServico.ordemEquipamentos[0].idEquipamento
+				)
+				setSelectedConjunto(
+					ordemServico.ordemEquipamentos[0].idSubConjuntoEquipamento
 				)
 			}
 		}
@@ -229,21 +232,23 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 		try {
 			setLoading(true)
 
-			await postOrdemServico({
-				descricao,
-				idTipoManutencao: selectedTipoManutencao?.value,
-				idPrioridade: selectedPrioridade?.value,
-				idOficina: selectedOficina?.value,
-				condicao: selectedCondicao?.value,
-				idSolicitacao: null,
-				homem: Number(numeroPessoas),
-				hora: Number(tempoExecucao),
-				ordemEquipamento: {
-					idFilial: selectedFilial!.value,
-					idSetor: selectedSetor!.value,
-					idEquipamento: selectedEquipamento!.value,
-				},
-			})
+			if (selectedFilial && selectedSetor && selectedEquipamento) {
+				await postOrdemServico({
+					descricao,
+					idTipoManutencao: selectedTipoManutencao,
+					idPrioridade: selectedPrioridade,
+					idOficina: selectedOficina,
+					condicao: selectedCondicao,
+					idSolicitacao: null,
+					homem: Number(numeroPessoas),
+					hora: Number(tempoExecucao),
+					ordemEquipamento: {
+						idFilial: selectedFilial,
+						idSetor: selectedSetor,
+						idEquipamento: selectedEquipamento,
+					},
+				})
+			}
 		} catch (err) {
 			Alert.alert('Erro', 'Erro ao criar ordem de serviço.')
 		} finally {

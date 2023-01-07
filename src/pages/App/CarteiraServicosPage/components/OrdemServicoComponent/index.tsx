@@ -15,15 +15,21 @@ import { OrdemServico } from '@models/OrdemServico'
 
 interface OrdemServicoProps {
 	ordemServico: OrdemServico
-	onPressOrdemServico(id: string): void
 }
 
 const OrdemServicoComponent: React.FC<OrdemServicoProps> = ({
-	ordemServico: { id, descricao, codOrdem, prioridade, equipamentos, status },
-	onPressOrdemServico,
+	ordemServico: {
+		descricao,
+		codOrdem,
+		prioridade,
+		ordemEquipamentos,
+		status,
+	},
 }) => {
 	const equipamentoDescricao =
-		equipamentos.length > 1 ? 'Vários Equipamentos' : equipamentos[0]
+		ordemEquipamentos.length > 1
+			? 'Vários Equipamentos'
+			: `${ordemEquipamentos[0].equipamento.tag} - ${ordemEquipamentos[0].equipamento.descricao}`
 
 	const prioridadeCor = () => {
 		const cores = ['blue', 'orange', 'purple', 'green', 'red']
@@ -60,7 +66,14 @@ const OrdemServicoComponent: React.FC<OrdemServicoProps> = ({
 	}
 
 	return (
-		<ButtonOpacity onPress={() => onPressOrdemServico(id)}>
+		<ButtonOpacity
+			onPress={() =>
+				Alert.alert(
+					'Detalhes da ordem de serviço',
+					'Funcionalidade ainda não implementada.'
+				)
+			}
+		>
 			<Container>
 				<View
 					style={{
@@ -70,7 +83,7 @@ const OrdemServicoComponent: React.FC<OrdemServicoProps> = ({
 					}}
 				>
 					<Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-						#{codOrdem}
+						OS: {codOrdem}
 					</Text>
 					<View
 						style={{

@@ -5,66 +5,53 @@ interface OrdemServicoServiceHookProps {
 	getOrdensServicos(
 		skipCount: number,
 		maxResultCount: number,
-		idsEquipamento?: string[],
-		idsOficina?: string[],
-		idsTipoManutencao?: string[],
-		idsFamilia?: string[],
-		idsExecutantes?: string[],
-		status?: string[],
-		condicao?: string,
-		statusTempo?: string,
-		pesquisa?: string,
-		isActive?: boolean,
-		osAbertas?: boolean
+		idsEquipamento: string[] | undefined,
+		idsOficina: string[] | undefined,
+		idsTipoManutencao: string[] | undefined,
+		idsFamilia: string[] | undefined,
+		idsExecutantes: string[] | undefined,
+		status: string | undefined,
+		condicao: string | undefined,
+		statusTempo: string | undefined,
+		pesquisa: string | undefined,
+		isActive: boolean | undefined,
+		osAbertas: boolean | undefined
 	): Promise<Items<OrdemServico>>
-	getOrdemServico(id: string): Promise<OrdemServico>
-	postOrdemServico(ordemServico: Partial<OrdemServico>): Promise<void>
 }
 
 const useOrdemServicoService = (): OrdemServicoServiceHookProps => {
 	const getOrdensServicos = async (
 		skipCount: number,
 		maxResultCount: number,
-		idsEquipamento?: string[],
-		idsOficina?: string[],
-		idsTipoManutencao?: string[],
-		idsFamilia?: string[],
-		idsExecutantes?: string[],
-		status?: string[],
-		condicao?: string,
-		statusTempo?: string,
-		pesquisa?: string,
-		isActive?: boolean,
-		osAbertas?: boolean
+		idsEquipamento: string[] | undefined,
+		idsOficina: string[] | undefined,
+		idsTipoManutencao: string[] | undefined,
+		idsFamilia: string[] | undefined,
+		idsExecutantes: string[] | undefined,
+		status: string | undefined,
+		condicao: string | undefined,
+		statusTempo: string | undefined,
+		pesquisa: string | undefined,
+		isActive: boolean | undefined,
+		osAbertas: boolean | undefined
 	): Promise<Items<OrdemServico>> => {
-		const { data } = await api.post<HttpResponse<Items<OrdemServico>>>(
-			'services/app/OrdemServico/GetCarteiraServico',
-			{
-				idsEquipamento,
-				idsOficina,
-				idsTipoManutencao,
-				idsFamilia,
-				idsExecutantes,
-				status,
-				condicao,
-				statusTempo,
-				keyword: pesquisa,
-				isActive,
-				osAbertas,
-				skipCount,
-				maxResultCount,
-			}
-		)
-
-		return data.result
-	}
-
-	const getOrdemServico = async (id: string): Promise<OrdemServico> => {
-		const { data } = await api.get<HttpResponse<OrdemServico>>(
-			'services/app/OrdemServico/Get',
+		const { data } = await api.get<HttpResponse<Items<OrdemServico>>>(
+			'services/app/OrdemServico/GetAll',
 			{
 				params: {
-					id,
+					idsEquipamento,
+					idsOficina,
+					idsTipoManutencao,
+					idsFamilia,
+					idsExecutantes,
+					status,
+					condicao,
+					statusTempo,
+					keyword: pesquisa,
+					isActive,
+					osAbertas,
+					skipCount,
+					maxResultCount,
 				},
 			}
 		)
@@ -72,19 +59,8 @@ const useOrdemServicoService = (): OrdemServicoServiceHookProps => {
 		return data.result
 	}
 
-	const postOrdemServico = async (
-		ordemServico: Partial<OrdemServico>
-	): Promise<void> => {
-		await api.post<OrdemServico>(
-			'services/app/OrdemServico/Create',
-			ordemServico
-		)
-	}
-
 	return {
 		getOrdensServicos,
-		getOrdemServico,
-		postOrdemServico,
 	}
 }
 

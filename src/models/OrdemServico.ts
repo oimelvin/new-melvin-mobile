@@ -30,7 +30,7 @@ export interface OrdemServico {
 	idPrioridade: string
 	idOficina: string
 	idFmp: string
-	condicao: string
+	condicao: number
 	status: OrdemServicoStatus
 	indFavorita: true
 	indCancelada: true
@@ -39,11 +39,10 @@ export interface OrdemServico {
 	historico: string
 	equipamentos: string[]
 	statusTempo: string
-	idSolicitacao: string | null
+	idSolicitacao: string
 	tipoManutencao: TipoManutencao
 	prioridade: Prioridade
 	oficina: Oficina
 	aprovador: User
 	ordemEquipamentos: OrdemServicoEquipamento[]
-	ordemEquipamento: OrdemServicoEquipamento
 }

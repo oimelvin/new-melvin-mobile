@@ -126,7 +126,7 @@ const Select: React.FC<SelectProps> = ({
 					/>
 				</View>
 			</TouchableWithoutFeedback>
-			<Modal opened={opened} onClose={() => handleCloseSelect()} padding>
+			<Modal opened={opened} onClose={() => handleCloseSelect()}>
 				<Input
 					value={search}
 					placeholder={

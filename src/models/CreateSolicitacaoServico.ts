@@ -1,3 +1,4 @@
+import { SelectItemProps } from "@components/Select";
 import { CanalSolicitacao } from "./CanalSolicitacao";
 import { StatusSolicitacao } from "./StatusSolicitacao";
 
@@ -15,4 +16,19 @@ export interface CreateSolicitacaoServicoDto {
     status: StatusSolicitacao;
     idOrdemServicoOrigem: string | undefined;
     idOrdemServicoCheckListOrigem: string | undefined;
+    selectedFilial: SelectItemProps | null
+	selectedSetor: SelectItemProps | null
+	selectedEquipamento: SelectItemProps | null
+	selectedConjunto: SelectItemProps | null
+	selectedStatus: SelectItemProps | null
+	selectedOficina: SelectItemProps | null
+	selectedTipoManutencao: SelectItemProps | null
+	selectedCondicao: SelectItemProps | null
+	selectedPrioridade: SelectItemProps | null
+	selectedExecutante: SelectItemProps | null
+	selectedDataAbertura: Date | null
+	selectedDataEncerramento: Date | null
+	selectedDataProgramada: Date | null
+    selectedCanal: SelectItemProps | null
+	pesquisa: string
 }

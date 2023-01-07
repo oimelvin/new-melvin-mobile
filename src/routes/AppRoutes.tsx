@@ -10,6 +10,11 @@ import colors from '@styles/colors.style'
 import SolicitacaoServicosPage from '@pages/App/SolicitacoesPage'
 import CarteiraServicosPage from '@pages/App/CarteiraServicosPage'
 import AdicionarOrdemServicoPage from '@pages/App/AdicionarOrdemServicoPage'
+import AcoesOrdemServicoPage from '@pages/App/AcoesOrdemServicoPage'
+import PlanejamentoOrdemServicoPage from '@pages/App/PlanejamentoOrdemServicoPage'
+import ControleOrdemServicoPage from '@pages/App/ControleOrdemServicoPage'
+import AnexosOrdemServicoPage from '@pages/App/AnexosOrdemServicoPage'
+import RastreabilidadeOrdemServicoPage from '@pages/App/RastreabilidadeOrdemServicoPage'
 import DetalhesOrdemServicoPage from '@pages/App/DetalhesOrdemServicoPage'
 import FiltroCarteiraServicosPage from '@pages/App/FiltroCarteiraServicosPage'
 import ProgramacaoPage from '@pages/App/ProgramacaoPage'
@@ -21,11 +26,26 @@ export type AppStackNavigatorParamList = {
 	FiltroEquipamentoPage: undefined
 	QRCodeEquipamentoPage: undefined
 	CarteiraServicosPage: undefined
+	AdicionarOrdemServicoPage: {
+		id?: string
+	}
 	DetalhesOrdemServicoPage: {
 		id: string
 	}
-	AdicionarOrdemServicoPage: {
-		id?: string
+	AcoesOrdemServicoPage: {
+		id: string
+	}
+	PlanejamentoOrdemServicoPage: {
+		id: string
+	}
+	ControleOrdemServicoPage: {
+		id: string
+	}
+	AnexosOrdemServicoPage: {
+		id: string
+	}
+	RastreabilidadeOrdemServicoPage: {
+		id: string
 	}
 	FiltroCarteiraServicosPage: undefined
 	ProgramacaoPage: undefined
@@ -86,6 +106,14 @@ const AppStackNavigator: React.FC = () => (
 			}}
 		/>
 		<NativeStack.Screen
+			name="AdicionarOrdemServicoPage"
+			component={AdicionarOrdemServicoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
 			name="DetalhesOrdemServicoPage"
 			component={DetalhesOrdemServicoPage}
 			options={{
@@ -94,8 +122,40 @@ const AppStackNavigator: React.FC = () => (
 			}}
 		/>
 		<NativeStack.Screen
-			name="AdicionarOrdemServicoPage"
-			component={AdicionarOrdemServicoPage}
+			name="AcoesOrdemServicoPage"
+			component={AcoesOrdemServicoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
+			name="PlanejamentoOrdemServicoPage"
+			component={PlanejamentoOrdemServicoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
+			name="ControleOrdemServicoPage"
+			component={ControleOrdemServicoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
+			name="AnexosOrdemServicoPage"
+			component={AnexosOrdemServicoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
+			name="RastreabilidadeOrdemServicoPage"
+			component={RastreabilidadeOrdemServicoPage}
 			options={{
 				headerTransparent: false,
 				animation: 'slide_from_right',

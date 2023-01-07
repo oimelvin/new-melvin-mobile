@@ -6,16 +6,25 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { OrdemServico } from '@models/OrdemServico'
 import useOrdemServicoService from '@services/useOrdemServicoService.hook'
 
-import { i18n } from '@languages/index'
+import { i18n, moment } from '@languages/index'
 import { AppStackNavigatorParamList } from '@routes/AppRoutes'
+import { OrdemServicoStatus } from '@models/OrdemServicoStatus'
 
 interface DetalhesOrdemServicoHookDataProps {
 	loading: boolean
 	ordemServico: OrdemServico | null
+	statusOrdemServico: OrdemServicoStatus
 }
 
 interface DetalhesOrdemServicoHandlesProps {
+	convertDate: (date: Date | undefined) => string
+	calcularHomemHora: () => number
 	onEditOrdemServico: () => void
+	onPressAcoes: () => void
+	onPressPlanejamento: () => void
+	onPressControle: () => void
+	onPressAnexos: () => void
+	onPressRastreabilidade: () => void
 }
 
 export interface DetalhesOrdemServicoHookProps {
@@ -23,19 +32,19 @@ export interface DetalhesOrdemServicoHookProps {
 	handles: DetalhesOrdemServicoHandlesProps
 }
 
-type EquipamentoNavigatorProp = NativeStackNavigationProp<
+type DetalhesOrdemServicoNavigatorProp = NativeStackNavigationProp<
 	AppStackNavigatorParamList,
 	'DetalhesOrdemServicoPage'
 >
 
-type EquipmentRouteProp = RouteProp<
+type DetalhesOrdemServicoRouteProp = RouteProp<
 	AppStackNavigatorParamList,
 	'DetalhesOrdemServicoPage'
 >
 
 const useDetalhesOrdemServicoHook = (): DetalhesOrdemServicoHookProps => {
-	const { navigate } = useNavigation<EquipamentoNavigatorProp>()
-	const { params } = useRoute<EquipmentRouteProp>()
+	const { navigate } = useNavigation<DetalhesOrdemServicoNavigatorProp>()
+	const { params } = useRoute<DetalhesOrdemServicoRouteProp>()
 
 	const [loading, setLoading] = useState(false)
 	const [ordemServico, setOrdemServico] = useState<OrdemServico | null>(null)
@@ -46,6 +55,23 @@ const useDetalhesOrdemServicoHook = (): DetalhesOrdemServicoHookProps => {
 		setLoading(true)
 		onCarregarOrdemServico()
 	}, [])
+
+	const statusOrdemServico = ordemServico?.status || 0
+
+	const convertDate = (date: Date | undefined): string => {
+		if (!date) {
+			return i18n.t('common.noData')
+		}
+
+		return moment(date).format('L')
+	}
+
+	const calcularHomemHora = (): number => {
+		const homem = ordemServico?.homem || 0
+		const hora = ordemServico?.hora || 0
+
+		return homem * hora
+	}
 
 	const onCarregarOrdemServico = async () => {
 		try {
@@ -68,13 +94,61 @@ const useDetalhesOrdemServicoHook = (): DetalhesOrdemServicoHookProps => {
 		})
 	}
 
+	const onPressAcoes = () => {
+		if (ordemServico) {
+			navigate('AcoesOrdemServicoPage', {
+				id: ordemServico.id,
+			})
+		}
+	}
+
+	const onPressPlanejamento = () => {
+		if (ordemServico) {
+			navigate('PlanejamentoOrdemServicoPage', {
+				id: ordemServico.id,
+			})
+		}
+	}
+
+	const onPressControle = () => {
+		if (ordemServico) {
+			navigate('ControleOrdemServicoPage', {
+				id: ordemServico.id,
+			})
+		}
+	}
+
+	const onPressAnexos = () => {
+		if (ordemServico) {
+			navigate('AnexosOrdemServicoPage', {
+				id: ordemServico.id,
+			})
+		}
+	}
+
+	const onPressRastreabilidade = () => {
+		if (ordemServico) {
+			navigate('RastreabilidadeOrdemServicoPage', {
+				id: ordemServico.id,
+			})
+		}
+	}
+
 	return {
 		data: {
 			loading,
 			ordemServico,
+			statusOrdemServico,
 		},
 		handles: {
 			onEditOrdemServico,
+			convertDate,
+			calcularHomemHora,
+			onPressAcoes,
+			onPressPlanejamento,
+			onPressControle,
+			onPressAnexos,
+			onPressRastreabilidade,
 		},
 	}
 }

@@ -163,6 +163,11 @@ const es: LanguageProps = {
 		edit: 'Editar',
 	},
 	workOrderDetails: {
+		actions: 'Acciones',
+		planning: 'Planificación',
+		control: 'Control',
+		attachments: 'Anexos',
+		traceability: 'Trazabilidad',
 		openingDate: 'Fecha de abertura',
 		startExecutionDate: 'Fecha de aplicación inicial',
 		endExecutionDate: 'Fecha de aplicación final',

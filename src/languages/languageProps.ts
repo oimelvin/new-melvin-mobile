@@ -159,6 +159,11 @@ export type LanguageProps = {
 		edit: string
 	}
 	workOrderDetails: {
+		actions: string
+		planning: string
+		control: string
+		attachments: string
+		traceability: string
 		openingDate: string
 		startExecutionDate: string
 		endExecutionDate: string

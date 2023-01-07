@@ -25,7 +25,7 @@ const IconButtonWithLabel: React.FC<EquipmentIconButtonProps> = ({
 			onPress={onPress}
 			{...props}
 		/>
-		<IconButtonLabel>{label}</IconButtonLabel>
+		<IconButtonLabel numberOfLines={1}>{label}</IconButtonLabel>
 	</IconButtonContainer>
 )
 

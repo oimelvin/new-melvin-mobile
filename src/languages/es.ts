@@ -160,6 +160,7 @@ const es: LanguageProps = {
 		selectASet: 'Seleccione un conjunto',
 		noSetsFound: 'No se encontró ningún conjunto.',
 		add: 'Añadir',
+		edit: 'Editar',
 	},
 	workOrderDetails: {
 		openingDate: 'Fecha de abertura',

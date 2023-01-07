@@ -156,6 +156,7 @@ export type LanguageProps = {
 		selectASet: string
 		noSetsFound: string
 		add: string
+		edit: string
 	}
 	workOrderDetails: {
 		openingDate: string

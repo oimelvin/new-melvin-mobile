@@ -159,6 +159,7 @@ const en: LanguageProps = {
 		selectASet: 'Select a set',
 		noSetsFound: 'No sets found.',
 		add: 'Add',
+		edit: 'Edit',
 	},
 	workOrderDetails: {
 		openingDate: 'Opening date',

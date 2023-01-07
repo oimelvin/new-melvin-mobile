@@ -159,6 +159,7 @@ const pt: LanguageProps = {
 		selectASet: 'Selecionar um conjunto',
 		noSetsFound: 'Nenhum conjunto encontrado.',
 		add: 'Adicionar',
+		edit: 'Editar',
 	},
 	workOrderDetails: {
 		openingDate: 'Data de abertura',

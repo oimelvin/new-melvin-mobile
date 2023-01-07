@@ -212,10 +212,12 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 					/>
 					<MarginTop value={15} />
 					<Button
-						onPress={handles.addOrdemServico}
+						onPress={handles.salvarOrdemServico}
 						disabled={loading}
 					>
-						{i18n.t('addWorkOrder.add')}
+						{edicao
+							? i18n.t('addWorkOrder.edit')
+							: i18n.t('addWorkOrder.add')}
 					</Button>
 					<MarginTop value={32} />
 				</AdicionarOrdemServicosPageContainer>

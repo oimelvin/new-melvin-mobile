@@ -21,6 +21,8 @@ import usePrioridadeService from '@services/usePrioridadeService.hook'
 import useOrdemServicoService from '@services/useOrdemServicoService.hook'
 
 import { AppStackNavigatorParamList } from '@routes/AppRoutes'
+import { Status } from '@models/Status'
+import { OrdemServico } from '@models/OrdemServico'
 
 interface AdicionarOrdemServico {
 	descricao: string
@@ -62,7 +64,7 @@ interface AdicionarOrdemServicoHandlesProps {
 	setSelectedSetor: Dispatch<SetStateAction<string | undefined>>
 	setSelectedEquipamento: Dispatch<SetStateAction<string | undefined>>
 	setSelectedConjunto: Dispatch<SetStateAction<string | undefined>>
-	addOrdemServico: () => Promise<void>
+	salvarOrdemServico: () => Promise<void>
 }
 
 export interface AdicionarOrdemServicoHookProps {
@@ -82,6 +84,9 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 
 	const [loading, setLoading] = useState(false)
 	const [edicao, setEdicao] = useState(false)
+	const [ordemServicoEdicao, setOrdemServicoEdicao] = useState<OrdemServico>(
+		{} as OrdemServico
+	)
 
 	const [tiposManutencao, setTiposManutencao] = useState<TipoManutencao[]>([])
 	const [prioridades, setPrioridades] = useState<Prioridade[]>([])
@@ -137,7 +142,8 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 	const { getSetores } = useSetorService()
 	const { getEquipamentosBySetor } = useEquipamentoService()
 	const { getConjuntosEquipamentoById } = useConjuntoEquipamentoService()
-	const { getOrdemServico, postOrdemServico } = useOrdemServicoService()
+	const { getOrdemServico, postOrdemServico, putOrdemServico } =
+		useOrdemServicoService()
 
 	useEffect(() => {
 		const loadSelects = async () => {
@@ -152,8 +158,6 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 
 	useEffect(() => {
 		const loadSelectSetor = async () => {
-			setSelectedSetor(undefined)
-
 			if (selectedFilial) {
 				setSetores(await getSetores(selectedFilial))
 			}
@@ -164,8 +168,6 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 
 	useEffect(() => {
 		const loadSelectEquipamento = async () => {
-			setSelectedEquipamento(undefined)
-
 			if (selectedSetor) {
 				setEquipamentos(await getEquipamentosBySetor(selectedSetor))
 			}
@@ -176,8 +178,6 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 
 	useEffect(() => {
 		const loadSelectConjunto = async () => {
-			setSelectedConjunto(undefined)
-
 			if (selectedEquipamento) {
 				setConjuntos(
 					await getConjuntosEquipamentoById(selectedEquipamento)
@@ -200,7 +200,7 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 
 				const ordemServico = await getOrdemServico(params.id)
 
-				console.log(ordemServico)
+				setOrdemServicoEdicao(ordemServico)
 
 				setDescricao(ordemServico.descricao)
 				setSelectedTipoManutencao(ordemServico.idTipoManutencao)
@@ -237,7 +237,6 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 					idPrioridade: selectedPrioridade,
 					idOficina: selectedOficina,
 					condicao: selectedCondicao,
-					idSolicitacao: null,
 					homem: Number(numeroPessoas),
 					hora: Number(tempoExecucao),
 					ordemEquipamento: {
@@ -252,6 +251,49 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 		} finally {
 			setLoading(false)
 		}
+	}
+
+	const editarOrdemServico = async () => {
+		try {
+			setLoading(true)
+
+			if (selectedFilial && selectedSetor && selectedEquipamento) {
+				await putOrdemServico({
+					id: params.id,
+					codOrdem: ordemServicoEdicao.codOrdem,
+					dataAbertura: ordemServicoEdicao.dataAbertura,
+					descricao,
+					idTipoManutencao: selectedTipoManutencao,
+					idPrioridade: selectedPrioridade,
+					idOficina: selectedOficina,
+					condicao: selectedCondicao,
+					status: ordemServicoEdicao.status,
+					homem: Number(numeroPessoas),
+					hora: Number(tempoExecucao),
+					ordemEquipamentos: [
+						{
+							id: ordemServicoEdicao.ordemEquipamentos[0].id,
+							idOrdemServico: ordemServicoEdicao.id,
+							idFilial: selectedFilial,
+							idSetor: selectedSetor,
+							idEquipamento: selectedEquipamento,
+						},
+					],
+				})
+			}
+		} catch (err) {
+			Alert.alert('Erro', 'Erro ao editar ordem de serviço.')
+		} finally {
+			setLoading(false)
+		}
+	}
+
+	const salvarOrdemServico = async () => {
+		if (edicao) {
+			return editarOrdemServico()
+		}
+
+		return addOrdemServico()
 	}
 
 	return {
@@ -294,7 +336,7 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 			setSelectedSetor,
 			setSelectedEquipamento,
 			setSelectedConjunto,
-			addOrdemServico,
+			salvarOrdemServico,
 		},
 	}
 }

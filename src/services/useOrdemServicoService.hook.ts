@@ -19,6 +19,7 @@ interface OrdemServicoServiceHookProps {
 	): Promise<Items<OrdemServico>>
 	getOrdemServico(id: string): Promise<OrdemServico>
 	postOrdemServico(ordemServico: Partial<OrdemServico>): Promise<void>
+	putOrdemServico(ordemServico: Partial<OrdemServico>): Promise<void>
 }
 
 const useOrdemServicoService = (): OrdemServicoServiceHookProps => {
@@ -81,10 +82,20 @@ const useOrdemServicoService = (): OrdemServicoServiceHookProps => {
 		)
 	}
 
+	const putOrdemServico = async (
+		ordemServico: Partial<OrdemServico>
+	): Promise<void> => {
+		await api.put<OrdemServico>(
+			'services/app/OrdemServico/Update',
+			ordemServico
+		)
+	}
+
 	return {
 		getOrdensServicos,
 		getOrdemServico,
 		postOrdemServico,
+		putOrdemServico,
 	}
 }
 

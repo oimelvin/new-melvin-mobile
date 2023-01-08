@@ -141,9 +141,11 @@ const useFiltroSolicitacaoServicosHook = (): FiltroSolicitacaoServicosHookProps 
 			setSelectedEquipamento(null)
 
 			if (selectedSetor) {
+				var equip = await getEquipamentosBySetor(selectedSetor)
 				setEquipamentos(
-					await getEquipamentosBySetor(selectedSetor.value)
+					equip
 				)
+				console.log(equipamentos)
 			}
 		}
 

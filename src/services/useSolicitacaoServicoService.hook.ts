@@ -46,10 +46,7 @@ const useSolicitacaoServicoService = (): SolicitacaoServicoServiceHookProps => {
 		body: CreateSolicitacaoServicoDto | undefined
 	): Promise<SolicitacaoServico> => {
 		const { data } = await api.post<HttpResponse<SolicitacaoServico>>(
-			'services/app/SolicitacaoServico/Create',
-			{
-				body: body,
-			}
+			'services/app/SolicitacaoServico/Create', body
 		)
 
 		return data.result

@@ -68,6 +68,14 @@ const NovaSolicitacaoComponent: React.FC = (
 
 	const salvarSolicitacao = async () => {
 		try {
+			createSolicitacaoDto.dataAbertura = new Date();
+			createSolicitacaoDto.idEquipamento = data.filtros.selectedEquipamento ?? ""
+			createSolicitacaoDto.idFilial = data.filtros.selectedFilial ?? "";
+			createSolicitacaoDto.idSetor = data.filtros.selectedSetor ?? "";
+			createSolicitacaoDto.idPrioridade = data.filtros.selectedPrioridade ?? "";
+			createSolicitacaoDto.horaAbertura = new Date().toTimeString().split(' ')[0];
+			createSolicitacaoDto.condicaoEquipamento = true
+			console.log(createSolicitacaoDto);
 			await createSolicitacao(createSolicitacaoDto);
 			
 		} catch (error) {
@@ -112,7 +120,8 @@ const NovaSolicitacaoComponent: React.FC = (
 				}))}
 				selectedValue={data.filtros.selectedCanal}
 				onSelect={value => { 
-					createSolicitacaoDto.canal = Number(value?.value)
+					console.log(value)
+					createSolicitacaoDto.canal = Number(value)
 					setcreateSolicitacaoDto(createSolicitacaoDto)
 					handles.setSelectedCanal(value)
 				} }
@@ -155,9 +164,9 @@ const NovaSolicitacaoComponent: React.FC = (
 			/>
 			<Select
 				label='Ativo'
-				items={data.equipamentos.map(({ id, descricaoCompleta }) => ({
+				items={data.equipamentos.map(({ id, descricao }) => ({
 					value: id,
-					label: descricaoCompleta,
+					label: descricao,
 				}))}
 				selectedValue={data.filtros.selectedEquipamento}
 				onSelect={item => handles.setSelectedEquipamento(item)}

@@ -194,6 +194,16 @@ const pt: LanguageProps = {
 		workshop: 'Oficina',
 		approver: 'Aprovador',
 	},
+	workOrderActions: {
+		actions: 'Ações',
+		checklist: 'Checklist',
+		guidance: 'Orientação',
+		informAGuidance: 'Informe uma orientação.',
+		noActionsFound: 'Nenhuma ação encontrada.',
+		notes: 'Observações',
+		informANotes: 'Informe uma observação.',
+		save: 'Salvar',
+	},
 	schedule: {
 		schedule: 'Programação',
 		noWorkOrderFound: 'Nenhuma ordem de serviços encontrada.',

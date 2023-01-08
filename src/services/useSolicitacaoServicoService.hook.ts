@@ -9,7 +9,7 @@ interface SolicitacaoServicoServiceHookProps {
 		status: string | undefined,
 		keyword: string | undefined,
 		isActive: boolean | undefined
-	): Promise<Items<SolicitacaoServico>>;
+	): Promise<Items<SolicitacaoServico>>
 
 	getSolicitacao(
 		id: string
@@ -59,7 +59,7 @@ const useSolicitacaoServicoService = (): SolicitacaoServicoServiceHookProps => {
 			'services/app/SolicitacaoServico/Get',
 			{
 				params: {
-					id
+					id,
 				},
 			}
 		)

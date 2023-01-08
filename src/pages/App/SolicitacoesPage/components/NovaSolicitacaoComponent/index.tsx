@@ -47,13 +47,11 @@ const NovaSolicitacaoComponent: React.FC = (
 	}
 	const carregarSolicitacoesServicos = async () => {
 		try {
-			if(route.params?.id){
+			if (route.params?.id) {
 				const solicitacao = await getSolicitacao(route.params?.id)
 				console.log(solicitacao)
 				setSolicitacoesServicos(solicitacao)
 			}
-			
-			
 		} catch (error) {
 			Alert.alert(
 				i18n.t('common.error'),
@@ -96,15 +94,16 @@ const NovaSolicitacaoComponent: React.FC = (
 
 	return (
 		<View
-		style={{
-			backgroundColor: 'white',
-			paddingLeft: 42,
-			paddingRight: 42
-		}}>
+			style={{
+				backgroundColor: 'white',
+				paddingLeft: 42,
+				paddingRight: 42,
+			}}
+		>
 			<SolicitacaoAcoesComponent></SolicitacaoAcoesComponent>
 			<Input
-				placeholder='Solicitante'
-				translucentBackground	
+				placeholder="Solicitante"
+				translucentBackground
 				color={colors.black}
 				value={createSolicitacaoDto?.solicitante}
 				onChangeText={value => {
@@ -126,7 +125,7 @@ const NovaSolicitacaoComponent: React.FC = (
 					handles.setSelectedCanal(value)
 				} }
 				color={colors.black}
-				placeholder='Canal'
+				placeholder="Canal"
 				emptyListText={i18n.t(
 					'filterServicePortfolio.noExecutorsFound'
 				)}
@@ -141,7 +140,7 @@ const NovaSolicitacaoComponent: React.FC = (
 				selectedValue={data.filtros.selectedFilial}
 				onSelect={item => handles.setSelectedFilial(item)}
 				color={colors.black}
-				placeholder='Filial'
+				placeholder="Filial"
 				emptyListText={i18n.t(
 					'filterServicePortfolio.noExecutorsFound'
 				)}
@@ -156,7 +155,7 @@ const NovaSolicitacaoComponent: React.FC = (
 				selectedValue={data.filtros.selectedSetor}
 				onSelect={item => handles.setSelectedSetor(item)}
 				color={colors.black}
-				placeholder='Setor'
+				placeholder="Setor"
 				emptyListText={i18n.t(
 					'filterServicePortfolio.noExecutorsFound'
 				)}
@@ -171,26 +170,29 @@ const NovaSolicitacaoComponent: React.FC = (
 				selectedValue={data.filtros.selectedEquipamento}
 				onSelect={item => handles.setSelectedEquipamento(item)}
 				color={colors.black}
-				placeholder='Ativo'
-				emptyListText='Não foi possível encontrar equipamentos'
+				placeholder="Ativo"
+				emptyListText={i18n.t(
+					'filterServicePortfolio.noExecutorsFound'
+				)}
 				translucentBackground
 			/>
 			<Select
 				label='Prioridade'
 				color={colors.black}
-				placeholder='Prioridade'
+				placeholder="Prioridade"
 				emptyListText={i18n.t(
 					'filterServicePortfolio.noExecutorsFound'
 				)}
-				translucentBackground items={data.prioridades.map(({ id, descricao }) => ({
-					value: id,
-					label: descricao,
-				}))}
-				selectedValue={data.filtros.selectedPrioridade}
-				onSelect={item => handles.setSelectedPrioridade(item)}		/>
+				translucentBackground
+				items={[]}
+				selectedValue={null}
+				onSelect={function (item: SelectItemProps | null): void {
+					throw new Error('Function not implemented.')
+				}}
+			/>
 			<Input
-				placeholder='Solicitação'
-				translucentBackground	
+				placeholder="Solicitação"
+				translucentBackground
 				color={colors.black}
 				multiline={true}
 				numberOfLines={4}

@@ -4,8 +4,8 @@ import { Tenant } from '@models/Tenant'
 import api from '@services/api'
 
 interface AuthServiceHookProps {
-  getTenantId(usernameOrEmail: string): Promise<Tenant>
-  getSession(usernameOrEmail: string, password: string): Promise<Auth>
+	getTenantId(usernameOrEmail: string): Promise<Tenant>
+	getSession(usernameOrEmail: string, password: string): Promise<Auth>
 }
 
 const useAuthService = (): AuthServiceHookProps => {
@@ -24,11 +24,14 @@ const useAuthService = (): AuthServiceHookProps => {
 		usernameOrEmail: string,
 		password: string
 	): Promise<Auth> => {
-		const { data: authData } = await api.post<Auth>('TokenAuth/Authenticate', {
-			userNameOrEmailAddress: usernameOrEmail,
-			password,
-			rememberClient: true,
-		})
+		const { data: authData } = await api.post<Auth>(
+			'TokenAuth/Authenticate',
+			{
+				userNameOrEmailAddress: usernameOrEmail,
+				password,
+				rememberClient: true,
+			}
+		)
 
 		return authData
 	}

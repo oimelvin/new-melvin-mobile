@@ -8,7 +8,7 @@ import { AppStackNavigatorParamList } from '@routes/AppRoutes'
 import colors from '@styles/colors.style'
 import { Text } from '@styles/global.style'
 import { i18n } from '@languages/index'
-import { FAB } from 'react-native-paper';
+import { FAB } from 'react-native-paper'
 import SolicitacaoServicoComponent from './components/SolicitacaoComponent'
 import Loading from '@components/Loading'
 import ListaSolicitacaoServicoHeader from './components/ListaSolicitacaoServicoHeader'
@@ -30,13 +30,18 @@ const SolicitacaoServicosPage: React.FC = () => {
 	const [refreshing, setRefreshing] = useState(false)
 	const [pagina, setPagina] = useState(0)
 	const [qtdPaginas, setQtdPaginas] = useState(1)
-	const [solicitacoesServicos, setSolicitacoesServicos] = useState<SolicitacaoServico[]>([])
+	const [solicitacoesServicos, setSolicitacoesServicos] = useState<
+		SolicitacaoServico[]
+	>([])
 
 	const carregarSolicitacoesServicos = async () => {
 		try {
 			const { items, totalCount } = await getSolicitacoes(
 				pagina * itensPorPagina,
-				itensPorPagina, undefined, undefined, undefined
+				itensPorPagina,
+				undefined,
+				undefined,
+				undefined
 			)
 
 			if (refreshing) {
@@ -109,7 +114,6 @@ const SolicitacaoServicosPage: React.FC = () => {
 			</View>
 		) : null
 
-
 	return (
 		<View style={{ flex: 1, backgroundColor: colors.white }}>
 			<FlatList<SolicitacaoServico>
@@ -135,11 +139,15 @@ const SolicitacaoServicosPage: React.FC = () => {
 				onEndReached={onEndReachedOrdensServicos}
 			/>
 			<FAB
-				icon={{uri: 'https://cdn-icons-png.flaticon.com/512/32/32339.png'}}
-				style={{position: 'absolute',
-				margin: 16,
-				right: 0,
-				bottom: 0}}
+				icon={{
+					uri: 'https://cdn-icons-png.flaticon.com/512/32/32339.png',
+				}}
+				style={{
+					position: 'absolute',
+					margin: 16,
+					right: 0,
+					bottom: 0,
+				}}
 				onPress={() => irNovaSolicitacao()}
 			/>
 		</View>

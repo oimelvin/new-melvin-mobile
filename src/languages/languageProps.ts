@@ -191,6 +191,16 @@ export type LanguageProps = {
 		workshop: string
 		approver: string
 	}
+	workOrderActions: {
+		actions: string
+		checklist: string
+		guidance: string
+		informAGuidance: string
+		noActionsFound: string
+		notes: string
+		informANotes: string
+		save: string
+	}
 	schedule: {
 		schedule: string
 		noWorkOrderFound: string

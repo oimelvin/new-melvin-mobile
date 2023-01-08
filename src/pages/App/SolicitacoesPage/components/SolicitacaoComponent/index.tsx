@@ -33,21 +33,21 @@ const SolicitacaoServicoComponent: React.FC<OrdemServicoProps> = ({
 		status,
 		solicitante,
 		canal,
-		id
+		id,
 	},
 }) => {
 	const { navigate } = useNavigation<BottomTabNavigatorProp>()
-	const descricaoEquipamento = `${equipamento.tag} - ${equipamento.descricao}`;
+	const descricaoEquipamento = `${equipamento.tag} - ${equipamento.descricao}`
 	const getCanalIcon = (canal: number) => {
 		switch (canal) {
 			case 1:
-				return 'phone';
+				return 'phone'
 			case 2:
-				return 'email-outline';
+				return 'email-outline'
 			case 3:
-				return 'file-upload';
+				return 'file-upload'
 			case 4:
-				return 'account';
+				return 'account'
 			default:
 				return 'phone'
 		}
@@ -55,26 +55,28 @@ const SolicitacaoServicoComponent: React.FC<OrdemServicoProps> = ({
 
 	const getCor = (cor: any) => {
 		switch (cor) {
-		  case 1:
-			return colors.blue;
-		  case 2:
-			return colors.orange;
-		  case 3:
-			return colors.purple;
-		  case 4:
-			return colors.green;
-		  case 5:
-			return colors.red;
-		  default:
-			return colors.red;
+			case 1:
+				return colors.blue
+			case 2:
+				return colors.orange
+			case 3:
+				return colors.purple
+			case 4:
+				return colors.green
+			case 5:
+				return colors.red
+			default:
+				return colors.red
 		}
 	}
 
 	return (
 		<ButtonOpacity
-		onPress={() => navigate('SolicitacaoDetalheComponent', {
-			id: id
-		})}
+			onPress={() =>
+				navigate('SolicitacaoDetalheComponent', {
+					id: id,
+				})
+			}
 		>
 			<Container>
 				<View

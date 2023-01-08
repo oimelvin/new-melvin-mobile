@@ -201,7 +201,7 @@ const NovaSolicitacaoComponent: React.FC = (
 				} }
 			/>
 			<FAB
-				icon={{uri: 'https://cdn-icons-png.flaticon.com/512/32/32339.png'}}
+				icon={{uri: 'https://cdn-icons-png.flaticon.com/512/2874/2874050.png'}}
 				style={{position: 'absolute',
 				margin: 16,
 				right: 0,

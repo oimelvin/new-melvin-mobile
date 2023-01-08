@@ -1,3 +1,9 @@
 import styled from 'styled-components/native'
 
-export const AnexosOrdemServicoPageContainer = styled.View``
+import colors from '@styles/colors.style'
+
+export const AnexosOrdemServicoPageContainer = styled.View`
+	flex: 1;
+	padding: 16px;
+	background-color: ${() => colors.white};
+`

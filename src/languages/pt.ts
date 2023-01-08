@@ -162,6 +162,11 @@ const pt: LanguageProps = {
 		edit: 'Editar',
 	},
 	workOrderDetails: {
+		actions: 'Ações',
+		planning: 'Planejamento',
+		control: 'Controle',
+		attachments: 'Anexos',
+		traceability: 'Rastreabilidade',
 		openingDate: 'Data de abertura',
 		startExecutionDate: 'Data de execução inicial',
 		endExecutionDate: 'Data de execução final',

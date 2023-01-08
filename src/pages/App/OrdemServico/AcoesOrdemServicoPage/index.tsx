@@ -12,7 +12,6 @@ import {
 	Divider,
 	MarginTop,
 	PageContainer,
-	ScrollView,
 	Text,
 	Title,
 } from '@styles/global.style'

@@ -196,6 +196,7 @@ const en: LanguageProps = {
 	},
 	workOrderActions: {
 		actions: 'Actions',
+		checklist: 'Checklist',
 		guidance: 'Guidance',
 		informAGuidance: 'Inform a guidance.',
 		noActionsFound: 'No actions found.',

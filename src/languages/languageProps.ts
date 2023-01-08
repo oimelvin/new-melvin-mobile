@@ -193,6 +193,7 @@ export type LanguageProps = {
 	}
 	workOrderActions: {
 		actions: string
+		checklist: string
 		guidance: string
 		informAGuidance: string
 		noActionsFound: string

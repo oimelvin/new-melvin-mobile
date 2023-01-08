@@ -1,25 +1,29 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
+import colors from '@styles/colors.style'
+
 import BottomTabNavigator from './BottomTabNavigator'
-import FiltroEquipamentoPage from '@pages/App/FiltroEquipamentoPage'
-import QRCodeEquipamentoPage from '@pages/App/QRCodeEquipamentoPage'
 import NotificationTopTabNavigator from './NotificationTopTabNavigator'
 import AccountPage from '@pages/App/AccountPage'
-import colors from '@styles/colors.style'
+
+import FiltroEquipamentoPage from '@pages/App/FiltroEquipamentoPage'
+import QRCodeEquipamentoPage from '@pages/App/QRCodeEquipamentoPage'
+
 import SolicitacaoServicosPage from '@pages/App/SolicitacoesPage'
+import SolicitacaoDetalheComponent from '@pages/App/SolicitacoesPage/components/SolicitacaoDetalheComponent'
+import ProgramacaoPage from '@pages/App/ProgramacaoPage'
+import NovaSolicitacaoComponent from '@pages/App/SolicitacoesPage/components/NovaSolicitacaoComponent'
+
 import CarteiraServicosPage from '@pages/App/OrdemServico/CarteiraServicosPage'
 import FiltroCarteiraServicosPage from '@pages/App/OrdemServico/FiltroCarteiraServicosPage'
 import AdicionarOrdemServicoPage from '@pages/App/OrdemServico/AdicionarOrdemServicoPage'
 import DetalhesOrdemServicoPage from '@pages/App/OrdemServico/DetalhesOrdemServicoPage'
-import AcoesOrdemServicoPage from '@pages/App/OrdemServico/AcoesOrdemServicoPage'
+import AcoesOrdemServicoTopTabNavigator from './AcoesOrdemServicoTopTabNavigator'
 import PlanejamentoOrdemServicoPage from '@pages/App/OrdemServico/PlanejamentoOrdemServicoPage'
 import ControleOrdemServicoPage from '@pages/App/OrdemServico/ControleOrdemServicoPage'
 import AnexosOrdemServicoPage from '@pages/App/OrdemServico/AnexosOrdemServicoPage'
 import RastreabilidadeOrdemServicoPage from '@pages/App/OrdemServico/RastreabilidadeOrdemServicoPage'
-import ProgramacaoPage from '@pages/App/ProgramacaoPage'
-import SolicitacaoDetalheComponent from '@pages/App/SolicitacoesPage/components/SolicitacaoDetalheComponent'
-import NovaSolicitacaoComponent from '@pages/App/SolicitacoesPage/components/NovaSolicitacaoComponent'
 
 export type AppStackNavigatorParamList = {
 	BottomTabNavigator: undefined
@@ -32,7 +36,7 @@ export type AppStackNavigatorParamList = {
 	DetalhesOrdemServicoPage: {
 		id: string
 	}
-	AcoesOrdemServicoPage: {
+	AcoesOrdemServicoTopTabNavigator: {
 		id: string
 	}
 	PlanejamentoOrdemServicoPage: {
@@ -122,8 +126,8 @@ const AppStackNavigator: React.FC = () => (
 			}}
 		/>
 		<NativeStack.Screen
-			name="AcoesOrdemServicoPage"
-			component={AcoesOrdemServicoPage}
+			name="AcoesOrdemServicoTopTabNavigator"
+			component={AcoesOrdemServicoTopTabNavigator}
 			options={{
 				headerTransparent: false,
 				animation: 'slide_from_right',

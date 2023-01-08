@@ -1,32 +1,17 @@
 import React from 'react'
-import {
-	FlatList,
-	ListRenderItemInfo,
-	RefreshControl,
-	View,
-} from 'react-native'
 
 import { AcoesOrdemServicoPageContainer } from './styles'
 import useAcoesOrdemServicoHook from './hooks/useAcoesOrdemServico.hook'
-import {
-	Divider,
-	MarginTop,
-	PageContainer,
-	Text,
-	Title,
-} from '@styles/global.style'
+import { MarginTop, PageContainer } from '@styles/global.style'
 import colors from '@styles/colors.style'
 import Loading from '@components/Loading'
 import Button from '@components/Button'
 import Input from '@components/Input'
-import AcaoComponent from './components/AcaoComponent'
 
 import { i18n } from '@languages/index'
-import { OrdemServicoAcoes } from '@models/OrdemServicoAcoes'
 
 const AcoesOrdemServicoPage: React.FC = () => {
-	const { loading, refreshing, saving, data, handles } =
-		useAcoesOrdemServicoHook()
+	const { loading, saving, data, handles } = useAcoesOrdemServicoHook()
 
 	if (loading) {
 		return (
@@ -35,48 +20,6 @@ const AcoesOrdemServicoPage: React.FC = () => {
 			</AcoesOrdemServicoPageContainer>
 		)
 	}
-
-	const emptyComponent = () =>
-		!loading ? (
-			<View
-				style={{
-					flex: 1,
-					justifyContent: 'center',
-					alignItems: 'center',
-				}}
-			>
-				<Text align="center">
-					{i18n.t('workOrderActions.noActionsFound')}
-				</Text>
-			</View>
-		) : null
-
-	const footerComponent = () =>
-		loading ? (
-			<View
-				style={{
-					flex: 1,
-					justifyContent: 'center',
-					alignItems: 'center',
-					marginBottom: 16,
-				}}
-			>
-				<Loading />
-			</View>
-		) : null
-
-	const renderItem = ({ item }: ListRenderItemInfo<OrdemServicoAcoes>) => (
-		<AcaoComponent key={item.id} acao={item} />
-	)
-
-	const refreshControl = (
-		<RefreshControl
-			refreshing={refreshing}
-			onRefresh={handles.onRefreshOrdensServicosAcoes}
-			tintColor={colors.cyan}
-			colors={[colors.cyan]}
-		/>
-	)
 
 	return (
 		<AcoesOrdemServicoPageContainer>
@@ -107,22 +50,6 @@ const AcoesOrdemServicoPage: React.FC = () => {
 					{i18n.t('workOrderActions.save')}
 				</Button>
 				<MarginTop value={15} />
-				<Divider style={{ width: '100%' }} color={colors.gray100} />
-				<Title>{i18n.t('workOrderActions.actions')}</Title>
-				<MarginTop value={15} />
-				<FlatList<OrdemServicoAcoes>
-					style={{ paddingHorizontal: 16 }}
-					data={data.acoes}
-					ItemSeparatorComponent={() => <MarginTop value={16} />}
-					keyExtractor={({ id }) => id}
-					overScrollMode="never"
-					ListEmptyComponent={emptyComponent}
-					ListFooterComponent={footerComponent}
-					renderItem={renderItem}
-					refreshControl={refreshControl}
-					onEndReachedThreshold={0.1}
-					onEndReached={handles.onEndReachedOrdensServicosAcoes}
-				/>
 			</PageContainer>
 		</AcoesOrdemServicoPageContainer>
 	)

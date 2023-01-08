@@ -194,6 +194,15 @@ const en: LanguageProps = {
 		workshop: 'Workshop',
 		approver: 'Approver',
 	},
+	workOrderActions: {
+		actions: 'Actions',
+		guidance: 'Guidance',
+		informAGuidance: 'Inform a guidance.',
+		noActionsFound: 'No actions found.',
+		notes: 'Notes',
+		informANotes: 'Inform a notes.',
+		save: 'Save',
+	},
 	schedule: {
 		schedule: 'Schedule',
 		noWorkOrderFound: 'No work orders found.',

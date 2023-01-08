@@ -20,23 +20,21 @@ interface OrdemServicoProps {
 	solicitacao: SolicitacaoServico
 }
 
-const SolicitacaoDetalheComponent: React.FC = (
-	{ route, navigation }
-) => {
-	const { id } = route.params;
+const SolicitacaoDetalheComponent: React.FC = ({ route, navigation }) => {
+	const { id } = route.params
 	const { getSolicitacao } = useSolicitacaoServicoService()
 	const itensPorPagina = 10
 
 	const [loading, setLoading] = useState(false)
 	const [refreshing, setRefreshing] = useState(false)
-	const [solicitacoesServicos, setSolicitacoesServicos] = useState<SolicitacaoServico>()
+	const [solicitacoesServicos, setSolicitacoesServicos] =
+		useState<SolicitacaoServico>()
 
 	const carregarSolicitacoesServicos = async () => {
 		try {
 			const solicitacao = await getSolicitacao(id)
 			console.log(solicitacao)
 			setSolicitacoesServicos(solicitacao)
-			
 		} catch (error) {
 			Alert.alert(
 				i18n.t('common.error'),
@@ -54,18 +52,21 @@ const SolicitacaoDetalheComponent: React.FC = (
 
 	return (
 		<View
-		style={{
-			backgroundColor: 'white',
-			paddingLeft: 42,
-			paddingRight: 42
-		}}>
+			style={{
+				backgroundColor: 'white',
+				paddingLeft: 42,
+				paddingRight: 42,
+			}}
+		>
 			<SolicitacaoDetalheHeaderComponent></SolicitacaoDetalheHeaderComponent>
-			<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						alignItems: 'center',
-						marginTop: 16,
-					}}>
+			<View
+				style={{
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+					marginTop: 16,
+				}}
+			>
 				<View>
 					<Text>Nº SS</Text>
 					<Text>{solicitacoesServicos?.codigo}</Text>
@@ -79,12 +80,14 @@ const SolicitacaoDetalheComponent: React.FC = (
 					<Text>3219</Text>
 				</View>
 			</View>
-			<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						alignItems: 'center',
-						marginTop: 20,
-					}}>
+			<View
+				style={{
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+					marginTop: 20,
+				}}
+			>
 				<View>
 					<Text>Solicitante</Text>
 					<Text>{solicitacoesServicos?.solicitante}</Text>
@@ -98,15 +101,19 @@ const SolicitacaoDetalheComponent: React.FC = (
 					<Text>3219</Text>
 				</View>
 			</View>
-			<View style={{
-						marginTop: 20,
-					}}>
+			<View
+				style={{
+					marginTop: 20,
+				}}
+			>
 				<Text>Ativo</Text>
 				<Text>O.S. Criada</Text>
 			</View>
-			<View style={{
-						marginTop: 20,
-					}}>
+			<View
+				style={{
+					marginTop: 20,
+				}}
+			>
 				<Text>Solicitação</Text>
 				<Text>O.S. Criada</Text>
 			</View>

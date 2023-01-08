@@ -2,7 +2,7 @@ import { User } from '@models/User'
 import api, { HttpResponse } from '@services/api'
 
 interface UserServiceHookProps {
-  getUserById(id: number): Promise<User>
+	getUserById(id: number): Promise<User>
 }
 
 const useUserService = (): UserServiceHookProps => {

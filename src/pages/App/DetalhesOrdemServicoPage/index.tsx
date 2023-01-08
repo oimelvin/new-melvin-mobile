@@ -15,16 +15,32 @@ import {
 import Loading from '@components/Loading'
 import Field from '@components/Field'
 
-import { i18n } from '@languages/index'
+import { i18n, moment } from '@languages/index'
 import colors from '@styles/colors.style'
 import FAB from '@components/FAB'
-import AcoesOrdemServico from './components/AcoesOrdemServico'
 
 const DetalhesOrdemServicoPage: React.FC = () => {
 	const {
-		data: { loading, ordemServico, statusOrdemServico },
+		data: { loading, ordemServico },
 		handles,
 	} = useDetalhesOrdemServicoHook()
+
+	const statusOrdemServico = ordemServico?.status || 0
+
+	const convertDate = (date: Date | undefined) => {
+		if (!date) {
+			return i18n.t('common.noData')
+		}
+
+		return moment(date).format('L')
+	}
+
+	const calcularHomemHora = () => {
+		const homem = ordemServico?.homem || 0
+		const hora = ordemServico?.hora || 0
+
+		return homem * hora
+	}
 
 	if (loading) {
 		return (
@@ -52,74 +68,55 @@ const DetalhesOrdemServicoPage: React.FC = () => {
 							}}
 						/>
 					</View>
-					<AcoesOrdemServico
-						onPressAcoes={handles.onPressAcoes}
-						onPressPlanejamento={handles.onPressPlanejamento}
-						onPressControle={handles.onPressControle}
-						onPressAnexos={handles.onPressAnexos}
-						onPressRastreabilidade={handles.onPressRastreabilidade}
-					/>
 					<MarginTop value={16} />
 					<Field
 						label={i18n.t('workOrderDetails.openingDate')}
-						value={handles.convertDate(ordemServico?.dataAbertura)}
+						value={convertDate(ordemServico?.dataAbertura)}
 					/>
 					<MarginTop value={16} />
 					<Field
 						label={i18n.t('workOrderDetails.startExecutionDate')}
-						value={handles.convertDate(
-							ordemServico?.dataExecucaoInicio
-						)}
+						value={convertDate(ordemServico?.dataExecucaoInicio)}
 					/>
 					<MarginTop value={16} />
 					<Field
 						label={i18n.t('workOrderDetails.requestDate')}
-						value={handles.convertDate(
-							ordemServico?.dataSolicitacao
-						)}
+						value={convertDate(ordemServico?.dataSolicitacao)}
 					/>
 					<MarginTop value={16} />
 					<Field
 						label={i18n.t('workOrderDetails.startScheduleDate')}
-						value={handles.convertDate(
-							ordemServico?.dataProgramacaoInicio
-						)}
+						value={convertDate(ordemServico?.dataProgramacaoInicio)}
 					/>
 					<MarginTop value={16} />
 					<Field
 						label={i18n.t('workOrderDetails.cancellationDate')}
-						value={handles.convertDate(ordemServico?.dataCancelada)}
+						value={convertDate(ordemServico?.dataCancelada)}
 					/>
 					<MarginTop value={16} />
 					<Field
 						label={i18n.t('workOrderDetails.closingDate')}
-						value={handles.convertDate(
-							ordemServico?.dataEncerramento
-						)}
+						value={convertDate(ordemServico?.dataEncerramento)}
 					/>
 					<MarginTop value={16} />
 					<Field
 						label={i18n.t('workOrderDetails.endExecutionDate')}
-						value={handles.convertDate(
-							ordemServico?.dataExecucaoFim
-						)}
+						value={convertDate(ordemServico?.dataExecucaoFim)}
 					/>
 					<MarginTop value={16} />
 					<Field
 						label={i18n.t('workOrderDetails.issueDate')}
-						value={handles.convertDate(ordemServico?.dataEmissao)}
+						value={convertDate(ordemServico?.dataEmissao)}
 					/>
 					<MarginTop value={16} />
 					<Field
 						label={i18n.t('workOrderDetails.endScheduleDate')}
-						value={handles.convertDate(
-							ordemServico?.dataProgramacaoFim
-						)}
+						value={convertDate(ordemServico?.dataProgramacaoFim)}
 					/>
 					<MarginTop value={16} />
 					<Field
 						label={i18n.t('workOrderDetails.approvalDate')}
-						value={handles.convertDate(ordemServico?.dataAprovacao)}
+						value={convertDate(ordemServico?.dataAprovacao)}
 					/>
 					<Divider style={{ width: '100%' }} color={colors.gray100} />
 					<Field
@@ -195,7 +192,7 @@ const DetalhesOrdemServicoPage: React.FC = () => {
 					<Field
 						label={i18n.t('workOrderDetails.manHour')}
 						value={
-							handles.calcularHomemHora().toFixed(2) ||
+							calcularHomemHora().toFixed(2) ||
 							i18n.t('common.noData')
 						}
 					/>

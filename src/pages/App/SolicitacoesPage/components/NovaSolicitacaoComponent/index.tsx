@@ -25,16 +25,16 @@ interface OrdemServicoProps {
 	solicitacao: SolicitacaoServico
 }
 
-const NovaSolicitacaoComponent: React.FC = (
-	{ route, navigation }
-) => {
+const NovaSolicitacaoComponent: React.FC = ({ route, navigation }) => {
 	const { getSolicitacao } = useSolicitacaoServicoService()
 	const itensPorPagina = 10
-	const { data, handles } = useFiltroSolicitacaoServicosHook();
+	const { data, handles } = useFiltroSolicitacaoServicosHook()
 	const [loading, setLoading] = useState(false)
 	const [refreshing, setRefreshing] = useState(false)
-	const [solicitacoesServicos, setSolicitacoesServicos] = useState<SolicitacaoServico>()
-	const [createSolicitacaoDto, setcreateSolicitacaoDto] = useState<CreateSolicitacaoServicoDto>()
+	const [solicitacoesServicos, setSolicitacoesServicos] =
+		useState<SolicitacaoServico>()
+	const [createSolicitacaoDto, setcreateSolicitacaoDto] =
+		useState<CreateSolicitacaoServicoDto>()
 	const canais = [
 		{ id: 1, nome: 'Telefone' },
 		{ id: 2, nome: 'Email' },
@@ -44,13 +44,11 @@ const NovaSolicitacaoComponent: React.FC = (
 
 	const carregarSolicitacoesServicos = async () => {
 		try {
-			if(route.params?.id){
+			if (route.params?.id) {
 				const solicitacao = await getSolicitacao(route.params?.id)
 				console.log(solicitacao)
 				setSolicitacoesServicos(solicitacao)
 			}
-			
-			
 		} catch (error) {
 			Alert.alert(
 				i18n.t('common.error'),
@@ -68,15 +66,16 @@ const NovaSolicitacaoComponent: React.FC = (
 
 	return (
 		<View
-		style={{
-			backgroundColor: 'white',
-			paddingLeft: 42,
-			paddingRight: 42
-		}}>
+			style={{
+				backgroundColor: 'white',
+				paddingLeft: 42,
+				paddingRight: 42,
+			}}
+		>
 			<SolicitacaoAcoesComponent></SolicitacaoAcoesComponent>
 			<Input
-				placeholder='Solicitante'
-				translucentBackground	
+				placeholder="Solicitante"
+				translucentBackground
 				color={colors.black}
 				value={createSolicitacaoDto?.solicitante}
 				onChangeText={value => handles.setPesquisa(value)}
@@ -90,7 +89,7 @@ const NovaSolicitacaoComponent: React.FC = (
 				selectedValue={data.filtros.selectedExecutante}
 				onSelect={item => handles.setSelectedExecutante(item)}
 				color={colors.black}
-				placeholder='Canal'
+				placeholder="Canal"
 				emptyListText={i18n.t(
 					'filterServicePortfolio.noExecutorsFound'
 				)}
@@ -105,7 +104,7 @@ const NovaSolicitacaoComponent: React.FC = (
 				selectedValue={data.filtros.selectedExecutante}
 				onSelect={item => handles.setSelectedExecutante(item)}
 				color={colors.black}
-				placeholder='Filial'
+				placeholder="Filial"
 				emptyListText={i18n.t(
 					'filterServicePortfolio.noExecutorsFound'
 				)}
@@ -120,7 +119,7 @@ const NovaSolicitacaoComponent: React.FC = (
 				selectedValue={data.filtros.selectedExecutante}
 				onSelect={item => handles.setSelectedExecutante(item)}
 				color={colors.black}
-				placeholder='Setor'
+				placeholder="Setor"
 				emptyListText={i18n.t(
 					'filterServicePortfolio.noExecutorsFound'
 				)}
@@ -135,7 +134,7 @@ const NovaSolicitacaoComponent: React.FC = (
 				selectedValue={data.filtros.selectedExecutante}
 				onSelect={item => handles.setSelectedExecutante(item)}
 				color={colors.black}
-				placeholder='Ativo'
+				placeholder="Ativo"
 				emptyListText={i18n.t(
 					'filterServicePortfolio.noExecutorsFound'
 				)}
@@ -144,16 +143,20 @@ const NovaSolicitacaoComponent: React.FC = (
 			<Select
 				label={i18n.t('filterServicePortfolio.executor')}
 				color={colors.black}
-				placeholder='Prioridade'
+				placeholder="Prioridade"
 				emptyListText={i18n.t(
 					'filterServicePortfolio.noExecutorsFound'
 				)}
-				translucentBackground items={[]} selectedValue={null} onSelect={function (item: SelectItemProps | null): void {
+				translucentBackground
+				items={[]}
+				selectedValue={null}
+				onSelect={function (item: SelectItemProps | null): void {
 					throw new Error('Function not implemented.')
-				} }			/>
+				}}
+			/>
 			<Input
-				placeholder='Solicitação'
-				translucentBackground	
+				placeholder="Solicitação"
+				translucentBackground
 				color={colors.black}
 				multiline={true}
 				numberOfLines={4}

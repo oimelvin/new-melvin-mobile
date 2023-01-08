@@ -16,6 +16,7 @@ type TextInputBorderProps = ThemedStyledProps<
 		React.RefAttributes<View> & {
 			borderColor?: ColorValue
 			translucentBackground?: boolean
+			multiline?: boolean
 		},
 	DefaultTheme
 >
@@ -34,7 +35,7 @@ export const TextInputBorder = styled.View<TextInputBorderProps>`
 	border: 2px solid
 		${({ borderColor }) =>
 			borderColor ? borderColor.toString() : colors.black};
-	border-radius: 50px;
+	border-radius: ${({ multiline }) => (multiline ? 16 : 50)}px;
 	background-color: ${props => getBackgroundColor(props)};
 	align-items: center;
 `
@@ -43,13 +44,15 @@ type TextInputProps = ThemedStyledProps<
 	ViewProps &
 		React.RefAttributes<View> & {
 			color?: ColorValue
+			multilineHeight?: number
 		},
 	DefaultTheme
 >
 
 export const TextInput = styled.TextInput<TextInputProps>`
 	flex: 1;
-	height: 28px;
+	height: ${({ multiline, multilineHeight }) =>
+		multiline ? multilineHeight || 100 : 28}px;
 	color: ${({ color }) => (color ? color.toString() : colors.black)};
 `
 

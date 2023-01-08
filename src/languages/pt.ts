@@ -162,11 +162,6 @@ const pt: LanguageProps = {
 		edit: 'Editar',
 	},
 	workOrderDetails: {
-		actions: 'Ações',
-		planning: 'Planejamento',
-		control: 'Controle',
-		attachments: 'Anexos',
-		traceability: 'Rastreabilidade',
 		openingDate: 'Data de abertura',
 		startExecutionDate: 'Data de execução inicial',
 		endExecutionDate: 'Data de execução final',
@@ -193,6 +188,15 @@ const pt: LanguageProps = {
 		priority: 'Prioridade',
 		workshop: 'Oficina',
 		approver: 'Aprovador',
+	},
+	workOrderActions: {
+		actions: 'Ações',
+		guidance: 'Orientação',
+		informAGuidance: 'Informe uma orientação.',
+		noActionsFound: 'Nenhuma ação encontrada.',
+		notes: 'Observações',
+		informANotes: 'Informe uma observação.',
+		save: 'Salvar',
 	},
 	schedule: {
 		schedule: 'Programação',

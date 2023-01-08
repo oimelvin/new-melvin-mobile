@@ -1,5 +1,5 @@
-import { SolicitacaoServico } from "@models/SolicitacaoServico";
-import api, { HttpResponse, Items } from "./api";
+import { SolicitacaoServico } from '@models/SolicitacaoServico'
+import api, { HttpResponse, Items } from './api'
 
 interface SolicitacaoServicoServiceHookProps {
 	getSolicitacoes(
@@ -8,11 +8,9 @@ interface SolicitacaoServicoServiceHookProps {
 		status: string | undefined,
 		keyword: string | undefined,
 		isActive: boolean | undefined
-	): Promise<Items<SolicitacaoServico>>;
+	): Promise<Items<SolicitacaoServico>>
 
-	getSolicitacao(
-		id: string
-	): Promise<SolicitacaoServico>
+	getSolicitacao(id: string): Promise<SolicitacaoServico>
 }
 
 const useSolicitacaoServicoService = (): SolicitacaoServicoServiceHookProps => {
@@ -39,14 +37,12 @@ const useSolicitacaoServicoService = (): SolicitacaoServicoServiceHookProps => {
 		return data.result
 	}
 
-	const getSolicitacao = async (
-		id: string
-	): Promise<SolicitacaoServico> => {
+	const getSolicitacao = async (id: string): Promise<SolicitacaoServico> => {
 		const { data } = await api.get<HttpResponse<SolicitacaoServico>>(
 			'services/app/SolicitacaoServico/Get',
 			{
 				params: {
-					id
+					id,
 				},
 			}
 		)
@@ -56,7 +52,7 @@ const useSolicitacaoServicoService = (): SolicitacaoServicoServiceHookProps => {
 
 	return {
 		getSolicitacoes,
-		getSolicitacao
+		getSolicitacao,
 	}
 }
 

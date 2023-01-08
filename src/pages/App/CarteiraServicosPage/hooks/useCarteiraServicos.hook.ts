@@ -64,6 +64,8 @@ const useCarteiraServicosHook = (): CarteiraServicosHookProps => {
 				equipamentos.map(equipamento => equipamento.id)
 			)
 
+			console.log(equipamentos.map(equipamento => equipamento.id))
+
 			if (refreshing) {
 				setOrdensServicos(items)
 			} else {

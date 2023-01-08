@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import { ColorValue, TextInputProps } from 'react-native'
 
 import colors from '@styles/colors.style'
-import { MarginRight, MarginTop, Text } from '@styles/global.style'
+import { MarginRight, MarginTop } from '@styles/global.style'
 import {
 	InputContainer,
 	InputLabel,
@@ -29,6 +29,7 @@ export type InputProps = Omit<
 	rightComponent?: ReactElement
 	color?: ColorValue
 	translucentBackground?: boolean
+	multilineHeight?: number
 }
 
 const Input: React.FC<InputProps> = ({
@@ -44,6 +45,7 @@ const Input: React.FC<InputProps> = ({
 	placeholderTextColor,
 	selectionColor,
 	translucentBackground,
+	multiline,
 	...rest
 }) => {
 	const getColor = (): string => {
@@ -105,6 +107,7 @@ const Input: React.FC<InputProps> = ({
 			<TextInputBorder
 				borderColor={getColor()}
 				translucentBackground={translucentBackground}
+				multiline={multiline}
 			>
 				{readOnly ? (
 					<FixedText color={getColor()}>{value}</FixedText>
@@ -118,6 +121,7 @@ const Input: React.FC<InputProps> = ({
 						color={getColor()}
 						secureTextEntry={isPassword}
 						editable={!disabled}
+						multiline={multiline}
 						{...rest}
 					/>
 				)}

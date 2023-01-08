@@ -61,9 +61,6 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 			await clearTenant()
 			await configTenant(usernameOrEmail)
 			await configSession(usernameOrEmail, password)
-
-			
-			
 		} finally {
 			setLoading(false)
 		}

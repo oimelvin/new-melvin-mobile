@@ -192,14 +192,24 @@ export type LanguageProps = {
 		approver: string
 	}
 	workOrderActions: {
-		actions: string
-		checklist: string
-		guidance: string
-		informAGuidance: string
-		noActionsFound: string
-		notes: string
-		informANotes: string
-		save: string
+		actions: {
+			actions: string
+			guidance: string
+			informAGuidance: string
+			notes: string
+			informANotes: string
+			save: string
+		}
+		checklist: {
+			checklist: string
+			selectDefaultChecklist: string
+			removeDefaultChecklist: string
+			addManualChecklist: string
+			noActionsFound: string
+		}
+	}
+	actionComponent: {
+		linkedWorkOrder: string
 	}
 	schedule: {
 		schedule: string

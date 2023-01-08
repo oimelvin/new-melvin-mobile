@@ -25,10 +25,12 @@ const AcoesOrdemServicoPage: React.FC = () => {
 		<AcoesOrdemServicoPageContainer>
 			<PageContainer>
 				<Input
-					label={i18n.t('workOrderActions.guidance')}
+					label={i18n.t('workOrderActions.actions.guidance')}
 					value={data.orientacao}
 					onChangeText={value => handles.setOrientacao(value)}
-					placeholder={i18n.t('workOrderActions.informAGuidance')}
+					placeholder={i18n.t(
+						'workOrderActions.actions.informAGuidance'
+					)}
 					color={colors.black}
 					numberOfLines={4}
 					multiline
@@ -36,10 +38,12 @@ const AcoesOrdemServicoPage: React.FC = () => {
 				/>
 				<MarginTop value={15} />
 				<Input
-					label={i18n.t('workOrderActions.notes')}
+					label={i18n.t('workOrderActions.actions.notes')}
 					value={data.observacoes}
 					onChangeText={value => handles.setObservacoes(value)}
-					placeholder={i18n.t('workOrderActions.informANotes')}
+					placeholder={i18n.t(
+						'workOrderActions.actions.informANotes'
+					)}
 					color={colors.black}
 					numberOfLines={4}
 					multiline
@@ -47,7 +51,7 @@ const AcoesOrdemServicoPage: React.FC = () => {
 				/>
 				<MarginTop value={15} />
 				<Button onPress={handles.onSalvarAcoes} disabled={loading}>
-					{i18n.t('workOrderActions.save')}
+					{i18n.t('workOrderActions.actions.save')}
 				</Button>
 				<MarginTop value={15} />
 			</PageContainer>

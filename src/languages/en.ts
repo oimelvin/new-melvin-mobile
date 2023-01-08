@@ -195,14 +195,24 @@ const en: LanguageProps = {
 		approver: 'Approver',
 	},
 	workOrderActions: {
-		actions: 'Actions',
-		checklist: 'Checklist',
-		guidance: 'Guidance',
-		informAGuidance: 'Inform a guidance.',
-		noActionsFound: 'No actions found.',
-		notes: 'Notes',
-		informANotes: 'Inform a notes.',
-		save: 'Save',
+		actions: {
+			actions: 'Actions',
+			guidance: 'Guidance',
+			informAGuidance: 'Inform a guidance.',
+			notes: 'Notes',
+			informANotes: 'Inform a notes.',
+			save: 'Save',
+		},
+		checklist: {
+			checklist: 'Checklist',
+			selectDefaultChecklist: 'Select default checklist',
+			removeDefaultChecklist: 'Remove default checklist',
+			addManualChecklist: 'Add manual checklist',
+			noActionsFound: 'No actions found.',
+		},
+	},
+	actionComponent: {
+		linkedWorkOrder: 'Linked work order:',
 	},
 	schedule: {
 		schedule: 'Schedule',

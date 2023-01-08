@@ -37,9 +37,9 @@ const FiltroEquipamentoPage: React.FC = () => {
 			: undefined
 
 	const handleVisualizarEquipamento = () => {
-		if (data.selectedEquipamento?.value) {
+		if (data.selectedEquipamento) {
 			navigate('EquipamentoPage', {
-				id: data.selectedEquipamento.value,
+				id: data.selectedEquipamento,
 			})
 		}
 	}

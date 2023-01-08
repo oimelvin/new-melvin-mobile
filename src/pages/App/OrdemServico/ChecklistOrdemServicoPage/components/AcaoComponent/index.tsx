@@ -6,6 +6,8 @@ import { AcaoContainer, AcaoName, AcaoRow } from './styles'
 import ConformidadeSelect from '../ConformidadeSelect'
 import { OrdemServicoAcoes } from '@models/OrdemServicoAcoes'
 
+import { i18n } from '@languages/index'
+
 type AcaoProps = {
 	acao: OrdemServicoAcoes
 }
@@ -17,7 +19,9 @@ const AcaoComponent: React.FC<AcaoProps> = ({ acao }) => (
 			<MarginTop value={5} />
 			{(acao.idOrdemNaoConformidade || acao.idSolicitacao) && (
 				<Text>
-					Ordem de serviço vinculada: #{acao.codOrdemNaoConformidade}
+					{`${i18n.t('actionComponent.linkedWorkerService')} #${
+						acao.codOrdemNaoConformidade
+					}`}
 				</Text>
 			)}
 		</View>

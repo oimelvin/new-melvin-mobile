@@ -1,24 +1,21 @@
 import React from 'react'
-import { TouchableOpacityProps } from 'react-native'
+import { ColorValue, TouchableOpacityProps } from 'react-native'
 
-import {
-	ButtonContainerFill,
-	ButtonContainerOutline,
-	ButtonContainerFillDisabled,
-	ButtonContainerOutlineDisabled,
-	TextButtonFill,
-	TextButtonFillDisabled,
-	TextButtonOutlineDisabled,
-	TextButtonOutline,
-} from './styles'
+import colors from '@styles/colors.style'
+
+import { ButtonContainer, TextButton } from './styles'
 
 export type ButtonProps = Omit<TouchableOpacityProps, 'activeOpacity'> & {
-  variant?: 'fill' | 'outline'
+	variant?: 'fill' | 'outline'
+	color?: ColorValue
+	textColor?: ColorValue
 }
 
 const Button: React.FC<ButtonProps> = ({
 	children,
 	variant,
+	color,
+	textColor,
 	disabled,
 	...rest
 }) => {
@@ -26,17 +23,33 @@ const Button: React.FC<ButtonProps> = ({
 		if (typeof children === 'string') {
 			if (!variant || variant === 'fill') {
 				if (disabled) {
-					return <TextButtonFillDisabled>{children}</TextButtonFillDisabled>
+					return (
+						<TextButton style={{ color: colors.white }}>
+							{children}
+						</TextButton>
+					)
 				}
 
-				return <TextButtonFill>{children}</TextButtonFill>
+				return (
+					<TextButton style={{ color: textColor || colors.black }}>
+						{children}
+					</TextButton>
+				)
 			}
 
 			if (disabled) {
-				return <TextButtonOutlineDisabled>{children}</TextButtonOutlineDisabled>
+				return (
+					<TextButton style={{ color: colors.gray100 }}>
+						{children}
+					</TextButton>
+				)
 			}
 
-			return <TextButtonOutline>{children}</TextButtonOutline>
+			return (
+				<TextButton style={{ color: textColor || colors.black }}>
+					{children}
+				</TextButton>
+			)
 		}
 
 		return children
@@ -45,29 +58,56 @@ const Button: React.FC<ButtonProps> = ({
 	if (!variant || variant === 'fill') {
 		if (disabled) {
 			return (
-				<ButtonContainerFillDisabled disabled {...rest}>
+				<ButtonContainer
+					style={{
+						backgroundColor: colors.gray100,
+						borderColor: colors.gray100,
+					}}
+					disabled
+					{...rest}
+				>
 					{renderChildren()}
-				</ButtonContainerFillDisabled>
+				</ButtonContainer>
 			)
 		}
 
 		return (
-			<ButtonContainerFill {...rest}>{renderChildren()}</ButtonContainerFill>
+			<ButtonContainer
+				style={{
+					backgroundColor: color || colors.cyan,
+					borderColor: color || colors.cyan,
+				}}
+				{...rest}
+			>
+				{renderChildren()}
+			</ButtonContainer>
 		)
 	}
 
 	if (disabled) {
 		return (
-			<ButtonContainerOutlineDisabled disabled {...rest}>
+			<ButtonContainer
+				style={{
+					borderColor: colors.gray100,
+				}}
+				disabled
+				{...rest}
+			>
 				{renderChildren()}
-			</ButtonContainerOutlineDisabled>
+			</ButtonContainer>
 		)
 	}
 
 	return (
-		<ButtonContainerOutline {...rest}>
+		<ButtonContainer
+			style={{
+				backgroundColor: 'transparent',
+				borderColor: color || colors.white,
+			}}
+			{...rest}
+		>
 			{renderChildren()}
-		</ButtonContainerOutline>
+		</ButtonContainer>
 	)
 }
 

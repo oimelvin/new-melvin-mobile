@@ -8,10 +8,11 @@ import {
 
 import { ChecklistOrdemServicoPageContainer } from './styles'
 import useChecklistOrdemServicoHook from './hooks/useChecklistOrdemServico.hook'
-import { MarginTop, PageContainer, Text } from '@styles/global.style'
+import { Divider, MarginTop, PageContainer, Text } from '@styles/global.style'
 import colors from '@styles/colors.style'
 import Loading from '@components/Loading'
 import AcaoComponent from './components/AcaoComponent'
+import Button from '@components/Button'
 
 import { i18n } from '@languages/index'
 import { OrdemServicoAcoes } from '@models/OrdemServicoAcoes'
@@ -38,7 +39,7 @@ const ChecklistOrdemServicoPage: React.FC = () => {
 				}}
 			>
 				<Text align="center">
-					{i18n.t('workOrderActions.noActionsFound')}
+					{i18n.t('workOrderActions.checklist.noActionsFound')}
 				</Text>
 			</View>
 		) : null
@@ -73,6 +74,27 @@ const ChecklistOrdemServicoPage: React.FC = () => {
 	return (
 		<ChecklistOrdemServicoPageContainer>
 			<PageContainer>
+				<Button>
+					{i18n.t(
+						'workOrderActions.checklist.selectDefaultChecklist'
+					)}
+				</Button>
+				<MarginTop value={16} />
+				<Button
+					variant="outline"
+					color={colors.red}
+					textColor={colors.red}
+					disabled
+				>
+					{i18n.t(
+						'workOrderActions.checklist.removeDefaultChecklist'
+					)}
+				</Button>
+				<Divider style={{ width: '100%' }} color={colors.gray100} />
+				<Button>
+					{i18n.t('workOrderActions.checklist.addManualChecklist')}
+				</Button>
+				<MarginTop value={16} />
 				<FlatList<OrdemServicoAcoes>
 					style={{ paddingHorizontal: 16 }}
 					data={data.acoes}

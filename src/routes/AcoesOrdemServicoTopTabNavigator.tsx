@@ -42,14 +42,14 @@ const AcoesOrdemServicoTopTabNavigator: React.FC = () => {
 			<TopTabBar.Screen
 				name="AcoesOrdemServicoPage"
 				options={{
-					tabBarLabel: i18n.t('workOrderActions.actions'),
+					tabBarLabel: i18n.t('workOrderActions.actions.actions'),
 				}}
 				component={AcoesOrdemServicoPage}
 			/>
 			<TopTabBar.Screen
 				name="ChecklistOrdemServicoPage"
 				options={{
-					tabBarLabel: i18n.t('workOrderActions.checklist'),
+					tabBarLabel: i18n.t('workOrderActions.checklist.checklist'),
 				}}
 				component={ChecklistOrdemServicoPage}
 			/>

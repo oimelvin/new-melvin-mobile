@@ -25,8 +25,8 @@ export type DatePickerItemProps = {
 }
 
 type DatePickerProps = {
-	value: Date | null
-	onDateChange(date: Date | null): void
+	value: Date | undefined
+	onDateChange(date: Date | undefined): void
 	onPress?(): void
 	onCloseSelect?(): void
 	label?: string
@@ -83,7 +83,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
 
 	const handleCleanDatePicker = () => {
 		setSelectedDate(new Date())
-		onDateChange(null)
+		onDateChange(undefined)
 		setOpened(false)
 		onCloseSelect && onCloseSelect()
 	}

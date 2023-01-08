@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 
-import { SelectItemProps } from '@components/Select'
-
 import { Filial } from '@models/Filial'
 import { Setor } from '@models/Setor'
 import { Equipamento } from '@models/Equipamento'
@@ -10,7 +8,7 @@ import { Status } from '@models/Status'
 
 import useFilialService from '@services/useFilialService.hook'
 import useSetorService from '@services/useSetorService.hook'
-import useEquipamentoService from '@services/useOrdemServicoService.hook'
+import useEquipamentoService from '@services/useEquipamentoService.hook'
 import useFamiliaService from '@services/useFamiliaService.hook'
 
 interface SearchEquipmentHookDataProps {
@@ -19,11 +17,11 @@ interface SearchEquipmentHookDataProps {
 	equipamentos: Equipamento[]
 	familias: Familia[]
 	status: Status[]
-	selectedFilial: SelectItemProps | null
-	selectedSetor: SelectItemProps | null
-	selectedEquipamento: SelectItemProps | null
-	selectedFamilia: SelectItemProps | null
-	selectedStatus: SelectItemProps | null
+	selectedFilial?: string
+	selectedSetor?: string
+	selectedEquipamento?: string
+	selectedFamilia?: string
+	selectedStatus?: string
 	pesquisa: string
 	dirtyEquipamento: boolean
 }
@@ -59,17 +57,21 @@ const useSearchEquipmentManuallyHook = () => {
 	])
 	const [pesquisa, setPesquisa] = useState<string>()
 
-	const [selectedFilial, setSelectedFilial] =
-		useState<SelectItemProps | null>(null)
-	const [selectedSetor, setSelectedSetor] = useState<SelectItemProps | null>(
-		null
+	const [selectedFilial, setSelectedFilial] = useState<string | undefined>(
+		undefined
 	)
-	const [selectedEquipamento, setSelectedEquipamento] =
-		useState<SelectItemProps | null>(null)
-	const [selectedFamilia, setSelectedFamilia] =
-		useState<SelectItemProps | null>(null)
-	const [selectedStatus, setSelectedStatus] =
-		useState<SelectItemProps | null>(null)
+	const [selectedSetor, setSelectedSetor] = useState<string | undefined>(
+		undefined
+	)
+	const [selectedEquipamento, setSelectedEquipamento] = useState<
+		string | undefined
+	>(undefined)
+	const [selectedFamilia, setSelectedFamilia] = useState<string | undefined>(
+		undefined
+	)
+	const [selectedStatus, setSelectedStatus] = useState<string | undefined>(
+		undefined
+	)
 
 	const { getFiliais } = useFilialService()
 	const { getSetores } = useSetorService()
@@ -78,7 +80,7 @@ const useSearchEquipmentManuallyHook = () => {
 
 	useEffect(() => {
 		const loadSelectFilial = async () => {
-			setSelectedFilial(null)
+			setSelectedFilial(undefined)
 
 			setFiliais(await getFiliais())
 		}
@@ -88,7 +90,7 @@ const useSearchEquipmentManuallyHook = () => {
 
 	useEffect(() => {
 		const loadSelectFamilia = async () => {
-			setSelectedFamilia(null)
+			setSelectedFamilia(undefined)
 
 			setFamilias(await getFamilias())
 		}
@@ -98,10 +100,10 @@ const useSearchEquipmentManuallyHook = () => {
 
 	useEffect(() => {
 		const loadSelectSetor = async () => {
-			setSelectedSetor(null)
+			setSelectedSetor(undefined)
 
 			if (selectedFilial) {
-				setSetores(await getSetores(selectedFilial.value))
+				setSetores(await getSetores(selectedFilial))
 			}
 		}
 
@@ -110,14 +112,14 @@ const useSearchEquipmentManuallyHook = () => {
 
 	useEffect(() => {
 		const loadSelectEquipamento = async () => {
-			setSelectedEquipamento(null)
+			setSelectedEquipamento(undefined)
 
 			setEquipamentos(
 				await getEquipamentos(
-					selectedFilial?.value,
-					selectedSetor?.value,
-					selectedFamilia?.value,
-					selectedStatus?.value,
+					selectedFilial,
+					selectedSetor,
+					selectedFamilia,
+					selectedStatus,
 					pesquisa
 				)
 			)

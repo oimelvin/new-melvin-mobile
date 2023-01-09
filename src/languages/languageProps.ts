@@ -213,6 +213,7 @@ export type LanguageProps = {
 	}
 	schedule: {
 		schedule: string
+		executor: string
 		noWorkOrderFound: string
 	}
 	material: {

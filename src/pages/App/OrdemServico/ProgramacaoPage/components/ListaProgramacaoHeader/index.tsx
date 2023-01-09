@@ -1,19 +1,26 @@
 import { View } from 'react-native'
 
-import { Divider, MarginTop, Text, Title } from '@styles/global.style'
+import { MarginTop, Text, Title } from '@styles/global.style'
 import IconButton from '@components/IconButton'
 
 import { i18n } from '@languages/index'
 import useAuth from '@contexts/auth.context'
-import colors from '@styles/colors.style'
-import DatePicker from '@components/DatePicker'
+import DatePreviousNext from '../DatePreviousNext'
 
 interface ListaProgramacaoHeaderProps {
-	onFilterClick(): void
+	onFilterClick: () => void
+	selectedDate: Date | undefined
+	onChangeDate: (date: Date | undefined) => void
+	onPreviousDate: () => void
+	onNextDate: () => void
 }
 
 const ListaProgramacaoHeader: React.FC<ListaProgramacaoHeaderProps> = ({
 	onFilterClick,
+	selectedDate,
+	onChangeDate,
+	onPreviousDate,
+	onNextDate,
 }) => {
 	const { user } = useAuth()
 
@@ -34,16 +41,15 @@ const ListaProgramacaoHeader: React.FC<ListaProgramacaoHeaderProps> = ({
 					onPress={onFilterClick}
 				/>
 			</View>
-			<Text>{user?.name}</Text>
+			<Text>{`${i18n.t('schedule.executor')} ${user?.name}`}</Text>
 			<MarginTop value={16} />
-			<View>
-				<DatePicker
-					value={new Date()}
-					onDateChange={() => {}}
-					translucentBackground
-				/>
-			</View>
-			<Divider color={colors.gray100} style={{ width: '100%' }} />
+			<DatePreviousNext
+				selectedDate={selectedDate}
+				onChangeDate={onChangeDate}
+				onPreviousDate={onPreviousDate}
+				onNextDate={onNextDate}
+			/>
+			<MarginTop value={16} />
 		</>
 	)
 }

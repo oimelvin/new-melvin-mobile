@@ -1,24 +1,26 @@
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 
 import { OrdemServico } from '@models/OrdemServico'
-import useOrdemServicoService from '@services/useOrdemServicoService.hook'
+import useOrdemServicoProgramacaoService from '@services/useOrdemServicoProgramacaoService.hook'
 
 import { i18n } from '@languages/index'
 import { AppStackNavigatorParamList } from '@routes/AppRoutes'
+import useAuth from '@contexts/auth.context'
 
 interface ProgramacaoHookDataProps {
+	selectedDate: Date | undefined
 	loading: boolean
 	refreshing: boolean
 	ordensServicos: OrdemServico[]
 }
 
 interface ProgramacaoHandlesProps {
+	setSelectedDate: Dispatch<SetStateAction<Date | undefined>>
 	onCarregarOrdensServicos(): void
 	onRefreshOrdensServicos(): void
-	onEndReachedOrdensServicos(): void
 	onPressFilter(): void
 	onPressOrdemServico(id: string): void
 }
@@ -36,35 +38,31 @@ type ProgramacaoPageProp = BottomTabNavigationProp<
 const useProgramacaoHook = (): ProgramacaoHookProps => {
 	const { navigate } = useNavigation<ProgramacaoPageProp>()
 
-	const itensPorPagina = 10
+	const { user } = useAuth()
 
+	const [selectedDate, setSelectedDate] = useState<Date | undefined>(
+		new Date()
+	)
 	const [loading, setLoading] = useState(false)
 	const [refreshing, setRefreshing] = useState(false)
-	const [pagina, setPagina] = useState(0)
-	const [qtdPaginas, setQtdPaginas] = useState(1)
 	const [ordensServicos, setOrdensServicos] = useState<OrdemServico[]>([])
 
-	const { getOrdensServicos } = useOrdemServicoService()
+	const { getOrdensServicosProgramacao } = useOrdemServicoProgramacaoService()
 
 	useEffect(() => {
 		setLoading(true)
 		onCarregarOrdensServicos()
-	}, [pagina])
+	}, [selectedDate])
 
 	const onCarregarOrdensServicos = async () => {
 		try {
-			const { items, totalCount } = await getOrdensServicos(
-				pagina * itensPorPagina,
-				itensPorPagina
-			)
+			const { items } = await getOrdensServicosProgramacao(selectedDate, [
+				user!.idExecutante,
+			])
 
 			if (refreshing) {
 				setOrdensServicos(items)
-			} else {
-				setOrdensServicos([...ordensServicos, ...items])
 			}
-
-			setQtdPaginas(Math.ceil(totalCount / itensPorPagina))
 		} catch (error) {
 			Alert.alert(
 				i18n.t('common.error'),
@@ -77,22 +75,12 @@ const useProgramacaoHook = (): ProgramacaoHookProps => {
 	}
 
 	const onRefreshOrdensServicos = async () => {
-		if (pagina !== 0) {
-			setRefreshing(true)
-			setQtdPaginas(0)
-			setPagina(0)
-		}
-	}
-
-	const onEndReachedOrdensServicos = async () => {
-		if (!loading && pagina <= qtdPaginas) {
-			setLoading(true)
-			setPagina(pagina + 1)
-		}
+		setRefreshing(true)
+		onCarregarOrdensServicos()
 	}
 
 	const onPressFilter = async () => {
-		navigate('FiltroCarteiraServicosPage')
+		navigate('FiltroProgramacaoPage')
 	}
 
 	const onPressOrdemServico = async (id: string) => {
@@ -103,14 +91,15 @@ const useProgramacaoHook = (): ProgramacaoHookProps => {
 
 	return {
 		data: {
+			selectedDate,
 			loading,
 			ordensServicos,
 			refreshing,
 		},
 		handles: {
+			setSelectedDate,
 			onCarregarOrdensServicos,
 			onRefreshOrdensServicos,
-			onEndReachedOrdensServicos,
 			onPressFilter,
 			onPressOrdemServico,
 		},

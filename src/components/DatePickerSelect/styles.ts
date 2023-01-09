@@ -24,25 +24,3 @@ export const DatePickerModal = styled.View`
 	background-color: ${colors.gray900};
 	elevation: 2;
 `
-
-export const DatePickerEmptyList = styled.View`
-	flex: 1;
-	padding: 16px;
-	align-items: center;
-`
-
-type DatePickerItemProps = ThemedStyledProps<
-	React.RefAttributes<View> & {
-		selected?: boolean
-	},
-	DefaultTheme
->
-
-export const DatePickerItem = styled.View<DatePickerItemProps>`
-	height: 40px;
-	justify-content: center;
-	padding: 0 16px;
-	border-radius: 16px;
-	background-color: ${({ selected }) =>
-		selected ? colors.gray500 : colors.gray900};
-`

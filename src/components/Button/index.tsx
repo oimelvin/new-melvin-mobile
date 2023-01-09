@@ -46,7 +46,7 @@ const Button: React.FC<ButtonProps> = ({
 			}
 
 			return (
-				<TextButton style={{ color: textColor || colors.black }}>
+				<TextButton style={{ color: textColor || colors.white }}>
 					{children}
 				</TextButton>
 			)

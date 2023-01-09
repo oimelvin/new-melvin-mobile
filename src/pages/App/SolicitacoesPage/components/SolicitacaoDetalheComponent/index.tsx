@@ -9,6 +9,7 @@ import {
 	Container,
 	MarginRight,
 	MarginTop,
+	PageContainer,
 	Text,
 } from '@styles/global.style'
 import { SolicitacaoServico } from '@models/SolicitacaoServico'
@@ -51,7 +52,7 @@ const SolicitacaoDetalheComponent: React.FC = ({ route, navigation }) => {
 	}, [])
 
 	return (
-		<View
+		<PageContainer
 			style={{
 				backgroundColor: 'white',
 				paddingLeft: 42,
@@ -117,7 +118,7 @@ const SolicitacaoDetalheComponent: React.FC = ({ route, navigation }) => {
 				<Text>Solicitação</Text>
 				<Text>O.S. Criada</Text>
 			</View>
-		</View>
+		</PageContainer>
 	)
 }
 

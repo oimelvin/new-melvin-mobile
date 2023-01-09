@@ -217,6 +217,7 @@ const es: LanguageProps = {
 	},
 	schedule: {
 		schedule: 'Programación',
+		executor: 'Ejecutor:',
 		noWorkOrderFound: 'No se ha encontrado ninguna orden de trabajo.',
 	},
 	material: {

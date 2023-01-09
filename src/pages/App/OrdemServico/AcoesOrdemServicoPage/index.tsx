@@ -50,7 +50,10 @@ const AcoesOrdemServicoPage: React.FC = () => {
 					translucentBackground
 				/>
 				<MarginTop value={15} />
-				<Button onPress={handles.onSalvarAcoes} disabled={loading}>
+				<Button
+					onPress={handles.onSalvarAcoes}
+					disabled={saving || loading}
+				>
 					{i18n.t('workOrderActions.actions.save')}
 				</Button>
 				<MarginTop value={15} />

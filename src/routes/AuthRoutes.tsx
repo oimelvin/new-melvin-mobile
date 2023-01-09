@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomePage from '@pages/Auth/HomePage'
 import SignInUsernameOrEmailPage from '@pages/Auth/SignInUsernameOrEmailPage'
 import SignInPasswordPage from '@pages/Auth/SignInPasswordPage'
-import { BackgroundImage, WhiteLogoMelvin } from '@styles/global.style'
+import { WhiteLogoMelvin } from '@styles/global.style'
 import colors from '@styles/colors.style'
 
 export type AuthStackNavigatorParamList = {

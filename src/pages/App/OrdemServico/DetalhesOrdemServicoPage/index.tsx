@@ -38,10 +38,13 @@ const DetalhesOrdemServicoPage: React.FC = () => {
 		<DetalhesOrdemServicoPageContainer>
 			<PageContainer>
 				<ScrollView>
-					<Title>#{ordemServico?.codOrdem}</Title>
-					<MarginTop value={16} />
-					<SubTitle>{ordemServico?.descricao}</SubTitle>
-					<MarginTop value={16} />
+					<AcoesOrdemServico
+						onPressAcoes={handles.onPressAcoes}
+						onPressPlanejamento={handles.onPressPlanejamento}
+						onPressControle={handles.onPressControle}
+						onPressAnexos={handles.onPressAnexos}
+						onPressRastreabilidade={handles.onPressRastreabilidade}
+					/>
 					<View>
 						<ProgressBar
 							progress={statusOrdemServico / 7}
@@ -52,13 +55,10 @@ const DetalhesOrdemServicoPage: React.FC = () => {
 							}}
 						/>
 					</View>
-					<AcoesOrdemServico
-						onPressAcoes={handles.onPressAcoes}
-						onPressPlanejamento={handles.onPressPlanejamento}
-						onPressControle={handles.onPressControle}
-						onPressAnexos={handles.onPressAnexos}
-						onPressRastreabilidade={handles.onPressRastreabilidade}
-					/>
+					<MarginTop value={16} />
+					<Title>#{ordemServico?.codOrdem}</Title>
+					<MarginTop value={5} />
+					<SubTitle>{ordemServico?.descricao}</SubTitle>
 					<MarginTop value={16} />
 					<Field
 						label={i18n.t('workOrderDetails.openingDate')}

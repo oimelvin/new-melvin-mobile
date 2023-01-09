@@ -96,6 +96,7 @@ const useDetalhesOrdemServicoHook = (): DetalhesOrdemServicoHookProps => {
 
 	const onPressAcoes = () => {
 		if (ordemServico) {
+			console.log(ordemServico.id)
 			navigate('AcoesOrdemServicoTopTabNavigator', {
 				id: ordemServico.id,
 			})

@@ -15,7 +15,7 @@ type AcaoProps = {
 const AcaoComponent: React.FC<AcaoProps> = ({ acao }) => (
 	<AcaoContainer>
 		<View style={{ padding: 16 }}>
-			<AcaoName>{acao.descricaoAcao}</AcaoName>
+			<AcaoName>{acao.nome}</AcaoName>
 			<MarginTop value={5} />
 			{(acao.idOrdemNaoConformidade || acao.idSolicitacao) && (
 				<Text>

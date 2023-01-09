@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
 	FlatList,
 	ListRenderItemInfo,
@@ -17,7 +17,12 @@ import Button from '@components/Button'
 import { i18n } from '@languages/index'
 import { OrdemServicoAcoes } from '@models/OrdemServicoAcoes'
 
-const ChecklistOrdemServicoPage: React.FC = () => {
+export type ChecklistOrdemServicoPageParamList = {
+	id: string
+}
+const ChecklistOrdemServicoPage: React.FC = ({
+	route
+}) => {
 	const { loading, refreshing, saving, data, handles } =
 		useChecklistOrdemServicoHook()
 

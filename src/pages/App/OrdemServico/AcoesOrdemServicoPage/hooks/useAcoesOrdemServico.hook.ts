@@ -1,9 +1,11 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { AcoesOrdemServicoTopTabNavigatorParamList } from '@routes/AcoesOrdemServicoTopTabNavigator'
 import { i18n } from '@languages/index'
+import useOrdemServicoService from '@services/useOrdemServicoService.hook'
+import { Alert } from 'react-native'
 
 interface AcoesOrdemServicoHookDataProps {
 	orientacao: string
@@ -43,7 +45,44 @@ const useAcoesOrdemServicoHook = (): AcoesOrdemServicoHookProps => {
 	const [orientacao, setOrientacao] = useState('')
 	const [observacoes, setObservacoes] = useState('')
 
-	const onSalvarAcoes = async () => {}
+	const { getOrdemServico, putObservacaoOrdemServico } =
+		useOrdemServicoService()
+
+	useEffect(() => {
+		onCarregarOrdemServico()
+	}, [])
+
+	const onCarregarOrdemServico = async () => {
+		try {
+			setLoading(true)
+			const ordemServicoApi = await getOrdemServico(params.id)
+
+			setObservacoes(ordemServicoApi.observacao)
+			setOrientacao(ordemServicoApi.orientacao)
+		} catch (error) {
+			Alert.alert(
+				i18n.t('common.error'),
+				i18n.t('common.anErrorHasOccuredPleaseTryAgain')
+			)
+		} finally {
+			setLoading(false)
+		}
+	}
+
+	const onSalvarAcoes = async () => {
+		try {
+			setSaving(true)
+
+			await putObservacaoOrdemServico(params.id, observacoes, orientacao)
+		} catch (error) {
+			Alert.alert(
+				i18n.t('common.error'),
+				i18n.t('common.anErrorHasOccuredPleaseTryAgain')
+			)
+		} finally {
+			setSaving(false)
+		}
+	}
 
 	return {
 		loading,

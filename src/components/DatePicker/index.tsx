@@ -1,28 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import {
-	ColorValue,
-	Platform,
-	TouchableWithoutFeedback,
-	View,
-} from 'react-native'
-import DateTimePicker from '@react-native-community/datetimepicker'
+import { ColorValue, TouchableWithoutFeedback, View } from 'react-native'
 
 import colors from '@styles/colors.style'
 import Icon from '@components/Icon'
 import Input from '@components/Input'
-import {
-	DatePickerModalContainer,
-	DatePickerModalOverlay,
-	DatePickerModal,
-} from './styles'
-import { i18n } from '@languages/index'
-import Button from '@components/Button'
-import { MarginTop } from '@styles/global.style'
-
-export type DatePickerItemProps = {
-	value: string
-	label: string
-}
+import DatePickerSelect from '@components/DatePickerSelect'
 
 type DatePickerProps = {
 	value: Date | undefined
@@ -118,42 +100,13 @@ const DatePicker: React.FC<DatePickerProps> = ({
 				</View>
 			</TouchableWithoutFeedback>
 			{opened ? (
-				<DatePickerModalContainer
-					visible={opened}
-					onRequestClose={() => handleCloseDatePicker()}
-				>
-					<TouchableWithoutFeedback
-						onPress={() => handleCloseDatePicker()}
-					>
-						<DatePickerModalOverlay>
-							<DatePickerModal>
-								<DateTimePicker
-									value={selectedDate || new Date()}
-									onChange={(_, date) =>
-										handleDateChange(date)
-									}
-									display={
-										Platform.OS === 'ios'
-											? 'spinner'
-											: 'calendar'
-									}
-									textColor={colors.white}
-								/>
-								<MarginTop value={16} />
-								<Button onPress={() => handleCloseDatePicker()}>
-									{i18n.t('components.datePicker.select')}
-								</Button>
-								<MarginTop value={16} />
-								<Button
-									variant="outline"
-									onPress={() => handleCleanDatePicker()}
-								>
-									{i18n.t('components.datePicker.clean')}
-								</Button>
-							</DatePickerModal>
-						</DatePickerModalOverlay>
-					</TouchableWithoutFeedback>
-				</DatePickerModalContainer>
+				<DatePickerSelect
+					opened={opened}
+					selectedDate={selectedDate}
+					onDateChange={(_, date) => handleDateChange(date)}
+					onCloseSelect={() => handleCloseDatePicker()}
+					onClearDate={() => handleCleanDatePicker()}
+				/>
 			) : null}
 		</View>
 	)

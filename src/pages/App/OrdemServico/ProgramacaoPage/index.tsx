@@ -1,5 +1,10 @@
 import React from 'react'
-import { FlatList, RefreshControl, View } from 'react-native'
+import {
+	FlatList,
+	ListRenderItemInfo,
+	RefreshControl,
+	View,
+} from 'react-native'
 
 import colors from '@styles/colors.style'
 import { Text } from '@styles/global.style'
@@ -10,7 +15,7 @@ import ListaProgramacaoHeader from './components/ListaProgramacaoHeader'
 
 import { OrdemServico } from '@models/OrdemServico'
 
-import { i18n } from '@languages/index'
+import { i18n, moment } from '@languages/index'
 import useProgramacaoHook from './hooks/useProgramacao.hook'
 
 const ProgramacaoPage: React.FC = () => {
@@ -45,6 +50,40 @@ const ProgramacaoPage: React.FC = () => {
 			</View>
 		) : null
 
+	const listHeaderComponent = () => (
+		<ListaProgramacaoHeader
+			onFilterClick={handles.onPressFilter}
+			selectedDate={data.selectedDate}
+			onChangeDate={date => handles.setSelectedDate(date)}
+			onPreviousDate={() =>
+				handles.setSelectedDate(
+					moment(data.selectedDate).add(-1, 'days').toDate()
+				)
+			}
+			onNextDate={() =>
+				handles.setSelectedDate(
+					moment(data.selectedDate).add(1, 'days').toDate()
+				)
+			}
+		/>
+	)
+
+	const renderItem = ({ item }: ListRenderItemInfo<OrdemServico>) => (
+		<OrdemServicoComponent
+			ordemServico={item}
+			onPressOrdemServico={handles.onPressOrdemServico}
+		/>
+	)
+
+	const refreshControl = (
+		<RefreshControl
+			refreshing={data.refreshing}
+			onRefresh={handles.onRefreshOrdensServicos}
+			tintColor={colors.cyan}
+			colors={[colors.cyan]}
+		/>
+	)
+
 	return (
 		<ProgramacaoPageContainer>
 			<FlatList<OrdemServico>
@@ -52,29 +91,11 @@ const ProgramacaoPage: React.FC = () => {
 				data={data.ordensServicos}
 				keyExtractor={({ id }) => id}
 				overScrollMode="never"
-				ListHeaderComponent={() => (
-					<ListaProgramacaoHeader
-						onFilterClick={handles.onPressFilter}
-					/>
-				)}
+				ListHeaderComponent={listHeaderComponent}
 				ListEmptyComponent={emptyComponent}
 				ListFooterComponent={footerComponent}
-				renderItem={({ item }) => (
-					<OrdemServicoComponent
-						ordemServico={item}
-						onPressOrdemServico={handles.onPressOrdemServico}
-					/>
-				)}
-				refreshControl={
-					<RefreshControl
-						refreshing={data.refreshing}
-						onRefresh={handles.onRefreshOrdensServicos}
-						tintColor={colors.cyan}
-						colors={[colors.cyan]}
-					/>
-				}
-				onEndReachedThreshold={0.1}
-				onEndReached={handles.onEndReachedOrdensServicos}
+				renderItem={renderItem}
+				refreshControl={refreshControl}
 			/>
 		</ProgramacaoPageContainer>
 	)

@@ -216,7 +216,8 @@ const pt: LanguageProps = {
 	},
 	schedule: {
 		schedule: 'Programação',
-		noWorkOrderFound: 'Nenhuma ordem de serviços encontrada.',
+		executor: 'Executante:',
+		noWorkOrderFound: 'Nenhuma ordem de serviço encontrada.',
 	},
 	material: {
 		materials: 'Materiais',

@@ -1,5 +1,6 @@
 import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import { RouteProp, useRoute } from '@react-navigation/native'
 
 import colors from '@styles/colors.style'
 import { i18n } from '@languages/index'
@@ -16,10 +17,19 @@ export type AcoesOrdemServicoTopTabNavigatorParamList = {
 	}
 }
 
+type AcoesOrdemServicoTopTabNavigatorRouteProp = RouteProp<
+	AcoesOrdemServicoTopTabNavigatorParamList,
+	'AcoesOrdemServicoPage'
+>
+
 const TopTabBar =
 	createMaterialTopTabNavigator<AcoesOrdemServicoTopTabNavigatorParamList>()
 
 const AcoesOrdemServicoTopTabNavigator: React.FC = () => {
+	const {
+		params: { id },
+	} = useRoute<AcoesOrdemServicoTopTabNavigatorRouteProp>()
+
 	return (
 		<TopTabBar.Navigator
 			screenOptions={{
@@ -45,6 +55,9 @@ const AcoesOrdemServicoTopTabNavigator: React.FC = () => {
 					tabBarLabel: i18n.t('workOrderActions.actions.actions'),
 				}}
 				component={AcoesOrdemServicoPage}
+				initialParams={{
+					id,
+				}}
 			/>
 			<TopTabBar.Screen
 				name="ChecklistOrdemServicoPage"
@@ -52,6 +65,9 @@ const AcoesOrdemServicoTopTabNavigator: React.FC = () => {
 					tabBarLabel: i18n.t('workOrderActions.checklist.checklist'),
 				}}
 				component={ChecklistOrdemServicoPage}
+				initialParams={{
+					id,
+				}}
 			/>
 		</TopTabBar.Navigator>
 	)

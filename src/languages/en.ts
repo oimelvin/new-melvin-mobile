@@ -216,6 +216,7 @@ const en: LanguageProps = {
 	},
 	schedule: {
 		schedule: 'Schedule',
+		executor: 'Executor:',
 		noWorkOrderFound: 'No work orders found.',
 	},
 	material: {

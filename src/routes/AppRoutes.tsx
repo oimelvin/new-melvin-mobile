@@ -1,5 +1,6 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavigatorScreenParams } from '@react-navigation/native'
 
 import colors from '@styles/colors.style'
 
@@ -12,7 +13,6 @@ import QRCodeEquipamentoPage from '@pages/App/QRCodeEquipamentoPage'
 
 import SolicitacaoServicosPage from '@pages/App/SolicitacoesPage'
 import SolicitacaoDetalheComponent from '@pages/App/SolicitacoesPage/components/SolicitacaoDetalheComponent'
-import ProgramacaoPage from '@pages/App/ProgramacaoPage'
 import NovaSolicitacaoComponent from '@pages/App/SolicitacoesPage/components/NovaSolicitacaoComponent'
 
 import CarteiraServicosPage from '@pages/App/OrdemServico/CarteiraServicosPage'
@@ -24,6 +24,8 @@ import PlanejamentoOrdemServicoPage from '@pages/App/OrdemServico/PlanejamentoOr
 import ControleOrdemServicoPage from '@pages/App/OrdemServico/ControleOrdemServicoPage'
 import AnexosOrdemServicoPage from '@pages/App/OrdemServico/AnexosOrdemServicoPage'
 import RastreabilidadeOrdemServicoPage from '@pages/App/OrdemServico/RastreabilidadeOrdemServicoPage'
+import ProgramacaoPage from '@pages/App/OrdemServico/ProgramacaoPage'
+import FiltroProgramacaoPage from '@pages/App/OrdemServico/FiltroProgramacaoPage'
 
 export type AppStackNavigatorParamList = {
 	BottomTabNavigator: undefined
@@ -52,6 +54,7 @@ export type AppStackNavigatorParamList = {
 		id: string
 	}
 	FiltroCarteiraServicosPage: undefined
+	FiltroProgramacaoPage: undefined
 	ProgramacaoPage: undefined
 	SolicitacaoServicosPage: undefined
 	NotificationTopTabNavigator: undefined
@@ -176,6 +179,14 @@ const AppStackNavigator: React.FC = () => (
 		<NativeStack.Screen
 			name="ProgramacaoPage"
 			component={ProgramacaoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
+			name="FiltroProgramacaoPage"
+			component={FiltroProgramacaoPage}
 			options={{
 				headerTransparent: false,
 				animation: 'slide_from_right',

@@ -7,7 +7,7 @@ export const AcoesOrdemServicoContainer = styled.View`
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
-	margin-top: 16px;
+	margin-bottom: 16px;
 `
 export const AcoesOrdemServicoIconButton = styled(IconButtonWithLabel)`
 	border: 2px solid ${() => colors.cyan};

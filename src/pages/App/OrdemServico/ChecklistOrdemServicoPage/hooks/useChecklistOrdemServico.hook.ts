@@ -3,10 +3,11 @@ import { Alert } from 'react-native'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { AcoesOrdemServicoTopTabNavigatorParamList } from '@routes/AcoesOrdemServicoTopTabNavigator'
+import { AppStackNavigatorParamList } from '@routes/AppRoutes'
 import { i18n } from '@languages/index'
 import { OrdemServicoAcoes } from '@models/OrdemServicoAcoes'
 import useOrdemServicoAcoesService from '@services/useOrdemServicoAcoesService.hook'
+import { AcoesOrdemServicoTopTabNavigatorParamList } from '@routes/AcoesOrdemServicoTopTabNavigator'
 
 interface ChecklistOrdemServicoHookDataProps {
 	acoes: OrdemServicoAcoes[]
@@ -67,8 +68,6 @@ const useAcoesOrdemServicoHook = (): AcoesOrdemServicoHookProps => {
 				itensPorPagina,
 				params.id
 			)
-
-			console.log(items)
 
 			if (refreshing) {
 				setAcoes(items)

@@ -10,7 +10,12 @@ import IconButton from '@components/IconButton'
 
 const SolicitacaoDetalheHeaderComponent: React.FC = () => {
 	return (
-		<View>
+		<View style={{
+			flexDirection: 'row',
+			justifyContent: 'space-around',
+			alignItems: 'center',
+			marginTop: 16,
+		}}>
 			<View>
 				<IconButton provider="materialIcons" iconName="attach-file" />
 				<Text>Anexos</Text>

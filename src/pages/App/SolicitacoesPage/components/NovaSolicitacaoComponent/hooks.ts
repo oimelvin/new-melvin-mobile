@@ -22,6 +22,7 @@ import useTipoManutencaoService from '@services/useTipoManutencaoService.hook'
 import usePrioridadeService from '@services/usePrioridadeService.hook'
 import useExecutanteService from '@services/useExecutanteService.hook'
 import { FiltrosCarteiraServicos } from '@models/FiltrosCarteiraServicos'
+import { CreateSolicitacaoServicoDto } from '@models/CreateSolicitacaoServico'
 
 interface FiltroSolicitacaoServicosHookDataProps {
 	filiais: Filial[]
@@ -34,7 +35,7 @@ interface FiltroSolicitacaoServicosHookDataProps {
 	condicoes: Condicao[]
 	prioridades: Prioridade[]
 	executantes: Executante[]
-	filtros: FiltrosCarteiraServicos
+	filtros: CreateSolicitacaoServicoDto
 }
 
 interface FiltroSolicitacaoServicosHandlesProps {
@@ -53,6 +54,7 @@ interface FiltroSolicitacaoServicosHandlesProps {
 	setSelectedDataProgramada: Dispatch<SetStateAction<Date | null>>
 	setPesquisa: Dispatch<SetStateAction<string>>
 	setFiltros(filtros: FiltrosCarteiraServicos): void
+	setSelectedCanal: Dispatch<SetStateAction<SelectItemProps | null>>
 }
 
 export interface FiltroSolicitacaoServicosHookProps {
@@ -99,6 +101,8 @@ const useFiltroSolicitacaoServicosHook = (): FiltroSolicitacaoServicosHookProps 
 		useState<Date | null>(null)
 	const [selectedDataProgramada, setSelectedDataProgramada] =
 		useState<Date | null>(null)
+	const [selectedCanal, setSelectedCanal] =
+		useState<SelectItemProps | null>(null)
 	const [pesquisa, setPesquisa] = useState('')
 
 	const { getFiliais } = useFilialService()
@@ -137,9 +141,11 @@ const useFiltroSolicitacaoServicosHook = (): FiltroSolicitacaoServicosHookProps 
 			setSelectedEquipamento(null)
 
 			if (selectedSetor) {
+				var equip = await getEquipamentosBySetor(selectedSetor)
 				setEquipamentos(
-					await getEquipamentosBySetor(selectedSetor.value)
+					equip
 				)
+				console.log(equipamentos)
 			}
 		}
 
@@ -214,8 +220,9 @@ const useFiltroSolicitacaoServicosHook = (): FiltroSolicitacaoServicosHookProps 
 		selectedDataAbertura,
 		selectedDataEncerramento,
 		selectedDataProgramada,
+		selectedCanal,
 		pesquisa,
-	}: FiltrosCarteiraServicos) => {
+	}: CreateSolicitacaoServicoDto) => {
 		setSelectedFilial(selectedFilial)
 		setSelectedSetor(selectedSetor)
 		setSelectedEquipamento(selectedEquipamento)
@@ -229,7 +236,9 @@ const useFiltroSolicitacaoServicosHook = (): FiltroSolicitacaoServicosHookProps 
 		setSelectedDataAbertura(selectedDataAbertura)
 		setSelectedDataEncerramento(selectedDataEncerramento)
 		setSelectedDataProgramada(selectedDataProgramada)
+		setSelectedCanal(selectedCanal)
 		setPesquisa(pesquisa)
+		
 	}
 
 	return {
@@ -258,6 +267,7 @@ const useFiltroSolicitacaoServicosHook = (): FiltroSolicitacaoServicosHookProps 
 				selectedDataAbertura,
 				selectedDataEncerramento,
 				selectedDataProgramada,
+				selectedCanal,
 				pesquisa,
 			},
 		},
@@ -275,6 +285,7 @@ const useFiltroSolicitacaoServicosHook = (): FiltroSolicitacaoServicosHookProps 
 			setSelectedDataAbertura,
 			setSelectedDataEncerramento,
 			setSelectedDataProgramada,
+			setSelectedCanal,
 			setPesquisa,
 			setFiltros,
 		},

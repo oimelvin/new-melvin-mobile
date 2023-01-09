@@ -1,5 +1,6 @@
-import { SolicitacaoServico } from '@models/SolicitacaoServico'
-import api, { HttpResponse, Items } from './api'
+import { CreateSolicitacaoServicoDto } from "@models/CreateSolicitacaoServico";
+import { SolicitacaoServico } from "@models/SolicitacaoServico";
+import api, { HttpResponse, Items } from "./api";
 
 interface SolicitacaoServicoServiceHookProps {
 	getSolicitacoes(
@@ -10,7 +11,11 @@ interface SolicitacaoServicoServiceHookProps {
 		isActive: boolean | undefined
 	): Promise<Items<SolicitacaoServico>>
 
-	getSolicitacao(id: string): Promise<SolicitacaoServico>
+	getSolicitacao(
+		id: string
+	): Promise<SolicitacaoServico>;
+
+	createSolicitacao(body: CreateSolicitacaoServicoDto | undefined): Promise<SolicitacaoServico>;
 }
 
 const useSolicitacaoServicoService = (): SolicitacaoServicoServiceHookProps => {
@@ -37,7 +42,19 @@ const useSolicitacaoServicoService = (): SolicitacaoServicoServiceHookProps => {
 		return data.result
 	}
 
-	const getSolicitacao = async (id: string): Promise<SolicitacaoServico> => {
+	const createSolicitacao = async (
+		body: CreateSolicitacaoServicoDto | undefined
+	): Promise<SolicitacaoServico> => {
+		const { data } = await api.post<HttpResponse<SolicitacaoServico>>(
+			'services/app/SolicitacaoServico/Create', body
+		)
+
+		return data.result
+	}
+
+	const getSolicitacao = async (
+		id: string
+	): Promise<SolicitacaoServico> => {
 		const { data } = await api.get<HttpResponse<SolicitacaoServico>>(
 			'services/app/SolicitacaoServico/Get',
 			{
@@ -52,7 +69,8 @@ const useSolicitacaoServicoService = (): SolicitacaoServicoServiceHookProps => {
 
 	return {
 		getSolicitacoes,
-		getSolicitacao,
+		getSolicitacao, 
+		createSolicitacao
 	}
 }
 

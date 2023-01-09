@@ -20,7 +20,7 @@ const useOrdemServicoAcoesService = (): OrdemServicoServiceAcoesHookProps => {
 		isActive?: boolean
 	): Promise<Items<OrdemServicoAcoes>> => {
 		const { data } = await api.get<HttpResponse<Items<OrdemServicoAcoes>>>(
-			'services/app/OrdemServicoAcoes/GetAll',
+			'services/app/OrdemServicoCheckList/GetAll',
 			{
 				params: {
 					idOrdemServico,

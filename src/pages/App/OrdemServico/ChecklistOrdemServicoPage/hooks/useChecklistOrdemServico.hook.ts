@@ -47,6 +47,7 @@ const useAcoesOrdemServicoHook = (): AcoesOrdemServicoHookProps => {
 	const [pagina, setPagina] = useState(0)
 	const [qtdPaginas, setQtdPaginas] = useState(1)
 	const [saving, setSaving] = useState(false)
+	
 
 	const [acoes, setAcoes] = useState<OrdemServicoAcoes[]>([])
 
@@ -60,6 +61,7 @@ const useAcoesOrdemServicoHook = (): AcoesOrdemServicoHookProps => {
 		try {
 			setLoading(true)
 
+			console.log(params)
 			const { items, totalCount } = await getOrdensServicosAcoes(
 				pagina * itensPorPagina,
 				itensPorPagina,
@@ -74,6 +76,7 @@ const useAcoesOrdemServicoHook = (): AcoesOrdemServicoHookProps => {
 
 			setQtdPaginas(Math.ceil(totalCount / itensPorPagina))
 		} catch (err) {
+			console.log(err)
 			Alert.alert(
 				i18n.t('common.error'),
 				i18n.t('common.anErrorHasOccuredPleaseTryAgain')

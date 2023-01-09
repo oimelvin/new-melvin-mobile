@@ -24,6 +24,24 @@ const AcoesOrdemServicoPage: React.FC = () => {
 	return (
 		<AcoesOrdemServicoPageContainer>
 			<PageContainer>
+				<Button disabled={saving}>
+					{i18n.t(
+						'workOrderActions.checklist.selectDefaultChecklist'
+					)}
+				</Button>
+				<MarginTop value={16} />
+				<Button
+					variant="outline"
+					color={colors.red}
+					textColor={colors.red}
+					onPress={handles.onRemoverChecklistPadrao}
+					disabled={true || saving}
+				>
+					{i18n.t(
+						'workOrderActions.checklist.removeDefaultChecklist'
+					)}
+				</Button>
+				<MarginTop value={16} />
 				<Input
 					label={i18n.t('workOrderActions.actions.guidance')}
 					value={data.orientacao}

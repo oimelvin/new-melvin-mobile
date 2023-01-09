@@ -16,6 +16,7 @@ interface AcoesOrdemServicoHandlesProps {
 	setOrientacao: Dispatch<SetStateAction<string>>
 	setObservacoes: Dispatch<SetStateAction<string>>
 	onSalvarAcoes: () => Promise<void>
+	onRemoverChecklistPadrao: () => Promise<void>
 }
 
 export interface AcoesOrdemServicoHookProps {
@@ -84,6 +85,40 @@ const useAcoesOrdemServicoHook = (): AcoesOrdemServicoHookProps => {
 		}
 	}
 
+	const removerChecklistPadrao = async () => {
+		try {
+			setSaving(true)
+
+			// await deleteChecklistPadrao()
+		} catch (err) {
+			Alert.alert(
+				i18n.t('common.error'),
+				i18n.t('common.anErrorHasOccuredPleaseTryAgain')
+			)
+		} finally {
+			setSaving(false)
+		}
+	}
+
+	const onRemoverChecklistPadrao = async () => {
+		Alert.alert(
+			i18n.t('common.warning'),
+			i18n.t('common.irreversibleAction'),
+			[
+				{
+					text: i18n.t('common.cancel'),
+					onPress: () => {},
+					style: 'cancel',
+				},
+				{
+					text: i18n.t('common.remove'),
+					onPress: () => removerChecklistPadrao(),
+					style: 'destructive',
+				},
+			]
+		)
+	}
+
 	return {
 		loading,
 		saving,
@@ -92,6 +127,7 @@ const useAcoesOrdemServicoHook = (): AcoesOrdemServicoHookProps => {
 			setOrientacao,
 			setObservacoes,
 			onSalvarAcoes,
+			onRemoverChecklistPadrao,
 		},
 	}
 }

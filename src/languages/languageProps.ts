@@ -4,6 +4,10 @@ export type LanguageProps = {
 		error: string
 		anErrorHasOccuredPleaseTryAgain: string
 		noData: string
+		warning: string
+		irreversibleAction: string
+		cancel: string
+		remove: string
 	}
 	components: {
 		select: {

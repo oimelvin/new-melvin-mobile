@@ -3,7 +3,6 @@ import { Alert } from 'react-native'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { AppStackNavigatorParamList } from '@routes/AppRoutes'
 import { i18n } from '@languages/index'
 import { OrdemServicoAcoes } from '@models/OrdemServicoAcoes'
 import useOrdemServicoAcoesService from '@services/useOrdemServicoAcoesService.hook'
@@ -16,7 +15,7 @@ interface ChecklistOrdemServicoHookDataProps {
 interface ChecklistOrdemServicoHandlesProps {
 	onRefreshOrdensServicosAcoes: () => Promise<void>
 	onEndReachedOrdensServicosAcoes: () => Promise<void>
-	onSalvarAcoes: () => Promise<void>
+	onRemoverChecklistPadrao: () => Promise<void>
 }
 
 export interface AcoesOrdemServicoHookProps {
@@ -50,8 +49,6 @@ const useAcoesOrdemServicoHook = (): AcoesOrdemServicoHookProps => {
 	const [saving, setSaving] = useState(false)
 
 	const [acoes, setAcoes] = useState<OrdemServicoAcoes[]>([])
-	const [orientacao, setOrientacao] = useState('')
-	const [observacoes, setObservacoes] = useState('')
 
 	const { getOrdensServicosAcoes } = useOrdemServicoAcoesService()
 
@@ -101,10 +98,11 @@ const useAcoesOrdemServicoHook = (): AcoesOrdemServicoHookProps => {
 		}
 	}
 
-	const onSalvarAcoes = async () => {
+	const removerChecklistPadrao = async () => {
 		try {
 			setSaving(true)
-			Alert.alert('Salvar ações', 'Funcionalidade não implementada.')
+
+			// await deleteChecklistPadrao()
 		} catch (err) {
 			Alert.alert(
 				i18n.t('common.error'),
@@ -115,6 +113,25 @@ const useAcoesOrdemServicoHook = (): AcoesOrdemServicoHookProps => {
 		}
 	}
 
+	const onRemoverChecklistPadrao = async () => {
+		Alert.alert(
+			i18n.t('common.warning'),
+			i18n.t('common.irreversibleAction'),
+			[
+				{
+					text: i18n.t('common.cancel'),
+					onPress: () => {},
+					style: 'cancel',
+				},
+				{
+					text: i18n.t('common.remove'),
+					onPress: () => removerChecklistPadrao(),
+					style: 'destructive',
+				},
+			]
+		)
+	}
+
 	return {
 		loading,
 		refreshing,
@@ -123,7 +140,7 @@ const useAcoesOrdemServicoHook = (): AcoesOrdemServicoHookProps => {
 		handles: {
 			onRefreshOrdensServicosAcoes,
 			onEndReachedOrdensServicosAcoes,
-			onSalvarAcoes,
+			onRemoverChecklistPadrao,
 		},
 	}
 }

@@ -6,6 +6,11 @@ const pt: LanguageProps = {
 		error: 'Erro',
 		anErrorHasOccuredPleaseTryAgain: 'Ocorreu um erro, tente novamente.',
 		noData: 'Sem dados',
+		warning: 'Atenção',
+		irreversibleAction:
+			'Essa ação é irreversível, deseja realmente prosseguir?',
+		cancel: 'Cancelar',
+		remove: 'Remover',
 	},
 	components: {
 		select: {

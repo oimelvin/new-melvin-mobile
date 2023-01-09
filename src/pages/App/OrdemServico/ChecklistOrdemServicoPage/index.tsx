@@ -74,7 +74,7 @@ const ChecklistOrdemServicoPage: React.FC = () => {
 	return (
 		<ChecklistOrdemServicoPageContainer>
 			<PageContainer>
-				<Button>
+				<Button disabled={saving}>
 					{i18n.t(
 						'workOrderActions.checklist.selectDefaultChecklist'
 					)}
@@ -84,14 +84,15 @@ const ChecklistOrdemServicoPage: React.FC = () => {
 					variant="outline"
 					color={colors.red}
 					textColor={colors.red}
-					disabled
+					onPress={handles.onRemoverChecklistPadrao}
+					disabled={true || saving}
 				>
 					{i18n.t(
 						'workOrderActions.checklist.removeDefaultChecklist'
 					)}
 				</Button>
 				<Divider style={{ width: '100%' }} color={colors.gray100} />
-				<Button>
+				<Button disabled={saving}>
 					{i18n.t('workOrderActions.checklist.addManualChecklist')}
 				</Button>
 				<MarginTop value={16} />

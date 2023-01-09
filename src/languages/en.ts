@@ -7,6 +7,11 @@ const en: LanguageProps = {
 		anErrorHasOccuredPleaseTryAgain:
 			'An error has occurred, please try again.',
 		noData: 'No data',
+		warning: 'Warning',
+		irreversibleAction:
+			'Is this action irreversible, do you really want to proceed?',
+		cancel: 'Cancel',
+		remove: 'Remove',
 	},
 	components: {
 		select: {

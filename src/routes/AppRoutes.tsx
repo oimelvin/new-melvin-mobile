@@ -1,6 +1,5 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { NavigatorScreenParams } from '@react-navigation/native'
 
 import colors from '@styles/colors.style'
 
@@ -20,10 +19,20 @@ import FiltroCarteiraServicosPage from '@pages/App/OrdemServico/FiltroCarteiraSe
 import AdicionarOrdemServicoPage from '@pages/App/OrdemServico/AdicionarOrdemServicoPage'
 import DetalhesOrdemServicoPage from '@pages/App/OrdemServico/DetalhesOrdemServicoPage'
 import AcoesOrdemServicoTopTabNavigator from './AcoesOrdemServicoTopTabNavigator'
+
 import PlanejamentoOrdemServicoPage from '@pages/App/OrdemServico/PlanejamentoOrdemServicoPage'
+
 import ControleOrdemServicoPage from '@pages/App/OrdemServico/ControleOrdemServicoPage'
+import ApontamentosOrdemServicoPage from '@pages/App/OrdemServico/ApontamentosOrdemServicoPage'
+import IndisponibilidadeOrdemServicoPage from '@pages/App/OrdemServico/IndisponibilidadeOrdemServicoPage'
+import AssinaturasOrdemServicoPage from '@pages/App/OrdemServico/AssinaturasOrdemServicoPage'
+import HistoricoOrdemServicoPage from '@pages/App/OrdemServico/HistoricoOrdemServicoPage'
+import AlterarStatusOrdemServicoPage from '@pages/App/OrdemServico/AlterarStatusOrdemServicoPage'
+
 import AnexosOrdemServicoPage from '@pages/App/OrdemServico/AnexosOrdemServicoPage'
+
 import RastreabilidadeOrdemServicoPage from '@pages/App/OrdemServico/RastreabilidadeOrdemServicoPage'
+
 import ProgramacaoPage from '@pages/App/OrdemServico/ProgramacaoPage'
 import FiltroProgramacaoPage from '@pages/App/OrdemServico/FiltroProgramacaoPage'
 
@@ -45,6 +54,21 @@ export type AppStackNavigatorParamList = {
 		id: string
 	}
 	ControleOrdemServicoPage: {
+		id: string
+	}
+	ApontamentosOrdemServicoPage: {
+		id: string
+	}
+	IndisponibilidadeOrdemServicoPage: {
+		id: string
+	}
+	AssinaturasOrdemServicoPage: {
+		id: string
+	}
+	HistoricoOrdemServicoPage: {
+		id: string
+	}
+	AlterarStatusOrdemServicoPage: {
 		id: string
 	}
 	AnexosOrdemServicoPage: {
@@ -147,6 +171,46 @@ const AppStackNavigator: React.FC = () => (
 		<NativeStack.Screen
 			name="ControleOrdemServicoPage"
 			component={ControleOrdemServicoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
+			name="ApontamentosOrdemServicoPage"
+			component={ApontamentosOrdemServicoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
+			name="IndisponibilidadeOrdemServicoPage"
+			component={IndisponibilidadeOrdemServicoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
+			name="AssinaturasOrdemServicoPage"
+			component={AssinaturasOrdemServicoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
+			name="HistoricoOrdemServicoPage"
+			component={HistoricoOrdemServicoPage}
+			options={{
+				headerTransparent: false,
+				animation: 'slide_from_right',
+			}}
+		/>
+		<NativeStack.Screen
+			name="AlterarStatusOrdemServicoPage"
+			component={AlterarStatusOrdemServicoPage}
 			options={{
 				headerTransparent: false,
 				animation: 'slide_from_right',

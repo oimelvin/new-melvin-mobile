@@ -3,12 +3,15 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { AppStackNavigatorParamList } from '@routes/AppRoutes'
 
-interface ControleOrdemServicoHookDataProps {}
-
-interface ControleOrdemServicoHandlesProps {}
+interface ControleOrdemServicoHandlesProps {
+	onPressApontamento: () => void
+	onPressIndisponibilidade: () => void
+	onPressAssinaturas: () => void
+	onPressHistorico: () => void
+	onPressAlterarStatusOrdemServico: () => void
+}
 
 export interface ControleOrdemServicoHookProps {
-	data: ControleOrdemServicoHookDataProps
 	handles: ControleOrdemServicoHandlesProps
 }
 
@@ -26,9 +29,44 @@ const useControleOrdemServicoHook = (): ControleOrdemServicoHookProps => {
 	const { navigate } = useNavigation<ControleOrdemServicoNavigatorProp>()
 	const { params } = useRoute<ControleOrdemServicoRouteProp>()
 
+	const onPressApontamento = () => {
+		navigate('ApontamentosOrdemServicoPage', {
+			id: params.id,
+		})
+	}
+
+	const onPressIndisponibilidade = () => {
+		navigate('IndisponibilidadeOrdemServicoPage', {
+			id: params.id,
+		})
+	}
+
+	const onPressAssinaturas = () => {
+		navigate('AssinaturasOrdemServicoPage', {
+			id: params.id,
+		})
+	}
+
+	const onPressHistorico = () => {
+		navigate('HistoricoOrdemServicoPage', {
+			id: params.id,
+		})
+	}
+
+	const onPressAlterarStatusOrdemServico = () => {
+		navigate('AlterarStatusOrdemServicoPage', {
+			id: params.id,
+		})
+	}
+
 	return {
-		data: {},
-		handles: {},
+		handles: {
+			onPressApontamento,
+			onPressIndisponibilidade,
+			onPressAssinaturas,
+			onPressHistorico,
+			onPressAlterarStatusOrdemServico,
+		},
 	}
 }
 

@@ -220,6 +220,13 @@ const es: LanguageProps = {
 	actionComponent: {
 		linkedWorkOrder: 'Orden de trabajo vinculada:',
 	},
+	workOrderControl: {
+		entries: 'Registros',
+		unavailability: 'Indisponibilidad',
+		signatures: 'Suscripciones',
+		history: 'Historial',
+		changeWorkOrderStatus: 'Cambiar el status de la orden de trabajo',
+	},
 	schedule: {
 		schedule: 'Programación',
 		executor: 'Ejecutor:',

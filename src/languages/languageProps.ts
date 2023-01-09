@@ -215,6 +215,13 @@ export type LanguageProps = {
 	actionComponent: {
 		linkedWorkOrder: string
 	}
+	workOrderControl: {
+		entries: string
+		unavailability: string
+		signatures: string
+		history: string
+		changeWorkOrderStatus: string
+	}
 	schedule: {
 		schedule: string
 		executor: string

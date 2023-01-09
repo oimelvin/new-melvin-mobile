@@ -47,7 +47,6 @@ const useAcoesOrdemServicoHook = (): AcoesOrdemServicoHookProps => {
 	const [pagina, setPagina] = useState(0)
 	const [qtdPaginas, setQtdPaginas] = useState(1)
 	const [saving, setSaving] = useState(false)
-	
 
 	const [acoes, setAcoes] = useState<OrdemServicoAcoes[]>([])
 
@@ -61,7 +60,6 @@ const useAcoesOrdemServicoHook = (): AcoesOrdemServicoHookProps => {
 		try {
 			setLoading(true)
 
-			console.log(params)
 			const { items, totalCount } = await getOrdensServicosAcoes(
 				pagina * itensPorPagina,
 				itensPorPagina,

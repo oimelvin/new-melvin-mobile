@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { Alert, View } from 'react-native'
+import { View } from 'react-native'
 import { Avatar, ProgressBar } from 'react-native-paper'
 
 import Icon from '@components/Icon'
@@ -32,7 +32,7 @@ const OrdemServicoComponent: React.FC<OrdemServicoProps> = ({
 	const equipamentoDescricao =
 		ordemEquipamentos.length > 1
 			? 'Vários Equipamentos'
-			: `${ordemEquipamentos[0].equipamento.tag} - ${ordemEquipamentos[0].equipamento.descricao}`
+			: `${ordemEquipamentos[0].equipamento?.tag} - ${ordemEquipamentos[0].equipamento?.descricao}`
 
 	const prioridadeCor = () => {
 		const cores = ['blue', 'orange', 'purple', 'green', 'red']

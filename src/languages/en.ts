@@ -219,6 +219,13 @@ const en: LanguageProps = {
 	actionComponent: {
 		linkedWorkOrder: 'Linked work order:',
 	},
+	workOrderControl: {
+		entries: 'Entries',
+		unavailability: 'Unavailability',
+		signatures: 'Signatures',
+		history: 'History',
+		changeWorkOrderStatus: 'Change work order status',
+	},
 	schedule: {
 		schedule: 'Schedule',
 		executor: 'Executor:',

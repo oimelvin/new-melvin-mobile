@@ -9,7 +9,12 @@ import AcoesOrdemServicoPage from '@pages/App/OrdemServico/AcoesOrdemServicoPage
 import ChecklistOrdemServicoPage from '@pages/App/OrdemServico/ChecklistOrdemServicoPage'
 
 export type AcoesOrdemServicoTopTabNavigatorParamList = {
-	id: string
+	AcoesOrdemServicoPage: {
+		id: string
+	}
+	ChecklistOrdemServicoPage: {
+		id: string
+	}
 }
 
 type AcoesOrdemServicoTopTabNavigatorRouteProp = RouteProp<
@@ -20,7 +25,11 @@ type AcoesOrdemServicoTopTabNavigatorRouteProp = RouteProp<
 const TopTabBar =
 	createMaterialTopTabNavigator<AcoesOrdemServicoTopTabNavigatorParamList>()
 
-const AcoesOrdemServicoTopTabNavigator: React.FC<AcoesOrdemServicoTopTabNavigatorParamList> = ({route}) => {
+const AcoesOrdemServicoTopTabNavigator: React.FC = () => {
+	const {
+		params: { id },
+	} = useRoute<AcoesOrdemServicoTopTabNavigatorRouteProp>()
+
 	return (
 		<TopTabBar.Navigator
 			screenOptions={{
@@ -56,7 +65,9 @@ const AcoesOrdemServicoTopTabNavigator: React.FC<AcoesOrdemServicoTopTabNavigato
 					tabBarLabel: i18n.t('workOrderActions.checklist.checklist'),
 				}}
 				component={ChecklistOrdemServicoPage}
-				initialParams={route.params}
+				initialParams={{
+					id,
+				}}
 			/>
 		</TopTabBar.Navigator>
 	)

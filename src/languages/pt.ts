@@ -219,6 +219,13 @@ const pt: LanguageProps = {
 	actionComponent: {
 		linkedWorkOrder: 'Ordem de serviço vinculada:',
 	},
+	workOrderControl: {
+		entries: 'Apontamentos',
+		unavailability: 'Indisponibilidade',
+		signatures: 'Assinaturas',
+		history: 'Histórico',
+		changeWorkOrderStatus: 'Alterar status da ordem de serviço',
+	},
 	schedule: {
 		schedule: 'Programação',
 		executor: 'Executante:',

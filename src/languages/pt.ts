@@ -9,8 +9,11 @@ const pt: LanguageProps = {
 		warning: 'Atenção',
 		irreversibleAction:
 			'Essa ação é irreversível, deseja realmente prosseguir?',
+		save: 'Salvar',
 		cancel: 'Cancelar',
 		remove: 'Remover',
+		yes: 'Sim',
+		no: 'Não',
 	},
 	components: {
 		select: {
@@ -225,6 +228,32 @@ const pt: LanguageProps = {
 		signatures: 'Assinaturas',
 		history: 'Histórico',
 		changeWorkOrderStatus: 'Alterar status da ordem de serviço',
+	},
+	workOrderEntries: {
+		entries: 'Apontamentos',
+		noEntriesFound: 'Nenhum apontamento encontrado.',
+		start: 'Início',
+		finish: 'Fim',
+	},
+	workOrderUnavailability: {
+		unavailabilities: 'Indisponibilidades',
+		noUnavailabilitiesFound: 'Nenhuma indisponibilidade encontrada.',
+		start: 'Início',
+		finish: 'Fim',
+	},
+	workOrderSignatures: {
+		signatures: 'Assinaturas',
+		noSignaturesFound: 'Nenhuma assinatura encontrada.',
+	},
+	workOrderHistory: {
+		history: 'Histórico',
+		informAHistory: 'Informe um histórico.',
+	},
+	workOrderChangeStatus: {
+		changeWorkOrderStatus: 'Alterar status da ordem de serviço',
+		approve: 'Aprovar',
+		finish: 'Finalizar',
+		reopen: 'Reabrir',
 	},
 	schedule: {
 		schedule: 'Programação',

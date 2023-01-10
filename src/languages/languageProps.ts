@@ -6,8 +6,11 @@ export type LanguageProps = {
 		noData: string
 		warning: string
 		irreversibleAction: string
+		save: string
 		cancel: string
 		remove: string
+		yes: string
+		no: string
 	}
 	components: {
 		select: {
@@ -221,6 +224,32 @@ export type LanguageProps = {
 		signatures: string
 		history: string
 		changeWorkOrderStatus: string
+	}
+	workOrderEntries: {
+		entries: string
+		noEntriesFound: string
+		start: string
+		finish: string
+	}
+	workOrderUnavailability: {
+		unavailabilities: string
+		noUnavailabilitiesFound: string
+		start: string
+		finish: string
+	}
+	workOrderSignatures: {
+		signatures: string
+		noSignaturesFound: string
+	}
+	workOrderHistory: {
+		history: string
+		informAHistory: string
+	}
+	workOrderChangeStatus: {
+		changeWorkOrderStatus: string
+		approve: string
+		finish: string
+		reopen: string
 	}
 	schedule: {
 		schedule: string

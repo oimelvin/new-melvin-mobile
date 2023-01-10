@@ -10,8 +10,11 @@ const en: LanguageProps = {
 		warning: 'Warning',
 		irreversibleAction:
 			'Is this action irreversible, do you really want to proceed?',
+		save: 'Save',
 		cancel: 'Cancel',
 		remove: 'Remove',
+		yes: 'Yes',
+		no: 'No',
 	},
 	components: {
 		select: {
@@ -225,6 +228,32 @@ const en: LanguageProps = {
 		signatures: 'Signatures',
 		history: 'History',
 		changeWorkOrderStatus: 'Change work order status',
+	},
+	workOrderEntries: {
+		entries: 'Entries',
+		noEntriesFound: 'No entries found.',
+		start: 'Start',
+		finish: 'Finish',
+	},
+	workOrderUnavailability: {
+		unavailabilities: 'Unavailabilities',
+		noUnavailabilitiesFound: 'No unavailabilities found.',
+		start: 'Start',
+		finish: 'Finish',
+	},
+	workOrderSignatures: {
+		signatures: 'Signatures',
+		noSignaturesFound: 'No signatures found.',
+	},
+	workOrderHistory: {
+		history: 'History',
+		informAHistory: 'Inform a history.',
+	},
+	workOrderChangeStatus: {
+		changeWorkOrderStatus: 'Change work order status',
+		approve: 'Approve',
+		finish: 'Finish',
+		reopen: 'Reopen',
 	},
 	schedule: {
 		schedule: 'Schedule',

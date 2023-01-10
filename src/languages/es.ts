@@ -10,8 +10,11 @@ const es: LanguageProps = {
 		warning: 'Atención',
 		irreversibleAction:
 			'¿Es esta acción irreversible, realmente quiere proceder?',
+		save: 'Guardar',
 		cancel: 'Cancelar',
 		remove: 'Eliminar',
+		yes: 'Sí',
+		no: 'No',
 	},
 	components: {
 		select: {
@@ -226,6 +229,32 @@ const es: LanguageProps = {
 		signatures: 'Suscripciones',
 		history: 'Historial',
 		changeWorkOrderStatus: 'Cambiar el status de la orden de trabajo',
+	},
+	workOrderEntries: {
+		entries: 'Registros',
+		noEntriesFound: 'No se encontró ningun registro.',
+		start: 'Início',
+		finish: 'Fin',
+	},
+	workOrderUnavailability: {
+		unavailabilities: 'Indisponibilidad',
+		noUnavailabilitiesFound: 'No se encontró ninguna indisponibilidad.',
+		start: 'Início',
+		finish: 'Fin',
+	},
+	workOrderSignatures: {
+		signatures: 'Signatures',
+		noSignaturesFound: 'No se encontró ninguna suscripción.',
+	},
+	workOrderHistory: {
+		history: 'Historial',
+		informAHistory: 'Informa un historial.',
+	},
+	workOrderChangeStatus: {
+		changeWorkOrderStatus: 'Cambiar el status de la orden de trabajo',
+		approve: 'Aprobar',
+		finish: 'Finalizar',
+		reopen: 'Reabrir',
 	},
 	schedule: {
 		schedule: 'Programación',

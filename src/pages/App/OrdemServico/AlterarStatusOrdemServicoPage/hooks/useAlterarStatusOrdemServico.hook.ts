@@ -3,7 +3,12 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { AppStackNavigatorParamList } from '@routes/AppRoutes'
 
-interface AlterarStatusOrdemServicoHandlesProps {}
+interface AlterarStatusOrdemServicoHandlesProps {
+	onAprovarOrdemServico: () => Promise<void>
+	onFinalizarOrdemServico: () => Promise<void>
+	onReabrirOrdemServico: () => Promise<void>
+	onCancelarOrdemServico: () => Promise<void>
+}
 
 export interface AlterarStatusOrdemServicoHookProps {
 	handles: AlterarStatusOrdemServicoHandlesProps
@@ -25,8 +30,21 @@ const useAlterarStatusOrdemServicoHook =
 			useNavigation<AlterarStatusOrdemServicoNavigatorProp>()
 		const { params } = useRoute<AlterarStatusOrdemServicoRouteProp>()
 
+		const onAprovarOrdemServico = async () => {}
+
+		const onFinalizarOrdemServico = async () => {}
+
+		const onReabrirOrdemServico = async () => {}
+
+		const onCancelarOrdemServico = async () => {}
+
 		return {
-			handles: {},
+			handles: {
+				onAprovarOrdemServico,
+				onFinalizarOrdemServico,
+				onReabrirOrdemServico,
+				onCancelarOrdemServico,
+			},
 		}
 	}
 

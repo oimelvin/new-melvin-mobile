@@ -20,14 +20,16 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "br.com.oimelvin.app.ios"
+      "bundleIdentifier": "br.com.oimelvin.app.ios",
+      "buildNumber": "2"
     },
     "android": {
       "package": "br.com.oimelvin.app.android",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"

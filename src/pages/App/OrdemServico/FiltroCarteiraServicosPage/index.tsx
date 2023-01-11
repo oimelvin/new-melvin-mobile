@@ -55,7 +55,6 @@ const FiltroCarteiraServicosPage: React.FC = () => {
 						emptyListText={i18n.t(
 							'filterServicePortfolio.noStatusFound'
 						)}
-						translucentBackground
 					/>
 					<MarginTop value={15} />
 					<Select
@@ -73,7 +72,6 @@ const FiltroCarteiraServicosPage: React.FC = () => {
 						emptyListText={i18n.t(
 							'filterServicePortfolio.noWorkshopsFound'
 						)}
-						translucentBackground
 					/>
 					<MarginTop value={15} />
 					<Select
@@ -95,7 +93,6 @@ const FiltroCarteiraServicosPage: React.FC = () => {
 						emptyListText={i18n.t(
 							'filterServicePortfolio.noMaintenanceTypesFound'
 						)}
-						translucentBackground
 					/>
 					<MarginTop value={15} />
 					<Select
@@ -110,7 +107,6 @@ const FiltroCarteiraServicosPage: React.FC = () => {
 						placeholder={i18n.t(
 							'filterServicePortfolio.selectACondition'
 						)}
-						translucentBackground
 					/>
 					<MarginTop value={15} />
 					<Select
@@ -128,7 +124,6 @@ const FiltroCarteiraServicosPage: React.FC = () => {
 						emptyListText={i18n.t(
 							'filterServicePortfolio.noPrioritiesFound'
 						)}
-						translucentBackground
 					/>
 					<MarginTop value={15} />
 					<Select
@@ -146,7 +141,6 @@ const FiltroCarteiraServicosPage: React.FC = () => {
 						emptyListText={i18n.t(
 							'filterServicePortfolio.noExecutorsFound'
 						)}
-						translucentBackground
 					/>
 					<MarginTop value={15} />
 					<DatePicker
@@ -159,7 +153,6 @@ const FiltroCarteiraServicosPage: React.FC = () => {
 						placeholder={i18n.t(
 							'filterServicePortfolio.selectAnOpeningDate'
 						)}
-						translucentBackground
 					/>
 					<MarginTop value={15} />
 					<DatePicker
@@ -172,7 +165,6 @@ const FiltroCarteiraServicosPage: React.FC = () => {
 						placeholder={i18n.t(
 							'filterServicePortfolio.selectAClosingDate'
 						)}
-						translucentBackground
 					/>
 					<MarginTop value={15} />
 					<DatePicker
@@ -185,7 +177,6 @@ const FiltroCarteiraServicosPage: React.FC = () => {
 						placeholder={i18n.t(
 							'filterServicePortfolio.selectAScheduleDate'
 						)}
-						translucentBackground
 					/>
 					<MarginTop value={15} />
 					<Input
@@ -196,12 +187,14 @@ const FiltroCarteiraServicosPage: React.FC = () => {
 							'filterServicePortfolio.searchWorkOrders'
 						)}
 						color={colors.black}
-						translucentBackground
 					/>
 					<MarginTop value={15} />
-					<Button onPress={() => handleFiltrarCarteiraServicos()}>
-						{i18n.t('filterServicePortfolio.filterWorkOrders')}
-					</Button>
+					<Button
+						label={i18n.t(
+							'filterServicePortfolio.filterWorkOrders'
+						)}
+						onPress={() => handleFiltrarCarteiraServicos()}
+					/>
 					<MarginTop value={32} />
 				</FiltroCarteiraServicosPageContainer>
 			</TouchableWithoutFeedback>

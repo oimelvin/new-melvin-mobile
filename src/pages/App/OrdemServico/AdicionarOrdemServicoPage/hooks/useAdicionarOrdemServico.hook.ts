@@ -10,6 +10,7 @@ import { Oficina } from '@models/Oficina'
 import { TipoManutencao } from '@models/TipoManutencao'
 import { Condicao } from '@models/Condicao'
 import { Prioridade } from '@models/Prioridade'
+import { OrdemServico } from '@models/OrdemServico'
 
 import useFilialService from '@services/useFilialService.hook'
 import useSetorService from '@services/useSetorService.hook'
@@ -21,8 +22,7 @@ import usePrioridadeService from '@services/usePrioridadeService.hook'
 import useOrdemServicoService from '@services/useOrdemServicoService.hook'
 
 import { AppStackNavigatorParamList } from '@routes/AppRoutes'
-import { Status } from '@models/Status'
-import { OrdemServico } from '@models/OrdemServico'
+import { i18n } from '@languages/index'
 
 interface AdicionarOrdemServico {
 	descricao: string
@@ -69,6 +69,7 @@ interface AdicionarOrdemServicoHandlesProps {
 
 export interface AdicionarOrdemServicoHookProps {
 	loading: boolean
+	saving: boolean
 	edicao: boolean
 	data: AdicionarOrdemServicoHookDataProps
 	handles: AdicionarOrdemServicoHandlesProps
@@ -83,6 +84,7 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 	const { params } = useRoute<AdicionarOrdemServicoRouteProp>()
 
 	const [loading, setLoading] = useState(false)
+	const [saving, setSaving] = useState(false)
 	const [edicao, setEdicao] = useState(false)
 	const [ordemServicoEdicao, setOrdemServicoEdicao] = useState<OrdemServico>(
 		{} as OrdemServico
@@ -195,31 +197,44 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 
 	useEffect(() => {
 		const carregarEdicao = async () => {
-			if (params.id) {
-				setEdicao(true)
+			try {
+				if (params.id) {
+					setEdicao(true)
+					setLoading(true)
 
-				const ordemServico = await getOrdemServico(params.id)
+					const ordemServico = await getOrdemServico(params.id)
 
-				setOrdemServicoEdicao(ordemServico)
+					setOrdemServicoEdicao(ordemServico)
 
-				setDescricao(ordemServico.descricao)
-				setSelectedTipoManutencao(ordemServico.idTipoManutencao)
-				setSelectedPrioridade(ordemServico.idPrioridade)
-				setSelectedOficina(ordemServico.idOficina)
-				setSelectedCondicao(ordemServico.condicao)
-				setNumeroPessoas(ordemServico.homem.toFixed())
-				setTempoExecucao(ordemServico.hora.toFixed(2))
-				setHomemHora(
-					(ordemServico.homem * ordemServico.hora).toFixed(2)
+					setDescricao(ordemServico.descricao)
+					setSelectedTipoManutencao(ordemServico.idTipoManutencao)
+					setSelectedPrioridade(ordemServico.idPrioridade)
+					setSelectedOficina(ordemServico.idOficina)
+					setSelectedCondicao(ordemServico.condicao)
+					setNumeroPessoas(ordemServico.homem.toFixed())
+					setTempoExecucao(ordemServico.hora.toFixed(2))
+					setHomemHora(
+						(ordemServico.homem * ordemServico.hora).toFixed(2)
+					)
+					setSelectedFilial(
+						ordemServico.ordemEquipamentos[0].idFilial
+					)
+					setSelectedSetor(ordemServico.ordemEquipamentos[0].idSetor)
+					setSelectedEquipamento(
+						ordemServico.ordemEquipamentos[0].idEquipamento
+					)
+					setSelectedConjunto(
+						ordemServico.ordemEquipamentos[0]
+							.idSubConjuntoEquipamento
+					)
+				}
+			} catch (err) {
+				Alert.alert(
+					i18n.t('common.error'),
+					i18n.t('common.anErrorHasOccuredPleaseTryAgain')
 				)
-				setSelectedFilial(ordemServico.ordemEquipamentos[0].idFilial)
-				setSelectedSetor(ordemServico.ordemEquipamentos[0].idSetor)
-				setSelectedEquipamento(
-					ordemServico.ordemEquipamentos[0].idEquipamento
-				)
-				setSelectedConjunto(
-					ordemServico.ordemEquipamentos[0].idSubConjuntoEquipamento
-				)
+			} finally {
+				setLoading(false)
 			}
 		}
 
@@ -227,77 +242,72 @@ const useAdicionarOrdemServicoHook = (): AdicionarOrdemServicoHookProps => {
 	}, [])
 
 	const addOrdemServico = async () => {
-		try {
-			setLoading(true)
+		setSaving(true)
 
-			if (selectedFilial && selectedSetor && selectedEquipamento) {
-				await postOrdemServico({
-					descricao,
-					idTipoManutencao: selectedTipoManutencao,
-					idPrioridade: selectedPrioridade,
-					idOficina: selectedOficina,
-					condicao: selectedCondicao,
-					homem: Number(numeroPessoas),
-					hora: Number(tempoExecucao),
-					ordemEquipamento: {
-						idFilial: selectedFilial,
-						idSetor: selectedSetor,
-						idEquipamento: selectedEquipamento,
-					},
-				})
-			}
-		} catch (err) {
-			Alert.alert('Erro', 'Erro ao criar ordem de serviço.')
-		} finally {
-			setLoading(false)
+		if (selectedFilial && selectedSetor && selectedEquipamento) {
+			await postOrdemServico({
+				descricao,
+				idTipoManutencao: selectedTipoManutencao,
+				idPrioridade: selectedPrioridade,
+				idOficina: selectedOficina,
+				condicao: selectedCondicao,
+				homem: Number(numeroPessoas),
+				hora: Number(tempoExecucao),
+				ordemEquipamento: {
+					idFilial: selectedFilial,
+					idSetor: selectedSetor,
+					idEquipamento: selectedEquipamento,
+				},
+			})
 		}
 	}
 
 	const editarOrdemServico = async () => {
-		try {
-			setLoading(true)
+		setSaving(true)
 
-			if (selectedFilial && selectedSetor && selectedEquipamento) {
-				await putOrdemServico({
-					id: params.id,
-					codOrdem: ordemServicoEdicao.codOrdem,
-					dataAbertura: ordemServicoEdicao.dataAbertura,
-					descricao,
-					idTipoManutencao: selectedTipoManutencao,
-					idPrioridade: selectedPrioridade,
-					idOficina: selectedOficina,
-					condicao: selectedCondicao,
-					status: ordemServicoEdicao.status,
-					homem: Number(numeroPessoas),
-					hora: Number(tempoExecucao),
-					ordemEquipamentos: [
-						{
-							id: ordemServicoEdicao.ordemEquipamentos[0].id,
-							idOrdemServico: ordemServicoEdicao.id,
-							idFilial: selectedFilial,
-							idSetor: selectedSetor,
-							idEquipamento: selectedEquipamento,
-						},
-					],
-				})
-			}
-		} catch (err) {
-			Alert.alert('Erro', 'Erro ao editar ordem de serviço.')
-		} finally {
-			setLoading(false)
+		if (selectedFilial && selectedSetor && selectedEquipamento) {
+			await putOrdemServico({
+				...ordemServicoEdicao,
+				id: params.id,
+				descricao,
+				idTipoManutencao: selectedTipoManutencao,
+				idPrioridade: selectedPrioridade,
+				idOficina: selectedOficina,
+				condicao: selectedCondicao,
+				homem: Number(numeroPessoas),
+				hora: Number(tempoExecucao),
+				ordemEquipamentos: [
+					{
+						idFilial: selectedFilial,
+						idSetor: selectedSetor,
+						idEquipamento: selectedEquipamento,
+					},
+				],
+			})
 		}
 	}
 
 	const salvarOrdemServico = async () => {
-		if (edicao) {
-			return editarOrdemServico()
-		}
+		try {
+			setSaving(true)
+			if (edicao) {
+				return editarOrdemServico()
+			}
 
-		return addOrdemServico()
+			return addOrdemServico()
+		} catch (err) {
+			Alert.alert(
+				i18n.t('common.error'),
+				i18n.t('common.anErrorHasOccuredPleaseTryAgain')
+			)
+		} finally {
+			setSaving(false)
+		}
 	}
 
 	return {
 		loading,
+		saving,
 		edicao,
 		data: {
 			tiposManutencao,

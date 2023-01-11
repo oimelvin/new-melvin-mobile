@@ -8,9 +8,9 @@ import MyMessagesPage from '@pages/App/NotificationTabs/MyMessagesPage'
 import SentPage from '@pages/App/NotificationTabs/SentPage'
 
 export type TopTabNavigatorParamList = {
-  ToYouPage: undefined
-  MyMessagesPage: undefined
-  SentPage: undefined
+	ToYouPage: undefined
+	MyMessagesPage: undefined
+	SentPage: undefined
 }
 
 const TopTabBar = createMaterialTopTabNavigator<TopTabNavigatorParamList>()
@@ -27,7 +27,7 @@ const NotificationTopTabNavigator: React.FC = () => {
 					backgroundColor: colors.cyan,
 				},
 				tabBarActiveTintColor: colors.white,
-				tabBarInactiveTintColor: colors.gray100,
+				tabBarInactiveTintColor: colors.gray300,
 			}}
 			sceneContainerStyle={{
 				backgroundColor: colors.black,

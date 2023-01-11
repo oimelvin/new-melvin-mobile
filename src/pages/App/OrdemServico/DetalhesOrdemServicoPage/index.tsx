@@ -50,7 +50,7 @@ const DetalhesOrdemServicoPage: React.FC = () => {
 							progress={statusOrdemServico / 7}
 							color={colors.green}
 							style={{
-								backgroundColor: colors.gray100,
+								backgroundColor: colors.gray300,
 								borderRadius: 16,
 							}}
 						/>
@@ -121,7 +121,7 @@ const DetalhesOrdemServicoPage: React.FC = () => {
 						label={i18n.t('workOrderDetails.approvalDate')}
 						value={handles.convertDate(ordemServico?.dataAprovacao)}
 					/>
-					<Divider style={{ width: '100%' }} color={colors.gray100} />
+					<Divider style={{ width: '100%' }} color={colors.gray300} />
 					<Field
 						label={i18n.t('workOrderDetails.approver')}
 						value={
@@ -183,7 +183,7 @@ const DetalhesOrdemServicoPage: React.FC = () => {
 							ordemServico?.statusTempo || i18n.t('common.noData')
 						}
 					/>
-					<Divider style={{ width: '100%' }} color={colors.gray100} />
+					<Divider style={{ width: '100%' }} color={colors.gray300} />
 					<Field
 						label={i18n.t('workOrderDetails.man')}
 						value={
@@ -215,7 +215,7 @@ const DetalhesOrdemServicoPage: React.FC = () => {
 							i18n.t('common.noData')
 						}
 					/>
-					<Divider style={{ width: '100%' }} color={colors.gray100} />
+					<Divider style={{ width: '100%' }} color={colors.gray300} />
 					<Field
 						label={i18n.t('workOrderDetails.guidance')}
 						value={

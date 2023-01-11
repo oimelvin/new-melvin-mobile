@@ -11,6 +11,7 @@ export type LanguageProps = {
 		remove: string
 		yes: string
 		no: string
+		search: string
 	}
 	components: {
 		select: {
@@ -74,14 +75,19 @@ export type LanguageProps = {
 	}
 	searchEquipmentManually: {
 		searchEquipment: string
+		branch: string
 		selectABranch: string
 		noBranchesFound: string
+		sector: string
 		selectASector: string
 		noSectorsFound: string
+		family: string
 		selectAFamily: string
 		noFamiliesFound: string
+		status: string
 		selectAStatus: string
 		noStatusFound: string
+		equipment: string
 		selectAnEquipment: string
 		noEquipmentFound: string
 		equipmentRequired: string
@@ -162,8 +168,6 @@ export type LanguageProps = {
 		set: string
 		selectASet: string
 		noSetsFound: string
-		add: string
-		edit: string
 	}
 	workOrderDetails: {
 		actions: string
@@ -255,6 +259,33 @@ export type LanguageProps = {
 		schedule: string
 		executor: string
 		noWorkOrderFound: string
+	}
+	filterSchedule: {
+		filterSchedule: string
+		filterWorkOrders: string
+	}
+	solicitation: {}
+	addSolicitation: {
+		addSolicitation: string
+		editSolicitation: string
+		applicant: string
+		informAnApplicant: string
+		channel: string
+		selectAChannel: string
+		branch: string
+		selectABranch: string
+		noBranchesFound: string
+		sector: string
+		selectASector: string
+		noSectorsFound: string
+		equipment: string
+		selectAnEquipment: string
+		noEquipmentsFound: string
+		priority: string
+		selectAPriority: string
+		noPrioritiesFound: string
+		solicitation: string
+		describeYourSolicitation: string
 	}
 	material: {
 		materials: string

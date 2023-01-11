@@ -53,7 +53,7 @@ export const ScrollView = styled.ScrollView.attrs({
 export const Container = styled.View`
 	margin-bottom: 16px;
 	padding: 16px;
-	border: 1px solid ${({ theme }) => theme.colors.border};
+	border: 1px solid ${colors.black};
 	border-radius: 16px;
 `
 
@@ -98,7 +98,7 @@ export const SubTitle = styled(Title)`
 
 export const SlideTitle = styled(Text)`
 	font-weight: bold;
-	color: ${({ theme }) => theme.colors.textPrimary};
+	color: ${colors.black};
 `
 
 export const MarginTop = styled.View<MarginProps>`

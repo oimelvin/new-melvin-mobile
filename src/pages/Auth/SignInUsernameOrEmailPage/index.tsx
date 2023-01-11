@@ -73,7 +73,7 @@ const SignInUsernameOrEmailPage: React.FC = () => {
 								placeholder={i18n.t(
 									'signInUsernameOrEmail.typeUsernameOrEmail'
 								)}
-								placeholderTextColor={colors.gray100}
+								placeholderTextColor={colors.gray300}
 								selectionColor={colors.gray500}
 								color={colors.white}
 								returnKeyType="go"
@@ -85,14 +85,13 @@ const SignInUsernameOrEmailPage: React.FC = () => {
 							/>
 							<MarginTop value={15} />
 							<Button
+								label={i18n.t('signInUsernameOrEmail.next')}
 								onPress={() => handleSubmit()}
 								disabled={
 									!dirtyUsernameOrEmail ||
 									!validUsernameOrEmail
 								}
-							>
-								{i18n.t('signInUsernameOrEmail.next')}
-							</Button>
+							/>
 							<MarginTop value={15} />
 						</BottomContent>
 					</PageContainer>

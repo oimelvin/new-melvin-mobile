@@ -27,9 +27,10 @@ const AccountPage: React.FC = () => {
 			<StatusBar />
 			<ProfileInfo />
 			<Menu />
-			<Button variant="outline" onPress={() => handleSignOut()}>
-				{i18n.t('account.signOut')}
-			</Button>
+			<Button
+				label={i18n.t('account.signOut')}
+				onPress={() => handleSignOut()}
+			/>
 		</AccountPageContainer>
 	)
 }

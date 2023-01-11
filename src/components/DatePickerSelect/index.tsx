@@ -46,13 +46,15 @@ const DatePickerSelect: React.FC<DatePickerSelectProps> = ({
 							textColor={colors.white}
 						/>
 						<MarginTop value={16} />
-						<Button onPress={onCloseSelect}>
-							{i18n.t('components.datePicker.select')}
-						</Button>
+						<Button
+							label={i18n.t('components.datePicker.select')}
+							onPress={onCloseSelect}
+						/>
 						<MarginTop value={16} />
-						<Button variant="outline" onPress={onClearDate}>
-							{i18n.t('components.datePicker.clean')}
-						</Button>
+						<Button
+							label={i18n.t('components.datePicker.clean')}
+							onPress={onClearDate}
+						/>
 					</DatePickerModal>
 				</DatePickerModalOverlay>
 			</TouchableWithoutFeedback>

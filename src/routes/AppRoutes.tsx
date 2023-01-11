@@ -10,9 +10,9 @@ import AccountPage from '@pages/App/AccountPage'
 import FiltroEquipamentoPage from '@pages/App/FiltroEquipamentoPage'
 import QRCodeEquipamentoPage from '@pages/App/QRCodeEquipamentoPage'
 
-import SolicitacaoServicosPage from '@pages/App/SolicitacoesPage'
-import SolicitacaoDetalheComponent from '@pages/App/SolicitacoesPage/components/SolicitacaoDetalheComponent'
-import NovaSolicitacaoComponent from '@pages/App/SolicitacoesPage/components/NovaSolicitacaoComponent'
+import SolicitacaoServicosPage from '@pages/App/Solicitacoes/SolicitacoesServicosPage'
+import SolicitacaoDetalheComponent from '@pages/App/Solicitacoes/SolicitacoesServicosPage/components/SolicitacaoDetalheComponent'
+import AdicionarSolicitacaoServicoPage from '@pages/App/Solicitacoes/AdicionarSolicitacaoServicoPage'
 
 import CarteiraServicosPage from '@pages/App/OrdemServico/CarteiraServicosPage'
 import FiltroCarteiraServicosPage from '@pages/App/OrdemServico/FiltroCarteiraServicosPage'
@@ -78,13 +78,15 @@ export type AppStackNavigatorParamList = {
 		id: string
 	}
 	FiltroCarteiraServicosPage: undefined
-	FiltroProgramacaoPage: undefined
 	ProgramacaoPage: undefined
+	FiltroProgramacaoPage: undefined
 	SolicitacaoServicosPage: undefined
+	AdicionarSolicitacaoServicoPage: {
+		id?: string
+	}
+	SolicitacaoDetalheComponent: undefined
 	NotificationTopTabNavigator: undefined
 	AccountPage: undefined
-	SolicitacaoDetalheComponent: undefined
-	NovaSolicitacaoComponent: undefined
 }
 
 const NativeStack = createNativeStackNavigator<AppStackNavigatorParamList>()
@@ -286,8 +288,8 @@ const AppStackNavigator: React.FC = () => (
 			}}
 		/>
 		<NativeStack.Screen
-			name="NovaSolicitacaoComponent"
-			component={NovaSolicitacaoComponent}
+			name="AdicionarSolicitacaoServicoPage"
+			component={AdicionarSolicitacaoServicoPage}
 			options={{
 				headerTransparent: false,
 				animation: 'slide_from_right',

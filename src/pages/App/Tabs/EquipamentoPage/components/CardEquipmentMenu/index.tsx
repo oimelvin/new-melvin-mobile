@@ -5,22 +5,9 @@ import { i18n } from '@languages/index'
 
 import { EquipmentMenuContainer } from './styles'
 import IconButtonWithLabel from '@components/IconButtonWithLabel'
-import colors from '@styles/colors.style'
 
 const CardEquipmentMenu: React.FC = () => (
 	<EquipmentMenuContainer>
-		<IconButtonWithLabel
-			label={i18n.t('equipment.technicalData')}
-			provider="materialCommunityIcons"
-			iconName="robot-industrial"
-			onPress={() =>
-				Alert.alert(
-					'Dados Técnicos',
-					'Funcionalidade não implementada.'
-				)
-			}
-			style={{ borderWidth: 2, borderColor: colors.cyan }}
-		/>
 		<IconButtonWithLabel
 			label={i18n.t('equipment.searchRequest')}
 			provider="materialCommunityIcons"

@@ -1,7 +1,5 @@
 import React from 'react'
 import { Keyboard, TouchableWithoutFeedback } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 
 import { AdicionarOrdemServicosPageContainer } from './styles'
 import colors from '@styles/colors.style'
@@ -9,20 +7,22 @@ import { KeyboardAvoidingView, MarginTop, Title } from '@styles/global.style'
 import Select from '@components/Select'
 import Button from '@components/Button'
 import Input from '@components/Input'
+import Loading from '@components/Loading'
 
 import { i18n } from '@languages/index'
 import useAdicionarOrdemServicosHook from './hooks/useAdicionarOrdemServico.hook'
-import { AppStackNavigatorParamList } from '@routes/AppRoutes'
-
-type AdicionarOrdemServicosPageProp = BottomTabNavigationProp<
-	AppStackNavigatorParamList,
-	'AdicionarOrdemServicoPage'
->
 
 const AdicionarOrdemServicoPage: React.FC = () => {
-	const { goBack } = useNavigation<AdicionarOrdemServicosPageProp>()
+	const { loading, saving, edicao, data, handles } =
+		useAdicionarOrdemServicosHook()
 
-	const { loading, edicao, data, handles } = useAdicionarOrdemServicosHook()
+	if (loading) {
+		return (
+			<AdicionarOrdemServicosPageContainer>
+				<Loading />
+			</AdicionarOrdemServicosPageContainer>
+		)
+	}
 
 	return (
 		<KeyboardAvoidingView>
@@ -42,7 +42,7 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 						placeholder={i18n.t('addWorkOrder.informADescription')}
 						color={colors.black}
 						numberOfLines={2}
-						translucentBackground
+						required
 					/>
 					<MarginTop value={15} />
 					<Select
@@ -64,7 +64,7 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 						emptyListText={i18n.t(
 							'filterServicePortfolio.noMaintenanceTypesFound'
 						)}
-						translucentBackground
+						required
 					/>
 					<MarginTop value={15} />
 					<Select
@@ -82,7 +82,6 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 						emptyListText={i18n.t(
 							'filterServicePortfolio.noPrioritiesFound'
 						)}
-						translucentBackground
 					/>
 					<MarginTop value={15} />
 					<Select
@@ -100,7 +99,7 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 						emptyListText={i18n.t(
 							'filterServicePortfolio.noWorkshopsFound'
 						)}
-						translucentBackground
+						required
 					/>
 					<MarginTop value={15} />
 					<Select
@@ -118,7 +117,7 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 						emptyListText={i18n.t(
 							'filterServicePortfolio.noConditionsFound'
 						)}
-						translucentBackground
+						required
 					/>
 					<MarginTop value={15} />
 					<Input
@@ -128,7 +127,7 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 						placeholder={i18n.t('addWorkOrder.informAPeopleNumber')}
 						color={colors.black}
 						keyboardType="numeric"
-						translucentBackground
+						required
 					/>
 					<MarginTop value={15} />
 					<Input
@@ -140,7 +139,7 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 						)}
 						color={colors.black}
 						keyboardType="numeric"
-						translucentBackground
+						required
 					/>
 					<MarginTop value={15} />
 					<Input
@@ -148,7 +147,6 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 						value={data.valores.homemHora}
 						color={colors.black}
 						keyboardType="numeric"
-						translucentBackground
 						disabled
 					/>
 					<MarginTop value={15} />
@@ -163,7 +161,7 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 						color={colors.black}
 						placeholder={i18n.t('addWorkOrder.selectABranch')}
 						emptyListText={i18n.t('addWorkOrder.noBranchesFound')}
-						translucentBackground
+						required
 					/>
 					<MarginTop value={15} />
 					<Select
@@ -178,7 +176,7 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 						color={colors.black}
 						placeholder={i18n.t('addWorkOrder.selectASector')}
 						emptyListText={i18n.t('addWorkOrder.noSectorsFound')}
-						translucentBackground
+						required
 					/>
 					<MarginTop value={15} />
 					<Select
@@ -193,7 +191,7 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 						color={colors.black}
 						placeholder={i18n.t('addWorkOrder.selectAnEquipment')}
 						emptyListText={i18n.t('addWorkOrder.noEquipmentsFound')}
-						translucentBackground
+						required
 					/>
 					<MarginTop value={15} />
 					<Select
@@ -208,17 +206,13 @@ const AdicionarOrdemServicoPage: React.FC = () => {
 						color={colors.black}
 						placeholder={i18n.t('addWorkOrder.selectASet')}
 						emptyListText={i18n.t('addWorkOrder.noSetsFound')}
-						translucentBackground
 					/>
 					<MarginTop value={15} />
 					<Button
+						label={i18n.t('common.save')}
 						onPress={handles.salvarOrdemServico}
-						disabled={loading}
-					>
-						{edicao
-							? i18n.t('addWorkOrder.edit')
-							: i18n.t('addWorkOrder.add')}
-					</Button>
+						disabled={saving || loading}
+					/>
 					<MarginTop value={32} />
 				</AdicionarOrdemServicosPageContainer>
 			</TouchableWithoutFeedback>

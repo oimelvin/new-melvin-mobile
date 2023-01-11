@@ -26,15 +26,13 @@ const HistoricoOrdemServicoPage: React.FC = () => {
 					color={colors.black}
 					numberOfLines={4}
 					multiline
-					translucentBackground
 				/>
 				<MarginTop value={15} />
 				<Button
+					label={i18n.t('common.save')}
 					onPress={handles.onSalvarHistorico}
 					disabled={saving || loading}
-				>
-					{i18n.t('common.save')}
-				</Button>
+				/>
 				<MarginTop value={15} />
 			</PageContainer>
 		</HistoricoOrdemServicoPageContainer>

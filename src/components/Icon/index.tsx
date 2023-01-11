@@ -9,8 +9,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
-import { ThemeContext } from '@contexts/theme.context'
 import { IconContainer } from './styles'
+import colors from '@styles/colors.style'
 
 export type IconProps = {
 	provider:
@@ -27,8 +27,6 @@ export type IconProps = {
 }
 
 const Icon: React.FC<IconProps> = ({ provider, iconName, color, size }) => {
-	const { theme } = useContext(ThemeContext)
-
 	const getIcon = () => {
 		let Icon
 
@@ -59,7 +57,7 @@ const Icon: React.FC<IconProps> = ({ provider, iconName, color, size }) => {
 		return (
 			<Icon
 				name={iconName}
-				color={color || theme.colors.text}
+				color={color || colors.black}
 				size={size || 24}
 			/>
 		)

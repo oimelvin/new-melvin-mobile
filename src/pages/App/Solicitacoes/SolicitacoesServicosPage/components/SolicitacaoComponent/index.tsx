@@ -128,7 +128,7 @@ const SolicitacaoServicoComponent: React.FC<OrdemServicoProps> = ({
 						progress={status / 7}
 						color={colors.green}
 						style={{
-							backgroundColor: colors.gray100,
+							backgroundColor: colors.gray300,
 							borderRadius: 16,
 						}}
 					/>

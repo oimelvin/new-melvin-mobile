@@ -18,21 +18,25 @@ const AlterarStatusOrdemServicoPage: React.FC = () => {
 					{i18n.t('workOrderChangeStatus.changeWorkOrderStatus')}
 				</Title>
 				<MarginTop value={15} />
-				<Button onPress={handles.onAprovarOrdemServico}>
-					{i18n.t('workOrderChangeStatus.approve')}
-				</Button>
+				<Button
+					label={i18n.t('workOrderChangeStatus.approve')}
+					onPress={handles.onAprovarOrdemServico}
+				/>
 				<MarginTop value={15} />
-				<Button onPress={handles.onFinalizarOrdemServico}>
-					{i18n.t('workOrderChangeStatus.finish')}
-				</Button>
+				<Button
+					label={i18n.t('workOrderChangeStatus.finish')}
+					onPress={handles.onFinalizarOrdemServico}
+				/>
 				<MarginTop value={15} />
-				<Button onPress={handles.onReabrirOrdemServico}>
-					{i18n.t('workOrderChangeStatus.reopen')}
-				</Button>
+				<Button
+					label={i18n.t('workOrderChangeStatus.reopen')}
+					onPress={handles.onReabrirOrdemServico}
+				/>
 				<MarginTop value={15} />
-				<Button onPress={handles.onCancelarOrdemServico}>
-					{i18n.t('common.cancel')}
-				</Button>
+				<Button
+					label={i18n.t('common.cancel')}
+					onPress={handles.onCancelarOrdemServico}
+				/>
 				<MarginTop value={15} />
 			</PageContainer>
 		</AlterarStatusOrdemServicoPageContainer>

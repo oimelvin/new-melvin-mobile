@@ -1,5 +1,5 @@
+import { DefaultTheme, ThemedStyledProps, css } from 'styled-components'
 import styled from 'styled-components/native'
-import { DefaultTheme, ThemedStyledProps } from 'styled-components'
 import { ColorValue, View, ViewProps } from 'react-native'
 
 import { Text } from '@styles/global.style'
@@ -7,37 +7,26 @@ import colors from '@styles/colors.style'
 
 export const InputContainer = styled.View``
 
-export const InputLabel = styled(Text)`
-	margin-left: 16px;
-`
-
 type TextInputBorderProps = ThemedStyledProps<
 	ViewProps &
 		React.RefAttributes<View> & {
 			borderColor?: ColorValue
-			translucentBackground?: boolean
-			multiline?: boolean
+			backgroundColor?: ColorValue
 		},
 	DefaultTheme
 >
 
-const getBackgroundColor = (props: TextInputBorderProps) => {
-	if (props.translucentBackground) {
-		return 'transparent'
-	}
-
-	return props.theme.dark ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.7)'
-}
-
 export const TextInputBorder = styled.View<TextInputBorderProps>`
-	flex-direction: row;
-	padding: 10px 20px;
-	border: 2px solid
-		${({ borderColor }) =>
-			borderColor ? borderColor.toString() : colors.black};
-	border-radius: ${({ multiline }) => (multiline ? 16 : 50)}px;
-	background-color: ${props => getBackgroundColor(props)};
-	align-items: center;
+	${({ borderColor, backgroundColor }) => css`
+		flex-direction: row;
+		padding: 10px 20px;
+		border: 2px solid ${borderColor ? borderColor.toString() : colors.black};
+		border-radius: 16px;
+		background-color: ${backgroundColor
+			? backgroundColor.toString()
+			: 'rgba(255, 255, 255, 0.5)'};
+		align-items: center;
+	`}
 `
 
 type TextInputProps = ThemedStyledProps<

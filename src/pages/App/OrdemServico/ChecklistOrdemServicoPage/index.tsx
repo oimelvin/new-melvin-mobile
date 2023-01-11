@@ -77,27 +77,28 @@ const ChecklistOrdemServicoPage: React.FC = () => {
 	return (
 		<ChecklistOrdemServicoPageContainer>
 			<PageContainer>
-				<Button disabled={saving}>
-					{i18n.t(
+				<Button
+					label={i18n.t(
 						'workOrderActions.checklist.selectDefaultChecklist'
 					)}
-				</Button>
+					disabled={saving}
+				/>
 				<MarginTop value={16} />
 				<Button
-					variant="outline"
-					color={colors.red}
-					textColor={colors.red}
-					onPress={handles.onRemoverChecklistPadrao}
-					disabled={true || saving}
-				>
-					{i18n.t(
+					label={i18n.t(
 						'workOrderActions.checklist.removeDefaultChecklist'
 					)}
-				</Button>
-				<Divider style={{ width: '100%' }} color={colors.gray100} />
-				<Button disabled={saving}>
-					{i18n.t('workOrderActions.checklist.addManualChecklist')}
-				</Button>
+					color={colors.red}
+					onPress={handles.onRemoverChecklistPadrao}
+					disabled={true || saving}
+				/>
+				<Divider style={{ width: '100%' }} color={colors.gray300} />
+				<Button
+					label={i18n.t(
+						'workOrderActions.checklist.addManualChecklist'
+					)}
+					disabled={saving}
+				/>
 				<MarginTop value={16} />
 				<FlatList<OrdemServicoAcoes>
 					style={{ paddingHorizontal: 16 }}

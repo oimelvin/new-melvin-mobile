@@ -1,11 +1,10 @@
 import React, { ReactElement } from 'react'
-import { ColorValue, TextInputProps } from 'react-native'
+import { ColorValue, TextInputProps, View } from 'react-native'
 
 import colors from '@styles/colors.style'
-import { MarginRight, MarginTop } from '@styles/global.style'
+import { MarginRight, MarginTop, Text } from '@styles/global.style'
 import {
 	InputContainer,
-	InputLabel,
 	TextInputBorder,
 	TextInput,
 	FixedText,
@@ -14,7 +13,6 @@ import {
 	InfoText,
 	ErrorText,
 } from './styles'
-import Icon from '../Icon'
 
 export type InputProps = Omit<
 	TextInputProps,
@@ -27,9 +25,10 @@ export type InputProps = Omit<
 	infoText?: string
 	errorText?: string
 	rightComponent?: ReactElement
+	backgroundColor?: ColorValue
 	color?: ColorValue
-	translucentBackground?: boolean
 	multilineHeight?: number
+	required?: boolean
 }
 
 const Input: React.FC<InputProps> = ({
@@ -41,17 +40,21 @@ const Input: React.FC<InputProps> = ({
 	rightComponent,
 	infoText,
 	errorText,
+	backgroundColor,
 	color,
+	placeholder,
 	placeholderTextColor,
 	selectionColor,
-	translucentBackground,
 	multiline,
+	required,
 	...rest
 }) => {
 	const getColor = (): string => {
 		if (errorText) {
 			return colors.red
 		} else if (disabled) {
+			return colors.gray300
+		} else if (!value) {
 			return colors.gray500
 		}
 
@@ -64,12 +67,7 @@ const Input: React.FC<InputProps> = ({
 		if (errorText) {
 			return (
 				<>
-					<Icon
-						provider="materialIcons"
-						iconName="error-outline"
-						color={colors.red}
-					/>
-					<MarginRight value={10} />
+					<MarginRight value={16} />
 					<ErrorText style={{ flexShrink: 1, flexWrap: 'wrap' }}>
 						{errorText}
 					</ErrorText>
@@ -80,13 +78,10 @@ const Input: React.FC<InputProps> = ({
 		if (infoText) {
 			return (
 				<>
-					<Icon
-						provider="materialIcons"
-						iconName="info-outline"
-						color={placeholderTextColor || colors.gray500}
-					/>
 					<MarginRight value={10} />
-					<InfoText color={placeholderTextColor || colors.gray500}>
+					<InfoText
+						color={disabled ? colors.gray300 : colors.gray500}
+					>
 						{infoText}
 					</InfoText>
 				</>
@@ -99,25 +94,34 @@ const Input: React.FC<InputProps> = ({
 	return (
 		<InputContainer>
 			{label && (
-				<InputLabel color={color || colors.white}>
-					{renderLabel()}
-				</InputLabel>
+				<View
+					style={{
+						flexDirection: 'row',
+						marginLeft: 16,
+					}}
+				>
+					<Text color={color || colors.black}>{renderLabel()}</Text>
+					<MarginRight value={5} />
+					{required && <Text color={colors.red}>*</Text>}
+				</View>
 			)}
 			<MarginTop value={5} />
 			<TextInputBorder
 				borderColor={getColor()}
-				translucentBackground={translucentBackground}
-				multiline={multiline}
+				backgroundColor={backgroundColor}
 			>
 				{readOnly ? (
-					<FixedText color={getColor()}>{value}</FixedText>
+					<FixedText color={getColor()}>
+						{value || placeholder}
+					</FixedText>
 				) : (
 					<TextInput
 						value={value}
+						placeholder={placeholder}
 						placeholderTextColor={
-							placeholderTextColor || colors.gray500
+							disabled ? colors.gray300 : colors.gray500
 						}
-						selectionColor={selectionColor || colors.cyan}
+						selectionColor={colors.cyan}
 						color={getColor()}
 						secureTextEntry={isPassword}
 						editable={!disabled}

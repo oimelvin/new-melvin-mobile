@@ -1,9 +1,9 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { useTheme } from 'styled-components'
 
 import Logo from '@assets/logo.svg'
 
+import colors from '@styles/colors.style'
 import Icon from '@components/Icon'
 import TabBar from '@components/TabBar'
 
@@ -26,8 +26,6 @@ export type BottomTabNavigatorParamList = {
 const BottomTabBar = createBottomTabNavigator<BottomTabNavigatorParamList>()
 
 const BottomTabNavigator: React.FC = () => {
-	const { colors } = useTheme()
-
 	return (
 		<BackgroundImage>
 			<BottomTabBar.Navigator
@@ -73,11 +71,7 @@ const BottomTabNavigator: React.FC = () => {
 					component={MelvinPage}
 					options={{
 						tabBarIcon: () => (
-							<Logo
-								width={30}
-								height={30}
-								fill={colors.secondary}
-							/>
+							<Logo width={30} height={30} fill={colors.white} />
 						),
 						headerShown: false,
 					}}

@@ -24,23 +24,21 @@ const AcoesOrdemServicoPage: React.FC = () => {
 	return (
 		<AcoesOrdemServicoPageContainer>
 			<PageContainer>
-				<Button disabled={saving}>
-					{i18n.t(
+				<Button
+					label={i18n.t(
 						'workOrderActions.checklist.selectDefaultChecklist'
 					)}
-				</Button>
+					disabled={saving}
+				/>
 				<MarginTop value={16} />
 				<Button
-					variant="outline"
-					color={colors.red}
-					textColor={colors.red}
-					onPress={handles.onRemoverChecklistPadrao}
-					disabled={true || saving}
-				>
-					{i18n.t(
+					label={i18n.t(
 						'workOrderActions.checklist.removeDefaultChecklist'
 					)}
-				</Button>
+					color={colors.red}
+					onPress={handles.onRemoverChecklistPadrao}
+					disabled={true || saving}
+				/>
 				<MarginTop value={16} />
 				<Input
 					label={i18n.t('workOrderActions.actions.guidance')}
@@ -52,7 +50,6 @@ const AcoesOrdemServicoPage: React.FC = () => {
 					color={colors.black}
 					numberOfLines={4}
 					multiline
-					translucentBackground
 				/>
 				<MarginTop value={15} />
 				<Input
@@ -65,15 +62,13 @@ const AcoesOrdemServicoPage: React.FC = () => {
 					color={colors.black}
 					numberOfLines={4}
 					multiline
-					translucentBackground
 				/>
 				<MarginTop value={15} />
 				<Button
+					label={i18n.t('workOrderActions.actions.save')}
 					onPress={handles.onSalvarAcoes}
 					disabled={saving || loading}
-				>
-					{i18n.t('workOrderActions.actions.save')}
-				</Button>
+				/>
 				<MarginTop value={15} />
 			</PageContainer>
 		</AcoesOrdemServicoPageContainer>

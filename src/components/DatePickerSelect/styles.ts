@@ -1,8 +1,6 @@
-import styled, { DefaultTheme } from 'styled-components/native'
+import styled from 'styled-components/native'
 
 import colors from '@styles/colors.style'
-import { ThemedStyledProps } from 'styled-components'
-import { View } from 'react-native'
 
 export const DatePickerModalContainer = styled.Modal.attrs({
 	animationType: 'fade',

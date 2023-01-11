@@ -10,6 +10,7 @@ import Button from '@components/Button'
 
 import useFiltroProgramacaoHook from './hooks/useFiltroProgramacao.hook'
 import { AppStackNavigatorParamList } from '@routes/AppRoutes'
+import { i18n } from '@languages/index'
 
 type FiltroProgramacaoPageProp = BottomTabNavigationProp<
 	AppStackNavigatorParamList,
@@ -30,11 +31,12 @@ const FiltroProgramacaoPage: React.FC = () => {
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 				<FiltroProgramacaoPageContainer>
 					<MarginTop value={15} />
-					<Title color={colors.black}>Filtrar programação</Title>
+					<Title>{i18n.t('filterSchedule.filterSchedule')}</Title>
 					<MarginTop value={15} />
-					<Button onPress={() => handleFiltrarProgramacao()}>
-						Filtrar ordens de serviço
-					</Button>
+					<Button
+						label={i18n.t('filterSchedule.filterWorkOrders')}
+						onPress={() => handleFiltrarProgramacao()}
+					/>
 					<MarginTop value={32} />
 				</FiltroProgramacaoPageContainer>
 			</TouchableWithoutFeedback>

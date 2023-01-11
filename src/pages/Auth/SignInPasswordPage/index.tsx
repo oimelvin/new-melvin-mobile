@@ -83,7 +83,7 @@ const SignInPasswordPage: React.FC = () => {
 								placeholder={i18n.t(
 									'signInPassword.typePassword'
 								)}
-								placeholderTextColor={colors.gray100}
+								placeholderTextColor={colors.gray300}
 								selectionColor={colors.gray500}
 								color={colors.white}
 								returnKeyType="go"
@@ -95,11 +95,10 @@ const SignInPasswordPage: React.FC = () => {
 							/>
 							<MarginTop value={15} />
 							<Button
+								label={i18n.t('signInPassword.signIn')}
 								onPress={() => handleSubmit()}
 								disabled={!dirtyPassword || !password}
-							>
-								{i18n.t('signInPassword.signIn')}
-							</Button>
+							/>
 							<MarginTop value={15} />
 						</BottomContent>
 					</PageContainer>

@@ -48,18 +48,18 @@ const FiltroEquipamentoPage: React.FC = () => {
 		<KeyboardAvoidingView>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 				<FiltroEquipamentoPageContainer>
-					<Title color={colors.white}>
+					<Title>
 						{i18n.t('searchEquipmentManually.searchEquipment')}
 					</Title>
 					<MarginTop value={15} />
 					<Select
+						label={i18n.t('searchEquipmentManually.branch')}
 						items={data.filiais.map(({ id, descricao }) => ({
 							value: id,
 							label: descricao,
 						}))}
 						selectedValue={data.selectedFilial}
 						onSelect={item => handles.setSelectedFilial(item)}
-						color={colors.white}
 						placeholder={i18n.t(
 							'searchEquipmentManually.selectABranch'
 						)}
@@ -69,6 +69,7 @@ const FiltroEquipamentoPage: React.FC = () => {
 					/>
 					<MarginTop value={15} />
 					<Select
+						label={i18n.t('searchEquipmentManually.sector')}
 						items={data.setores.map(({ id, descricao }) => ({
 							value: id,
 							label: descricao,
@@ -76,7 +77,6 @@ const FiltroEquipamentoPage: React.FC = () => {
 						selectedValue={data.selectedSetor}
 						onSelect={item => handles.setSelectedSetor(item)}
 						disabled={!data.selectedFilial}
-						color={colors.white}
 						placeholder={i18n.t(
 							'searchEquipmentManually.selectASector'
 						)}
@@ -86,13 +86,13 @@ const FiltroEquipamentoPage: React.FC = () => {
 					/>
 					<MarginTop value={15} />
 					<Select
+						label={i18n.t('searchEquipmentManually.family')}
 						items={data.familias.map(({ id, descricao }) => ({
 							value: id,
 							label: descricao,
 						}))}
 						selectedValue={data.selectedFamilia}
 						onSelect={item => handles.setSelectedFamilia(item)}
-						color={colors.white}
 						placeholder={i18n.t(
 							'searchEquipmentManually.selectAFamily'
 						)}
@@ -102,13 +102,13 @@ const FiltroEquipamentoPage: React.FC = () => {
 					/>
 					<MarginTop value={15} />
 					<Select
+						label={i18n.t('searchEquipmentManually.status')}
 						items={data.status.map(({ id, descricao }) => ({
 							value: id,
 							label: descricao,
 						}))}
 						selectedValue={data.selectedStatus}
 						onSelect={item => handles.setSelectedStatus(item)}
-						color={colors.white}
 						placeholder={i18n.t(
 							'searchEquipmentManually.selectAStatus'
 						)}
@@ -118,25 +118,25 @@ const FiltroEquipamentoPage: React.FC = () => {
 					/>
 					<MarginTop value={15} />
 					<Input
+						label={i18n.t('common.search')}
 						value={data.pesquisa}
 						onChangeText={value => handles.setPesquisa(value)}
-						placeholderTextColor={colors.gray100}
+						placeholderTextColor={colors.gray300}
 						placeholder={i18n.t(
 							'searchEquipmentManually.searchEquipment'
 						)}
 						selectionColor={colors.gray500}
-						color={colors.white}
 					/>
 					<Divider color={colors.gray900} />
 					<MarginTop value={15} />
 					<Select
+						label={i18n.t('searchEquipmentManually.equipment')}
 						items={data.equipamentos.map(({ id, descricao }) => ({
 							value: id,
 							label: descricao,
 						}))}
 						selectedValue={data.selectedEquipamento}
 						onSelect={item => handles.setSelectedEquipamento(item)}
-						color={colors.white}
 						placeholder={i18n.t(
 							'searchEquipmentManually.selectAnEquipment'
 						)}
@@ -148,14 +148,14 @@ const FiltroEquipamentoPage: React.FC = () => {
 							setDirtyEquipamento(true)
 						}
 						errorText={errorEquipamento}
+						required
 					/>
 					<MarginTop value={15} />
 					<Button
+						label={i18n.t('searchEquipmentManually.seeEquipment')}
 						onPress={() => handleVisualizarEquipamento()}
 						disabled={!data.selectedEquipamento}
-					>
-						{i18n.t('searchEquipmentManually.seeEquipment')}
-					</Button>
+					/>
 					<MarginTop value={32} />
 				</FiltroEquipamentoPageContainer>
 			</TouchableWithoutFeedback>

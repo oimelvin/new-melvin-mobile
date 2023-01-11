@@ -27,14 +27,12 @@ const HomePage: React.FC = () => {
 			<PageContainer>
 				<StatusBar />
 				<BottomContent>
-					<Button>{i18n.t('home.trial')}</Button>
+					<Button label={i18n.t('home.trial')} />
 					<MarginTop value={16} />
 					<Button
-						variant="outline"
+						label={i18n.t('home.signIn')}
 						onPress={() => navigate('SignInUsernameOrEmailPage')}
-					>
-						{i18n.t('home.signIn')}
-					</Button>
+					/>
 					<MarginTop value={35} />
 					<TalkConsultant />
 					<MarginTop value={15} />

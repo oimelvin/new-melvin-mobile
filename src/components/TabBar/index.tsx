@@ -1,17 +1,15 @@
 import React from 'react'
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
-import { useTheme } from 'styled-components'
 
 import { TabBarContainer, TabButtonCenter, TabSelected } from './styles'
 import { ButtonOpacity } from '@styles/global.style'
+import colors from '@styles/colors.style'
 
 const TabBar: React.FC<BottomTabBarProps> = ({
 	state,
 	descriptors,
 	navigation,
 }) => {
-	const { colors } = useTheme()
-
 	return (
 		<TabBarContainer>
 			{state.routes.map((route, index) => {
@@ -57,7 +55,7 @@ const TabBar: React.FC<BottomTabBarProps> = ({
 						{options.tabBarIcon &&
 							options.tabBarIcon({
 								focused: isFocused,
-								color: colors.title,
+								color: colors.white,
 								size: 24,
 							})}
 					</TabButtonCenter>
@@ -74,7 +72,9 @@ const TabBar: React.FC<BottomTabBarProps> = ({
 						{options.tabBarIcon &&
 							options.tabBarIcon({
 								focused: isFocused,
-								color: colors.title,
+								color: isFocused
+									? colors.black
+									: colors.gray300,
 								size: 24,
 							})}
 						{isFocused && <TabSelected />}

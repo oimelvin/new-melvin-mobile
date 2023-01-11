@@ -18,7 +18,6 @@ type DatePickerProps = {
 	errorText?: string
 	color?: ColorValue
 	disabled?: boolean
-	translucentBackground?: boolean
 }
 
 const DatePicker: React.FC<DatePickerProps> = ({
@@ -31,7 +30,6 @@ const DatePicker: React.FC<DatePickerProps> = ({
 	errorText,
 	color,
 	disabled,
-	translucentBackground,
 }: DatePickerProps) => {
 	const [selectedDate, setSelectedDate] = useState<Date>(new Date())
 	const [opened, setOpened] = useState(false)
@@ -89,12 +87,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
 								color="gray"
 							/>
 						}
-						placeholderTextColor={colors.gray100}
+						placeholderTextColor={colors.gray300}
 						selectionColor={colors.gray500}
-						color={color || colors.gray100}
+						color={color || colors.gray300}
 						errorText={errorText}
 						disabled={disabled}
-						translucentBackground={translucentBackground}
 						readOnly
 					/>
 				</View>

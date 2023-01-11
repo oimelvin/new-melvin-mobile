@@ -64,9 +64,10 @@ const QRCodeEquipamentoPage: React.FC = () => {
 						{i18n.t('searchEquipmentQRCode.permissionDenied')}
 					</Text>
 					<MarginTop value={15} />
-					<Button onPress={() => requestPermission()}>
-						{i18n.t('searchEquipmentQRCode.verifyPermission')}
-					</Button>
+					<Button
+						label={i18n.t('searchEquipmentQRCode.verifyPermission')}
+						onPress={() => requestPermission()}
+					/>
 				</Center>
 			)
 		}

@@ -1,9 +1,8 @@
-import { CreateSolicitacaoServicoDto } from "@models/CreateSolicitacaoServico";
-import { SolicitacaoServico } from "@models/SolicitacaoServico";
-import api, { HttpResponse, Items } from "./api";
+import { SolicitacaoServico } from '@models/SolicitacaoServico'
+import api, { HttpResponse, Items } from './api'
 
 interface SolicitacaoServicoServiceHookProps {
-	getSolicitacoes(
+	getSolicitacoesServico(
 		skipCount: number,
 		maxResultCount: number,
 		status: string | undefined,
@@ -11,15 +10,17 @@ interface SolicitacaoServicoServiceHookProps {
 		isActive: boolean | undefined
 	): Promise<Items<SolicitacaoServico>>
 
-	getSolicitacao(
-		id: string
-	): Promise<SolicitacaoServico>;
-
-	createSolicitacao(body: CreateSolicitacaoServicoDto | undefined): Promise<SolicitacaoServico>;
+	getSolicitacaoServico(id: string): Promise<SolicitacaoServico>
+	postSolicitacaoServico(
+		solicitacaoServico: Partial<SolicitacaoServico>
+	): Promise<SolicitacaoServico>
+	putSolicitacaoServico(
+		solicitacaoServico: Partial<SolicitacaoServico>
+	): Promise<void>
 }
 
 const useSolicitacaoServicoService = (): SolicitacaoServicoServiceHookProps => {
-	const getSolicitacoes = async (
+	const getSolicitacoesServico = async (
 		skipCount: number,
 		maxResultCount: number,
 		status: string | undefined,
@@ -42,17 +43,27 @@ const useSolicitacaoServicoService = (): SolicitacaoServicoServiceHookProps => {
 		return data.result
 	}
 
-	const createSolicitacao = async (
-		body: CreateSolicitacaoServicoDto | undefined
+	const postSolicitacaoServico = async (
+		solicitacaoServico: Partial<SolicitacaoServico>
 	): Promise<SolicitacaoServico> => {
 		const { data } = await api.post<HttpResponse<SolicitacaoServico>>(
-			'services/app/SolicitacaoServico/Create', body
+			'services/app/SolicitacaoServico/Create',
+			solicitacaoServico
 		)
 
 		return data.result
 	}
 
-	const getSolicitacao = async (
+	const putSolicitacaoServico = async (
+		solicitacaoServico: Partial<SolicitacaoServico>
+	): Promise<void> => {
+		await api.put<SolicitacaoServico>(
+			'services/app/SolicitacaoServico/Update',
+			solicitacaoServico
+		)
+	}
+
+	const getSolicitacaoServico = async (
 		id: string
 	): Promise<SolicitacaoServico> => {
 		const { data } = await api.get<HttpResponse<SolicitacaoServico>>(
@@ -68,9 +79,10 @@ const useSolicitacaoServicoService = (): SolicitacaoServicoServiceHookProps => {
 	}
 
 	return {
-		getSolicitacoes,
-		getSolicitacao, 
-		createSolicitacao
+		getSolicitacoesServico,
+		getSolicitacaoServico,
+		postSolicitacaoServico,
+		putSolicitacaoServico,
 	}
 }
 

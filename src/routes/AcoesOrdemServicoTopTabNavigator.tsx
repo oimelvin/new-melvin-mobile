@@ -41,7 +41,7 @@ const AcoesOrdemServicoTopTabNavigator: React.FC = () => {
 					backgroundColor: colors.cyan,
 				},
 				tabBarActiveTintColor: colors.black,
-				tabBarInactiveTintColor: colors.gray100,
+				tabBarInactiveTintColor: colors.gray300,
 			}}
 			sceneContainerStyle={{
 				backgroundColor: colors.white,

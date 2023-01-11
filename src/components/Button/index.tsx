@@ -1,112 +1,61 @@
 import React from 'react'
 import { ColorValue, TouchableOpacityProps } from 'react-native'
 
+import { ButtonContainer, ButtonText } from './styles'
 import colors from '@styles/colors.style'
 
-import { ButtonContainer, TextButton } from './styles'
-
 export type ButtonProps = Omit<TouchableOpacityProps, 'activeOpacity'> & {
-	variant?: 'fill' | 'outline'
+	label?: string
 	color?: ColorValue
-	textColor?: ColorValue
+	labelColor?: ColorValue
+	disabledColor?: ColorValue
+	disabledLabelColor?: ColorValue
 }
 
 const Button: React.FC<ButtonProps> = ({
+	label,
 	children,
-	variant,
 	color,
-	textColor,
+	labelColor,
+	disabledColor,
+	disabledLabelColor,
 	disabled,
 	...rest
 }) => {
-	const renderChildren = () => {
-		if (typeof children === 'string') {
-			if (!variant || variant === 'fill') {
-				if (disabled) {
-					return (
-						<TextButton style={{ color: colors.white }}>
-							{children}
-						</TextButton>
-					)
-				}
-
-				return (
-					<TextButton style={{ color: textColor || colors.black }}>
-						{children}
-					</TextButton>
-				)
-			}
-
-			if (disabled) {
-				return (
-					<TextButton style={{ color: colors.gray100 }}>
-						{children}
-					</TextButton>
-				)
-			}
-
-			return (
-				<TextButton style={{ color: textColor || colors.white }}>
-					{children}
-				</TextButton>
-			)
-		}
-
-		return children
-	}
-
-	if (!variant || variant === 'fill') {
+	const getColor = () => {
 		if (disabled) {
-			return (
-				<ButtonContainer
-					style={{
-						backgroundColor: colors.gray100,
-						borderColor: colors.gray100,
-					}}
-					disabled
-					{...rest}
-				>
-					{renderChildren()}
-				</ButtonContainer>
-			)
+			return disabledColor || colors.gray300
+		}
+
+		return color || colors.cyan
+	}
+
+	const getLabelColor = () => {
+		if (disabled) {
+			return disabledLabelColor || colors.black
+		}
+
+		return labelColor || colors.black
+	}
+
+	const renderContent = () => {
+		if (!children && !label) {
+			throw new Error('A label or children must be informed to button.')
 		}
 
 		return (
-			<ButtonContainer
-				style={{
-					backgroundColor: color || colors.cyan,
-					borderColor: color || colors.cyan,
-				}}
-				{...rest}
-			>
-				{renderChildren()}
-			</ButtonContainer>
-		)
-	}
-
-	if (disabled) {
-		return (
-			<ButtonContainer
-				style={{
-					borderColor: colors.gray100,
-				}}
-				disabled
-				{...rest}
-			>
-				{renderChildren()}
-			</ButtonContainer>
+			children || <ButtonText color={getLabelColor()}>{label}</ButtonText>
 		)
 	}
 
 	return (
 		<ButtonContainer
-			style={{
-				backgroundColor: 'transparent',
-				borderColor: color || colors.white,
-			}}
+			backgroundColor={getColor()}
+			borderColor={getColor()}
+			disabled={disabled}
 			{...rest}
 		>
-			{renderChildren()}
+			{renderContent()}
 		</ButtonContainer>
 	)
 }

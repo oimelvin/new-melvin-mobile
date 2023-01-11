@@ -3,27 +3,27 @@ import { Alert, FlatList, RefreshControl, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 
-import { AppStackNavigatorParamList } from '@routes/AppRoutes'
-
 import colors from '@styles/colors.style'
 import { Text } from '@styles/global.style'
-import { i18n } from '@languages/index'
-import { FAB } from 'react-native-paper'
-import SolicitacaoServicoComponent from './components/SolicitacaoComponent'
 import Loading from '@components/Loading'
+import FAB from '@components/FAB'
 import ListaSolicitacaoServicoHeader from './components/ListaSolicitacaoServicoHeader'
+import SolicitacaoServicoComponent from './components/SolicitacaoComponent'
+
 import { SolicitacaoServico } from '@models/SolicitacaoServico'
+import { AppStackNavigatorParamList } from '@routes/AppRoutes'
+import { i18n } from '@languages/index'
 import useSolicitacaoServicoService from '@services/useSolicitacaoServicoService.hook'
 
 type CarteiraServicosPageProp = BottomTabNavigationProp<
 	AppStackNavigatorParamList,
-	'CarteiraServicosPage'
+	'SolicitacaoServicosPage'
 >
 
 const SolicitacaoServicosPage: React.FC = () => {
 	const { navigate } = useNavigation<CarteiraServicosPageProp>()
 
-	const { getSolicitacoes } = useSolicitacaoServicoService()
+	const { getSolicitacoesServico } = useSolicitacaoServicoService()
 	const itensPorPagina = 10
 
 	const [loading, setLoading] = useState(false)
@@ -36,7 +36,7 @@ const SolicitacaoServicosPage: React.FC = () => {
 
 	const carregarSolicitacoesServicos = async () => {
 		try {
-			const { items, totalCount } = await getSolicitacoes(
+			const { items, totalCount } = await getSolicitacoesServico(
 				pagina * itensPorPagina,
 				itensPorPagina,
 				undefined,
@@ -82,7 +82,7 @@ const SolicitacaoServicosPage: React.FC = () => {
 	}
 
 	const irNovaSolicitacao = () => {
-		navigate('NovaSolicitacaoComponent')
+		navigate('AdicionarSolicitacaoServicoPage', {})
 	}
 
 	const emptyComponent = () =>
@@ -139,15 +139,8 @@ const SolicitacaoServicosPage: React.FC = () => {
 				onEndReached={onEndReachedOrdensServicos}
 			/>
 			<FAB
-				icon={{
-					uri: 'https://cdn-icons-png.flaticon.com/512/32/32339.png',
-				}}
-				style={{
-					position: 'absolute',
-					margin: 16,
-					right: 0,
-					bottom: 0,
-				}}
+				provider="materialIcons"
+				iconName="add"
 				onPress={() => irNovaSolicitacao()}
 			/>
 		</View>

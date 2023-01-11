@@ -2,18 +2,24 @@ import React, { useState } from 'react'
 import {
 	ColorValue,
 	FlatList,
+	ListRenderItemInfo,
 	TouchableHighlight,
 	TouchableWithoutFeedback,
 	View,
 } from 'react-native'
 
 import colors from '@styles/colors.style'
-import { Text } from '@styles/global.style'
-import Modal from '@components/Modal'
+import { MarginTop, Text } from '@styles/global.style'
 import Icon from '@components/Icon'
 import Input from '@components/Input'
 import Button from '@components/Button'
-import { SelectEmptyList, SelectItem } from './styles'
+import {
+	SelectEmptyList,
+	SelectItem,
+	SelectModal,
+	SelectModalContainer,
+	SelectModalOverlay,
+} from './styles'
 import { i18n } from '@languages/index'
 
 export type SelectItemProps = {
@@ -34,7 +40,7 @@ type SelectProps = {
 	errorText?: string
 	color?: ColorValue
 	disabled?: boolean
-	translucentBackground?: boolean
+	required?: boolean
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -50,10 +56,22 @@ const Select: React.FC<SelectProps> = ({
 	errorText,
 	color,
 	disabled,
-	translucentBackground,
+	required,
 }: SelectProps) => {
 	const [opened, setOpened] = useState(false)
 	const [search, setSearch] = useState('')
+
+	const getColor = (): string => {
+		if (errorText) {
+			return colors.red
+		} else if (disabled) {
+			return colors.gray300
+		} else if (!selectedValue) {
+			return colors.gray500
+		}
+
+		return color ? color.toString() : colors.black
+	}
 
 	const handlePress = () => {
 		onPress && onPress()
@@ -66,16 +84,11 @@ const Select: React.FC<SelectProps> = ({
 		onCloseSelect && onCloseSelect()
 	}
 
-	const handleCloseSelect = () => {
-		setOpened(false)
-		onCloseSelect && onCloseSelect()
-	}
-
-	const renderItem = (item: SelectItemProps) => (
+	const renderItem = ({ item }: ListRenderItemInfo<SelectItemProps>) => (
 		<TouchableHighlight
 			onPress={() => handleSelect(item.value)}
 			style={{ borderRadius: 16 }}
-			underlayColor={colors.gray100}
+			underlayColor={colors.gray300}
 		>
 			<SelectItem selected={item.value === selectedValue}>
 				<Text>{item.label}</Text>
@@ -85,7 +98,7 @@ const Select: React.FC<SelectProps> = ({
 
 	const renderEmptyList = () => (
 		<SelectEmptyList>
-			<Text color={colors.gray100}>
+			<Text color={colors.black}>
 				{emptyListText || i18n.t('components.select.noItemsFound')}
 			</Text>
 		</SelectEmptyList>
@@ -102,8 +115,7 @@ const Select: React.FC<SelectProps> = ({
 								? items.find(
 										item => item.value === selectedValue
 								  )?.label
-								: placeholder ||
-								  i18n.t('components.select.select')
+								: ''
 						}
 						rightComponent={
 							<Icon
@@ -112,46 +124,61 @@ const Select: React.FC<SelectProps> = ({
 									opened ? 'chevron-up' : 'chevron-down'
 								}
 								size={20}
-								color="gray"
+								color={getColor()}
 							/>
 						}
-						placeholderTextColor={colors.gray100}
-						selectionColor={colors.gray500}
-						color={color || colors.gray100}
+						placeholder={
+							placeholder || i18n.t('components.select.select')
+						}
 						errorText={errorText}
 						disabled={disabled}
-						translucentBackground={translucentBackground}
+						required={required}
 						readOnly
 					/>
 				</View>
 			</TouchableWithoutFeedback>
-			<Modal opened={opened} onClose={() => handleCloseSelect()}>
-				<Input
-					value={search}
-					placeholder={
-						placeholderSearch ||
-						i18n.t('components.select.typeForSearch')
-					}
-					onChangeText={text => setSearch(text)}
-					translucentBackground={translucentBackground}
-				/>
-				<FlatList
-					keyExtractor={({ value }) => value}
-					data={items?.filter(item =>
-						item.label?.toUpperCase().includes(search.toUpperCase())
-					)}
-					renderItem={({ item }) => renderItem(item)}
-					ListEmptyComponent={renderEmptyList}
-					showsVerticalScrollIndicator={false}
-					overScrollMode="never"
-				/>
-				<Button
-					variant="outline"
-					onPress={() => handleSelect(undefined)}
-				>
-					{i18n.t('components.select.clean')}
-				</Button>
-			</Modal>
+			<SelectModalContainer
+				visible={opened}
+				onRequestClose={onCloseSelect}
+			>
+				<TouchableWithoutFeedback onPress={onCloseSelect}>
+					<SelectModalOverlay>
+						<SelectModal>
+							<Input
+								label={i18n.t('common.search')}
+								value={search}
+								placeholder={
+									placeholderSearch ||
+									i18n.t('components.select.typeForSearch')
+								}
+								onChangeText={text => setSearch(text)}
+							/>
+							<MarginTop value={16} />
+							<FlatList
+								style={{ maxHeight: 300 }}
+								keyExtractor={({ value }) => value}
+								data={items?.filter(item =>
+									item.label
+										?.toUpperCase()
+										.includes(search.toUpperCase())
+								)}
+								ItemSeparatorComponent={() => (
+									<MarginTop value={5} />
+								)}
+								renderItem={renderItem}
+								ListEmptyComponent={renderEmptyList}
+								showsVerticalScrollIndicator={false}
+								overScrollMode="never"
+							/>
+							<MarginTop value={16} />
+							<Button
+								label={i18n.t('components.select.clean')}
+								onPress={() => handleSelect(undefined)}
+							/>
+						</SelectModal>
+					</SelectModalOverlay>
+				</TouchableWithoutFeedback>
+			</SelectModalContainer>
 		</View>
 	)
 }

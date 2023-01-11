@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
-import { useTheme } from 'styled-components'
 
 import { ButtonOpacity } from '@styles/global.style'
 import Icon from '../Icon'
 import Input, { InputProps } from '../Input'
+import colors from '@styles/colors.style'
 
 export type PasswordInputProps = InputProps
 
 const PasswordInput: React.FC<PasswordInputProps> = props => {
-	const { colors } = useTheme()
-
 	const [passwordVisible, setPasswordVisible] = useState(false)
 
 	const renderButtonViewPassword = () => (
@@ -17,7 +15,7 @@ const PasswordInput: React.FC<PasswordInputProps> = props => {
 			<Icon
 				provider="materialCommunityIcons"
 				iconName={passwordVisible ? 'eye-off' : 'eye'}
-				color={colors.accent}
+				color={colors.cyan}
 				size={24}
 			/>
 		</ButtonOpacity>

@@ -55,7 +55,7 @@ const LightTheme: Theme = {
 		title: colors.black,
 		text: colors.gray900,
 		textPrimary: colors.black,
-		surface: colors.gray100,
+		surface: colors.gray300,
 		onSurface: colors.white,
 	},
 }
@@ -67,7 +67,7 @@ const DarkTheme: Theme = {
 		...themeColors,
 		background: colors.gray900,
 		title: colors.white,
-		text: colors.gray100,
+		text: colors.gray300,
 		textPrimary: colors.white,
 		surface: colors.gray900,
 		onSurface: colors.gray900,
